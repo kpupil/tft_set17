@@ -17,6 +17,7 @@ TFT Assistant — 悬浮窗口
 
 from __future__ import annotations
 
+import logging
 import sys
 
 from PyQt6.QtCore import Qt, QPoint, pyqtSignal, QSize, QObject, QTimer
@@ -28,6 +29,8 @@ from PyQt6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout,
     QHBoxLayout, QLabel, QPushButton, QSizePolicy,
 )
+
+logger = logging.getLogger("tft.overlay")
 
 from config import UI
 from data.manager import DataManager
@@ -108,6 +111,7 @@ class TFTOverlay(QMainWindow):
         # ── 窗口标志 ──────────────────────────────────────────
         self._apply_window_flags()
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
         self.setWindowTitle(UI["window_title"])
         self.setFixedWidth(self.PANEL_W)
 
@@ -260,6 +264,8 @@ class TFTOverlay(QMainWindow):
         else:
             self.show()
             self.raise_()
+            # 重新应用 no-activate，确保显示后不抢焦点
+            self._set_no_activate_native()
 
     def _exit_application(self):
         app = QApplication.instance()
@@ -276,6 +282,42 @@ class TFTOverlay(QMainWindow):
         if self._always_on_top:
             flags |= Qt.WindowType.WindowStaysOnTopHint
         self.setWindowFlags(flags)
+        # setWindowFlags 会重建 native 窗口，需要重新设置
+        self.setAttribute(Qt.WidgetAttribute.WA_ShowWithoutActivating)
+
+    # ──────────────────────────────────────────────────────────
+    # 防止悬浮窗抢夺游戏焦点
+    # ──────────────────────────────────────────────────────────
+
+    def showEvent(self, event):
+        """窗口显示后设置平台级 no-activate 标志。"""
+        super().showEvent(event)
+        self._set_no_activate_native()
+
+    def _set_no_activate_native(self):
+        """
+        通过平台原生 API 将悬浮窗设为不可激活（点击不夺取焦点）。
+
+        Windows: WS_EX_NOACTIVATE — 操作系统层面阻止窗口激活，
+                 鼠标事件仍然正常传递，按钮、下拉框等控件不受影响。
+        macOS:   Tool 窗口类型在 macOS 上映射为 NSPanel，
+                 本身已经不会抢夺焦点（无需额外设置）。
+        """
+        if sys.platform == "win32":
+            try:
+                import ctypes
+                hwnd = int(self.winId())
+                GWL_EXSTYLE = -20
+                WS_EX_NOACTIVATE = 0x08000000
+                WS_EX_APPWINDOW  = 0x00040000
+                user32 = ctypes.windll.user32
+                style = user32.GetWindowLongW(hwnd, GWL_EXSTYLE)
+                # 加上 NOACTIVATE，去掉 APPWINDOW（避免任务栏图标抢焦点）
+                style = (style | WS_EX_NOACTIVATE) & ~WS_EX_APPWINDOW
+                user32.SetWindowLongW(hwnd, GWL_EXSTYLE, style)
+                logger.debug("已设置 WS_EX_NOACTIVATE (hwnd=%s)", hwnd)
+            except Exception as exc:
+                logger.warning("设置 WS_EX_NOACTIVATE 失败: %s", exc)
 
     def _sync_pin_button(self):
         if not hasattr(self, "_btn_pin"):
