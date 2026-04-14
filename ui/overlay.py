@@ -7,7 +7,7 @@ TFT Assistant — 悬浮窗口
 - 无标题栏，可拖动
 - 始终置顶（游戏内可见）
 - 最小化 / 关闭按钮
-- 全局快捷键 Ctrl+Shift+T 切换显示/隐藏（不依赖窗口焦点）
+- 全局快捷键 Ctrl+Shift+T 切换显示/隐藏、Ctrl+Alt+A 开关自动拿牌（不依赖窗口焦点）
 - 透明背景（背后游戏画面仍可见）
 
 启动：
@@ -172,8 +172,8 @@ class TFTOverlay(QMainWindow):
         h_lay.addWidget(btn_min)
 
         # 关闭
-        btn_close = IconButton("✕", "关闭", hover_color="#8b2020")
-        btn_close.clicked.connect(self.close)
+        btn_close = IconButton("✕", "退出应用", hover_color="#8b2020")
+        btn_close.clicked.connect(self._exit_application)
         h_lay.addWidget(btn_close)
 
         root_lay.addWidget(header)
@@ -261,6 +261,13 @@ class TFTOverlay(QMainWindow):
             self.show()
             self.raise_()
 
+    def _exit_application(self):
+        app = QApplication.instance()
+        if app is not None:
+            app.quit()
+            return
+        self.close()
+
     def _apply_window_flags(self):
         flags = (
             Qt.WindowType.FramelessWindowHint
@@ -282,6 +289,7 @@ class TFTOverlay(QMainWindow):
 
     def closeEvent(self, event):
         GlobalHotkeyManager.instance().stop()
+        event.accept()
         super().closeEvent(event)
 
     def paintEvent(self, _event):
@@ -321,6 +329,7 @@ def run_overlay():
     """独立启动悬浮窗（python -m ui.overlay 或 main.py ui）。"""
     app = QApplication.instance() or QApplication(sys.argv)
     app.setStyle("Fusion")
+    app.setQuitOnLastWindowClosed(True)
 
     # 加载数据
     dm = DataManager()
