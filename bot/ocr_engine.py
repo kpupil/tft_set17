@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from pathlib import Path
 import threading
 import time
@@ -25,6 +26,9 @@ from difflib import SequenceMatcher
 from typing import Optional
 
 import numpy as np
+from PyQt6.QtCore import QRect
+from PyQt6.QtGui import QCursor
+from PyQt6.QtWidgets import QApplication
 
 from config import APP_DATA_ROOT, RAW_DATA_DIR, RESOURCE_ROOT
 
@@ -202,6 +206,61 @@ class OCREngine:
             rel_y = max(0, min(rel_y, actual_height - 1))
             crops.append(merged[rel_y:y2, rel_x:x2].copy())
         return crops
+
+    def _resolve_windows_native_target_rect(self, config) -> QRect:
+        logical_target = config.resolved_screen_rect()
+        runtime = self._get_worker_runtime()
+        monitors = runtime["sct"].monitors[1:]
+        if not monitors:
+            return logical_target
+
+        app = QApplication.instance()
+        screens = app.screens() if app else []
+        if not screens:
+            return logical_target
+
+        sorted_screens = sorted(
+            screens,
+            key=lambda s: (s.geometry().x(), s.geometry().y(), s.geometry().width(), s.geometry().height()),
+        )
+        sorted_monitors = sorted(
+            monitors,
+            key=lambda m: (m["left"], m["top"], m["width"], m["height"]),
+        )
+
+        def _score(screen) -> int:
+            rect = screen.geometry()
+            name_penalty = 0 if not config.screen_name or screen.name() == config.screen_name else 100_000
+            size_delta = abs(rect.width() - logical_target.width()) + abs(rect.height() - logical_target.height())
+            pos_delta = abs(rect.x() - logical_target.x()) + abs(rect.y() - logical_target.y())
+            return name_penalty + size_delta * 10 + pos_delta
+
+        target_index = min(range(len(sorted_screens)), key=lambda idx: _score(sorted_screens[idx]))
+        if target_index < len(sorted_monitors):
+            mon = sorted_monitors[target_index]
+            return QRect(mon["left"], mon["top"], mon["width"], mon["height"])
+
+        matched_screen = sorted_screens[target_index]
+        dpr = matched_screen.devicePixelRatio() or 1.0
+        rect = matched_screen.geometry()
+        return QRect(
+            int(round(rect.x() * dpr)),
+            int(round(rect.y() * dpr)),
+            int(round(rect.width() * dpr)),
+            int(round(rect.height() * dpr)),
+        )
+
+    def resolve_native_ocr_rects(self, config) -> list[list[int]]:
+        if os.name == "nt":
+            target = self._resolve_windows_native_target_rect(config)
+            return config.resolved_ocr_rects_for_target(target)
+        return config.resolved_ocr_rects()
+
+    def resolve_native_click_points(self, config) -> list[list[int]]:
+        if os.name == "nt":
+            target = self._resolve_windows_native_target_rect(config)
+            return config.resolved_click_points_for_target(target)
+        return config.resolved_click_points()
 
     def recognize_slot(self, rect: list[int]) -> tuple[Optional[str], float]:
         if not self._loaded:

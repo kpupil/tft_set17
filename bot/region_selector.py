@@ -147,7 +147,9 @@ class RegionConfig:
         return active.geometry()
 
     def resolved_ocr_rects(self) -> list[list[int]]:
-        target = self.resolved_screen_rect()
+        return self.resolved_ocr_rects_for_target(self.resolved_screen_rect())
+
+    def resolved_ocr_rects_for_target(self, target: QRect) -> list[list[int]]:
         rels = self.ocr_rects_relative or self._fallback_relative_rects()
         if target.isValid() and len(rels) == SLOT_COUNT:
             rects: list[list[int]] = []
@@ -166,7 +168,9 @@ class RegionConfig:
         return [[int(v) for v in rect] for rect in self.ocr_rects if len(rect) == 4]
 
     def resolved_click_points(self) -> list[list[int]]:
-        target = self.resolved_screen_rect()
+        return self.resolved_click_points_for_target(self.resolved_screen_rect())
+
+    def resolved_click_points_for_target(self, target: QRect) -> list[list[int]]:
         rels = self.click_points_relative or self._fallback_relative_points()
         if target.isValid() and len(rels) == SLOT_COUNT:
             points: list[list[int]] = []

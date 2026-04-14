@@ -211,7 +211,7 @@ class AutoPicker(QThread):
         if not config or not pick_set:
             return
 
-        ocr_rects = config.resolved_ocr_rects()
+        ocr_rects = self._ocr.resolve_native_ocr_rects(config)
         if len(ocr_rects) != 5:
             logger.warning("区域配置无效：OCR 区域数量异常")
             return
@@ -256,12 +256,11 @@ class AutoPicker(QThread):
 
         logger.info("本轮 OCR 结果 | %s", " | ".join(slot_logs))
 
-    @staticmethod
-    def _click_slot(config: RegionConfig, slot_idx: int):
+    def _click_slot(self, config: RegionConfig, slot_idx: int):
         """通过 pyautogui 点击指定 slot 的购买位置。"""
         try:
             import pyautogui
-            click_points = config.resolved_click_points()
+            click_points = self._ocr.resolve_native_click_points(config)
             x, y = click_points[slot_idx]
             pyautogui.click(x, y)
         except ImportError:
