@@ -2,7 +2,7 @@
 TFT Assistant — 自动拿牌
 ========================
 在 QThread 中运行拿牌主循环：
-    截图 → OCR 识别 → 匹配拿取列表 → pyautogui 点击购买
+    截图 → OCR 识别 → 匹配拿取列表 → 原生鼠标事件点击购买
 
 公开接口：
     picker = AutoPicker.instance()
@@ -33,6 +33,10 @@ logger = logging.getLogger("tft.picker")
 
 POLL_INTERVAL = BOT.get("scan_interval_ms", 500) / 1000   # 一轮扫描的目标总间隔（秒）
 CLICK_DELAY   = BOT.get("pick_delay_ms", 200) / 1000      # 每次点击后等待（秒，防连点）
+GAME_WINDOW_KEYWORDS = (
+    "League of Legends",
+    "League of Legends (TM) Client",
+)
 
 
 class AutoPicker(QThread):
@@ -62,6 +66,8 @@ class AutoPicker(QThread):
         self._config:   Optional[RegionConfig] = None
         self._ocr       = OCREngine.instance()
         self._loading   = False
+        self._foreground_warned = False
+        self._click_block_warned = False
 
     # ──────────────────────────────────────────────────────────
     # 配置
@@ -121,6 +127,8 @@ class AutoPicker(QThread):
             return
 
         if not self.isRunning():
+            self._foreground_warned = False
+            self._click_block_warned = False
             self._running = True
             self.start()
             if self._ocr.is_loaded():
@@ -228,9 +236,9 @@ class AutoPicker(QThread):
                     "识别到目标英雄: %s (slot %d, score %.2f) → 点击购买",
                     hero_id, slot_idx + 1, score,
                 )
-                self._click_slot(config, slot_idx)
-                self.hero_picked.emit(hero_id)
-                time.sleep(CLICK_DELAY)
+                if self._click_slot(config, slot_idx):
+                    self.hero_picked.emit(hero_id)
+                    time.sleep(CLICK_DELAY)
 
     @staticmethod
     def _log_ocr_results(details: list[dict], pick_set: Set[str]):
@@ -258,34 +266,133 @@ class AutoPicker(QThread):
 
         logger.info("本轮 OCR 结果 | %s", " | ".join(slot_logs))
 
-    def _click_slot(self, config: RegionConfig, slot_idx: int):
-        """通过 pydirectinput 点击指定 slot 的购买位置。"""
+    def _click_slot(self, config: RegionConfig, slot_idx: int) -> bool:
+        """点击指定 slot 的购买位置。"""
         try:
             click_points = self._ocr.resolve_native_click_points(config)
             x, y = click_points[slot_idx]
-
-            self._perform_click(x, y)
-            logger.info("已点击 slot %d 坐标 (%d, %d)", slot_idx + 1, x, y)
-        except ImportError:
-            logger.error("缺少依赖: pip install pydirectinput")
         except IndexError:
             logger.error("无效的 slot_idx: %d", slot_idx)
+            return False
 
-    def _perform_click(self, x: int, y: int):
+        if not self._can_click_current_foreground():
+            return False
+
+        if not self._perform_click(x, y):
+            self._warn_windows_input_blocked()
+            return False
+
+        logger.info("已点击 slot %d 坐标 (%d, %d)", slot_idx + 1, x, y)
+        return True
+
+    def _can_click_current_foreground(self) -> bool:
         """
-        执行一次“移动到目标点 + 按下 + 抬起”点击流程。
-        使用 pydirectinput（更容易被 DirectX 游戏接收）。
-        说明：pydirectinput 为纯 Python 包，Windows 32/64 位均可运行。
+        不再强制激活游戏窗口。
+        因此前台若不是游戏，点击即便发出也不会真正买牌，直接跳过更安全。
+        """
+        if sys.platform != "win32":
+            return True
+
+        title = self._get_foreground_window_title_windows()
+        if not title or self._is_game_window_title(title):
+            return True
+
+        if not self._foreground_warned:
+            self._foreground_warned = True
+            logger.warning("当前前台窗口不是游戏窗口（%s）；已跳过自动点击", title)
+            self.status_changed.emit("⚠ 请先切回游戏窗口")
+        return False
+
+    @staticmethod
+    def _is_game_window_title(title: str) -> bool:
+        return any(keyword in title for keyword in GAME_WINDOW_KEYWORDS)
+
+    @staticmethod
+    def _get_foreground_window_title_windows() -> str:
+        try:
+            import ctypes
+
+            user32 = ctypes.windll.user32
+            hwnd = user32.GetForegroundWindow()
+            if not hwnd:
+                return ""
+
+            length = user32.GetWindowTextLengthW(hwnd)
+            buf = ctypes.create_unicode_buffer(max(256, length + 1))
+            user32.GetWindowTextW(hwnd, buf, len(buf))
+            return buf.value.strip()
+        except Exception as exc:
+            logger.debug("读取前台窗口标题失败: %s", exc)
+            return ""
+
+    @staticmethod
+    def _is_process_elevated_windows() -> bool:
+        try:
+            import ctypes
+
+            return bool(ctypes.windll.shell32.IsUserAnAdmin())
+        except Exception as exc:
+            logger.debug("读取当前进程权限失败: %s", exc)
+            return False
+
+    def _warn_windows_input_blocked(self):
+        if sys.platform != "win32" or self._click_block_warned:
+            return
+
+        self._click_block_warned = True
+        if self._is_process_elevated_windows():
+            logger.warning("原生点击失败；请检查游戏窗口模式或是否被系统/安全软件拦截")
+            self.status_changed.emit("⚠ 自动点击失败，请检查窗口模式或系统拦截")
+            return
+
+        logger.warning(
+            "原生点击失败。若游戏进程以管理员权限运行而助手不是，Windows 会拦截输入注入"
+        )
+        self.status_changed.emit("⚠ 自动点击可能被拦截，请尝试以管理员身份运行助手")
+
+    def _perform_click(self, x: int, y: int) -> bool:
+        """
+        Windows 下直接使用 user32.SetCursorPos + mouse_event。
+        这样比依赖第三方库更可控，也便于诊断“前台是游戏时不移动鼠标”的问题。
         """
         if sys.platform != "win32":
             if not self._platform_warned:
                 self._platform_warned = True
-                logger.warning("pydirectinput 当前仅支持 Windows；已跳过自动点击")
-            return
+                logger.warning("自动点击当前仅实现 Windows 原生输入；已跳过本次点击")
+            return False
 
-        import pydirectinput
+        try:
+            import ctypes
+            from ctypes import wintypes
 
-        pydirectinput.moveTo(x, y)
-        pydirectinput.mouseDown(button="left")
-        time.sleep(0.02)
-        pydirectinput.mouseUp(button="left")
+            user32 = ctypes.windll.user32
+            MOUSEEVENTF_LEFTDOWN = 0x0002
+            MOUSEEVENTF_LEFTUP = 0x0004
+
+            user32.SetCursorPos.argtypes = [ctypes.c_int, ctypes.c_int]
+            user32.SetCursorPos.restype = wintypes.BOOL
+            user32.GetCursorPos.argtypes = [ctypes.POINTER(wintypes.POINT)]
+            user32.GetCursorPos.restype = wintypes.BOOL
+
+            if not user32.SetCursorPos(int(x), int(y)):
+                logger.warning("SetCursorPos 失败，目标坐标=(%d, %d)", x, y)
+                return False
+
+            time.sleep(0.01)
+
+            point = wintypes.POINT()
+            if user32.GetCursorPos(ctypes.byref(point)):
+                if abs(point.x - x) > 2 or abs(point.y - y) > 2:
+                    logger.warning(
+                        "鼠标未移动到目标位置，期望=(%d, %d) 实际=(%d, %d)",
+                        x, y, point.x, point.y,
+                    )
+                    return False
+
+            user32.mouse_event(MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+            time.sleep(0.02)
+            user32.mouse_event(MOUSEEVENTF_LEFTUP, 0, 0, 0, 0)
+            return True
+        except Exception as exc:
+            logger.warning("执行原生点击失败: %s", exc)
+            return False
