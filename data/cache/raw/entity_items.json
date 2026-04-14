@@ -1,0 +1,2480 @@
+{
+  "TFT17_AnimaSquadItem_Tier0_ClunkyPrototype": {
+    "category": "anima_weapon",
+    "description": "对战开始时：获得一个20%最大生命值的护盾。",
+    "effects": {
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier0_ClunkyPrototype.webp",
+    "id": "TFT17_AnimaSquadItem_Tier0_ClunkyPrototype",
+    "name": "破损原型"
+  },
+  "TFT17_AnimaSquadItem_Tier0_LeakyPrototype": {
+    "category": "anima_weapon",
+    "description": "每5秒，该装备失去5法术加成，并获得1法力回复。",
+    "effects": {
+      "AP": 25
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier0_LeakyPrototype.webp",
+    "id": "TFT17_AnimaSquadItem_Tier0_LeakyPrototype",
+    "name": "泄露原型"
+  },
+  "TFT17_AnimaSquadItem_Tier0_SparkingPrototype": {
+    "category": "anima_weapon",
+    "description": "每4秒，获得持续4秒的30%攻击速度。",
+    "effects": {
+      "AD": 0.15,
+      "AttackSpeed": 0.3
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier0_SparkingPrototype.webp",
+    "id": "TFT17_AnimaSquadItem_Tier0_SparkingPrototype",
+    "name": "闪光原型"
+  },
+  "TFT17_AnimaSquadItem_Tier1_GuidingHex": {
+    "category": "anima_weapon",
+    "description": "每3秒，对攻击距离内的1名随机敌人发射一个飞弹，造成@ProjectileDamage@魔法伤害。\n\n【阿萝拉】加成：如果该装备由【阿萝拉】携带，每当这个飞弹命中敌人时，她获得9法术加成。\n\n伤害随阶段提升。",
+    "effects": {
+      "AP": 15
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier1_GuidingHex.webp",
+    "id": "TFT17_AnimaSquadItem_Tier1_GuidingHex",
+    "name": "附灵飞弹"
+  },
+  "TFT17_AnimaSquadItem_Tier1_RocketSwarm": {
+    "category": "anima_weapon",
+    "description": "每消耗30法力值，对目标发射一连串的4个火箭，每个造成30% {{icon:TFTBaseAD}}物理伤害。\n\n【金克丝】加成：如果该装备由【金克丝】携带，则将所有技能子弹替换为造成45%额外伤害的火箭。",
+    "effects": {
+      "AD": 0.1,
+      "ManaRegen": 3
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier1_RocketSwarm.webp",
+    "id": "TFT17_AnimaSquadItem_Tier1_RocketSwarm",
+    "name": "火箭狂潮"
+  },
+  "TFT17_AnimaSquadItem_Tier1_SavageSlicer": {
+    "category": "anima_weapon",
+    "description": "攻击会命中目标和所有邻格的敌人，造成相当于30%攻击力的伤害。该伤害的全能吸血效能为150%。\n\n【贝蕾亚】加成：如果该装备由【贝蕾亚】携带，施放技能时会发生6次该效果。",
+    "effects": {
+      "AD": 0.1
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier1_SavageSlicer.webp",
+    "id": "TFT17_AnimaSquadItem_Tier1_SavageSlicer",
+    "name": "无情砍削"
+  },
+  "TFT17_AnimaSquadItem_Tier1_TentacleSlam": {
+    "category": "anima_weapon",
+    "description": "每5秒，召唤出一只触手向下猛击目标，造成@SlamDamage@物理伤害并为携带者回复12%最大生命值。\n\n【俄洛伊】加成：如果该装备由【俄洛伊】携带，则额外生成一只触手，对其技能吸取的目标进行效能为35%的猛击。\n\n伤害随阶段提升。",
+    "effects": {
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier1_TentacleSlam.webp",
+    "id": "TFT17_AnimaSquadItem_Tier1_TentacleSlam",
+    "name": "触手重击"
+  },
+  "TFT17_AnimaSquadItem_Tier2_Annihilator": {
+    "category": "anima_weapon",
+    "description": "储存造成伤害的20%。阵亡时或者对战开始18秒后，对所有敌人造成相当于储存伤害的真实伤害，每远离中心一格，这个伤害降低15%。\n\n推荐角色定位：物理术师或魔法术师",
+    "effects": {
+      "AD": 0.2,
+      "AP": 30,
+      "ManaRegen": 3
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_Annihilator.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_Annihilator",
+    "name": "歼灭者"
+  },
+  "TFT17_AnimaSquadItem_Tier2_BattleBunnyCrossbow": {
+    "category": "anima_weapon",
+    "description": "获得技能暴击。\n\n每4次暴击，朝目标发射5个可以暴击的透体飞箭。每个造成80% {{icon:TFTBaseAD}}物理伤害。\n\n每次技能施放至多3层。\n推荐角色定位：物理射手或物理战士",
+    "effects": {
+      "AD": 0.2,
+      "AS": 25,
+      "CritChance": 35
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_BattleBunnyCrossbow.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_BattleBunnyCrossbow",
+    "name": "战兔十字弩"
+  },
+  "TFT17_AnimaSquadItem_Tier2_CyclonicSlicers": {
+    "category": "anima_weapon",
+    "description": "获得3个环身剃刀。剃刀造成@Damage@魔法伤害，并对敌人造成持续4秒的30%魔抗击碎和护甲击碎。对受到魔抗击碎或护甲击碎的敌人造成10%额外伤害。\n\n伤害随阶段提升。\n推荐角色定位：物理战士或魔法战士",
+    "effects": {
+      "AD": 0.2,
+      "AP": 20,
+      "Armor": 15,
+      "MagicResist": 15
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_CyclonicSlicers.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_CyclonicSlicers",
+    "name": "旋风切割器"
+  },
+  "TFT17_AnimaSquadItem_Tier2_EchoingBatblades": {
+    "category": "anima_weapon",
+    "description": "每3次攻击，发射10个蝙蝠战刃，由相距最近的3名敌人分摊。每个战刃造成50% {{icon:TFTBaseAD}}物理伤害。\n\n推荐角色定位：物理射手",
+    "effects": {
+      "AD": 0.3,
+      "AS": 20
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_EchoingBatblades.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_EchoingBatblades",
+    "name": "回响蝠刃"
+  },
+  "TFT17_AnimaSquadItem_Tier2_IceblastArmor": {
+    "category": "anima_weapon",
+    "description": "当生命值首次降至70%和35%时，获得一个25%最大生命值的护盾，持续4秒，并释放一个冰霜新星，将3格内的敌人晕眩2秒。\n\n推荐角色定位：物理坦克或魔法坦克",
+    "effects": {
+      "Armor": 30,
+      "Health": 400,
+      "MagicResist": 30
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_IceblastArmor.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_IceblastArmor",
+    "name": "冰爆护甲"
+  },
+  "TFT17_AnimaSquadItem_Tier2_LionessLament": {
+    "category": "anima_weapon",
+    "description": "每失去15%最大生命值，对一条直线发射新月形飞弹，造成相当于携带者50%护甲与魔抗的物理伤害。从命中的所有敌人处窃取8护甲和魔抗。\n\n推荐角色定位：物理坦克或魔法坦克",
+    "effects": {
+      "Armor": 30,
+      "Health": 200,
+      "MagicResist": 30
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_LionessLament.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_LionessLament",
+    "name": "雌狮之怨"
+  },
+  "TFT17_AnimaSquadItem_Tier2_RadiantField": {
+    "category": "anima_weapon",
+    "description": "获得25%最大生命值。每秒，在1格半径内造成相当于携带者3%最大生命值的魔法伤害。半径每6秒增加一次。\n\n推荐角色定位：物理坦克或魔法坦克",
+    "effects": {
+      "Health": 400
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_RadiantField.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_RadiantField",
+    "name": "耀光力场"
+  },
+  "TFT17_AnimaSquadItem_Tier2_SearingShortbow": {
+    "category": "anima_weapon",
+    "description": "每消耗20法力值，对1名附近的敌人发射1个飞弹，造成相当于@ProjectileDamage@ + 携带者75%法术加成的魔法伤害，并对敌人施加持续3秒的1%灼烧效果和33%重伤效果。\n\n伤害随阶段提升。\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果\n推荐角色定位：魔法术师",
+    "effects": {
+      "AD": 0.1,
+      "AP": 40,
+      "ManaRegen": 4
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_SearingShortbow.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_SearingShortbow",
+    "name": "炽烈短弓"
+  },
+  "TFT17_AnimaSquadItem_Tier2_UwuBlaster": {
+    "category": "anima_weapon",
+    "description": "每次攻击，对距离内随机目标发射3道激光冲击波，造成相当于携带者40%物理加成的物理伤害。\n\n推荐角色定位：物理射手",
+    "effects": {
+      "AD": 0.15,
+      "AS": 45
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier2_UwuBlaster.webp",
+    "id": "TFT17_AnimaSquadItem_Tier2_UwuBlaster",
+    "name": "UwU魔爆炮"
+  },
+  "TFT17_AnimaSquadItem_Tier3_Annihilator": {
+    "category": "anima_weapon",
+    "description": "储存造成伤害的20%。每6秒和阵亡时，对所有敌人造成相当于储存伤害的真实伤害，每远离中心一格，这个伤害降低5%。\n\n推荐角色定位：物理术师或魔法术师",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "ManaRegen": 5
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_Annihilator.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_Annihilator",
+    "name": "幻灵启示录"
+  },
+  "TFT17_AnimaSquadItem_Tier3_BattleBunnyCrossbow": {
+    "category": "anima_weapon",
+    "description": "获得技能暴击。\n\n每3次暴击，朝目标发射6个可以暴击的透体飞箭。每个造成100% {{icon:TFTBaseAD}}物理伤害。\n\n参与击杀时，从目标处发射一连串的12个飞箭。\n\n每次技能施放至多3层。\n推荐角色定位：物理射手或物理战士",
+    "effects": {
+      "AD": 0.3,
+      "AS": 50,
+      "CritChance": 50
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_BattleBunnyCrossbow.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_BattleBunnyCrossbow",
+    "name": "战兔至尊弩炮"
+  },
+  "TFT17_AnimaSquadItem_Tier3_CyclonicSlicers": {
+    "category": "anima_weapon",
+    "description": "获得6个环身剃刀。剃刀造成@Damage@真实伤害，并对敌人造成持续至战斗环节结束的30%魔抗击碎和护甲击碎。对受到魔抗击碎或护甲击碎的敌人造成30%额外伤害。\n\n伤害随阶段提升。\n推荐角色定位：物理战士或魔法战士",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "Armor": 40,
+      "MagicResist": 40
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_CyclonicSlicers.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_CyclonicSlicers",
+    "name": "不息气旋"
+  },
+  "TFT17_AnimaSquadItem_Tier3_EchoingBatblades": {
+    "category": "anima_weapon",
+    "description": "每5次攻击，发射30个炫彩战刃，由所有敌人分摊。每个战刃造成50% {{icon:TFTBaseAD}}物理伤害。\n\n推荐角色定位：物理射手",
+    "effects": {
+      "AD": 0.3,
+      "AS": 50
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_EchoingBatblades.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_EchoingBatblades",
+    "name": "薇恩的炫彩战刃"
+  },
+  "TFT17_AnimaSquadItem_Tier3_IceblastArmor": {
+    "category": "anima_weapon",
+    "description": "当生命值首次降至90%、60%、40%和20%时，获得一个20%最大生命值的护盾，持续4秒。当这个效果发生时，释放一个冰霜新星，将2格内的敌人晕眩2秒并造成相当于他们15%最大生命值的魔法伤害。\n\n每次释放新星会使其半径提升1。\n\n推荐角色定位：物理坦克或魔法坦克",
+    "effects": {
+      "Armor": 30,
+      "Health": 550,
+      "MagicResist": 30
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_IceblastArmor.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_IceblastArmor",
+    "name": "深度冻结"
+  },
+  "TFT17_AnimaSquadItem_Tier3_LionessLament": {
+    "category": "anima_weapon",
+    "description": "每失去15%最大生命值，对3条直线发射新月形飞弹，造成相当于携带者50%护甲与魔抗的物理伤害。从命中的所有敌人处窃取10护甲和魔抗。\n\n推荐角色定位：物理坦克或魔法坦克",
+    "effects": {
+      "Armor": 40,
+      "Health": 400,
+      "MagicResist": 40
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_LionessLament.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_LionessLament",
+    "name": "猛狮之殇"
+  },
+  "TFT17_AnimaSquadItem_Tier3_RadiantField": {
+    "category": "anima_weapon",
+    "description": "获得18%最大生命值。每秒，在2 格半径内造成相当于携带者5%最大生命值的魔法伤害，并获得相当于20%造成伤害的最大生命值。半径每6秒增加一次。\n\n推荐角色定位：物理坦克或魔法坦克",
+    "effects": {
+      "Health": 800
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_RadiantField.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_RadiantField",
+    "name": "日蚀之刻"
+  },
+  "TFT17_AnimaSquadItem_Tier3_SearingShortbow": {
+    "category": "anima_weapon",
+    "description": "每消耗15法力值，对1名附近的敌人发射1个飞弹，造成相当于@ProjectileDamage@ + 携带者50%法术加成的魔法伤害，并对敌人施加持续10秒的1%灼烧效果和33%重伤效果。\n\n每个飞弹会留下一片缓慢消失的地带，对其中的敌人每秒造成@FieldDamagePerSecond@魔法伤害。\n\n伤害随阶段提升。\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果\n推荐角色定位：魔法术师",
+    "effects": {
+      "AD": 0.4,
+      "AP": 40,
+      "ManaRegen": 5
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_SearingShortbow.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_SearingShortbow",
+    "name": "进化余烬射击"
+  },
+  "TFT17_AnimaSquadItem_Tier3_UwuBlaster": {
+    "category": "anima_weapon",
+    "description": "每次攻击，对距离内随机目标发射9道激光冲击波，造成相当于携带者40%物理加成的物理伤害。\n\n推荐角色定位：物理射手",
+    "effects": {
+      "AD": 0.35,
+      "AS": 75
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier3_UwuBlaster.webp",
+    "id": "TFT17_AnimaSquadItem_Tier3_UwuBlaster",
+    "name": "OwO魔爆炮"
+  },
+  "TFT17_AnimaSquadItem_Tier4_Omniweapon": {
+    "category": "anima_weapon",
+    "description": "幻灵科技的顶点。",
+    "effects": {
+      "AD": 1,
+      "AP": 100,
+      "AS": 100,
+      "Armor": 100,
+      "CritChance": 75,
+      "Durability": 0.5,
+      "Health": 10000,
+      "MagicResist": 100,
+      "ManaRegen": 10
+    },
+    "icon": "/set17/item-webp/TFT17_AnimaSquadItem_Tier4_Omniweapon.webp",
+    "id": "TFT17_AnimaSquadItem_Tier4_Omniweapon",
+    "name": "幻灵合体至尊炮"
+  },
+  "TFT17_EkkoOffering_AnomalyItem": {
+    "category": "artifact",
+    "description": "使携带者进化，从而获得基于其角色定位的一个效果。\n\n坦克：获得1100生命值且体型提升。\n\n射手：获得60%攻击速度。施放时，如果目标在其3格内，就将其击退。\n\n战士/刺客：获得30法术加成和30%物理加成。生命值低于85%时，此加成变为3倍。\n\n术师：每花费50法力值，就会投掷一个半径2格的火球，在5秒里造成6%最大生命值的真实伤害、33%重伤和1%灼烧效果。\n\n专家：获得6颗星星，环绕该弈子飞行。每颗星星造成85魔法伤害，并且环绕轨道会扩展以命中携带者的当前目标。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_EkkoOffering_AnomalyItem.webp",
+    "id": "TFT17_EkkoOffering_AnomalyItem",
+    "name": "异常突变"
+  },
+  "TFT17_GravesTrait_FrameDefense": {
+    "category": "graves_upgrade",
+    "description": "！！请勿选择 - 尚未实装！！\n1范围，物理坦克\n专门负责吸收伤害，保护友军。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_FrameDefense.webp",
+    "id": "TFT17_GravesTrait_FrameDefense",
+    "name": "加固框架"
+  },
+  "TFT17_GravesTrait_FrameOffense": {
+    "category": "graves_upgrade",
+    "description": "4范围，物理射手\n专门负责对敌人造成伤害。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_FrameOffense.webp",
+    "id": "TFT17_GravesTrait_FrameOffense",
+    "name": "进攻框架"
+  },
+  "TFT17_GravesTrait_FrameSupport": {
+    "category": "graves_upgrade",
+    "description": "！！请勿选择 - 尚未实装！！\n4范围，混伤术师\n专门负责削弱敌人，强化友军。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_FrameSupport.webp",
+    "id": "TFT17_GravesTrait_FrameSupport",
+    "name": "支援框架"
+  },
+  "TFT17_GravesTrait_Offense_APRounds": {
+    "category": "graves_upgrade",
+    "description": "攻击和技能无视敌人30%的护甲。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_APRounds.webp",
+    "id": "TFT17_GravesTrait_Offense_APRounds",
+    "name": "穿甲弹"
+  },
+  "TFT17_GravesTrait_Offense_APRounds2": {
+    "category": "graves_upgrade",
+    "description": "攻击和技能无视敌人60%的护甲。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_APRounds2.webp",
+    "id": "TFT17_GravesTrait_Offense_APRounds2",
+    "name": "穿甲弹+"
+  },
+  "TFT17_GravesTrait_Offense_AimAssistant": {
+    "category": "graves_upgrade",
+    "description": "每与目标相距1格，造成5%额外伤害。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_AimAssistant.webp",
+    "id": "TFT17_GravesTrait_Offense_AimAssistant",
+    "name": "辅助瞄准"
+  },
+  "TFT17_GravesTrait_Offense_Backup": {
+    "category": "graves_upgrade",
+    "description": "什么也不做，但它免费！",
+    "effects": {
+      "AttackSpeed": 0.05
+    },
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Backup.webp",
+    "id": "TFT17_GravesTrait_Offense_Backup",
+    "name": "调试"
+  },
+  "TFT17_GravesTrait_Offense_BlastRadius": {
+    "category": "graves_upgrade",
+    "description": "次级爆炸半径增加1格，每远离爆炸中心一格，造成的伤害降低50%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_BlastRadius.webp",
+    "id": "TFT17_GravesTrait_Offense_BlastRadius",
+    "name": "爆炸范围"
+  },
+  "TFT17_GravesTrait_Offense_BlastRadius2": {
+    "category": "graves_upgrade",
+    "description": "次级爆炸半径增加2格，每远离爆炸中心一格，造成的伤害降低30%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_BlastRadius2.webp",
+    "id": "TFT17_GravesTrait_Offense_BlastRadius2",
+    "name": "爆炸范围+"
+  },
+  "TFT17_GravesTrait_Offense_BlastRadius3": {
+    "category": "graves_upgrade",
+    "description": "次级爆炸半径增加3格，每远离爆炸中心一格，造成的伤害降低30%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_BlastRadius3.webp",
+    "id": "TFT17_GravesTrait_Offense_BlastRadius3",
+    "name": "爆炸范围++"
+  },
+  "TFT17_GravesTrait_Offense_Buckshot": {
+    "category": "graves_upgrade",
+    "description": "攻击飞弹的数量增加2。散射范围扩大20%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Buckshot.webp",
+    "id": "TFT17_GravesTrait_Offense_Buckshot",
+    "name": "铅弹"
+  },
+  "TFT17_GravesTrait_Offense_Buckshot2": {
+    "category": "graves_upgrade",
+    "description": "攻击飞弹的数量增加4。散射范围扩大30%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Buckshot2.webp",
+    "id": "TFT17_GravesTrait_Offense_Buckshot2",
+    "name": "铅弹+"
+  },
+  "TFT17_GravesTrait_Offense_Buckshot3": {
+    "category": "graves_upgrade",
+    "description": "攻击飞弹的数量增加6。散射范围扩大40%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Buckshot3.webp",
+    "id": "TFT17_GravesTrait_Offense_Buckshot3",
+    "name": "铅弹++"
+  },
+  "TFT17_GravesTrait_Offense_Choke": {
+    "category": "graves_upgrade",
+    "description": "飞弹散射范围缩小75%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Choke.webp",
+    "id": "TFT17_GravesTrait_Offense_Choke",
+    "name": "阻塞"
+  },
+  "TFT17_GravesTrait_Offense_CloseQuarters": {
+    "category": "graves_upgrade",
+    "description": "成为一个物理战士，拥有-2距离。获得500基础生命值、15%全能吸血和25%物理加成。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_CloseQuarters.webp",
+    "id": "TFT17_GravesTrait_Offense_CloseQuarters",
+    "name": "进攻框架"
+  },
+  "TFT17_GravesTrait_Offense_Coolant": {
+    "category": "graves_upgrade",
+    "description": "法力消耗减少10",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Coolant.webp",
+    "id": "TFT17_GravesTrait_Offense_Coolant",
+    "name": "冷却介质"
+  },
+  "TFT17_GravesTrait_Offense_Coolant2": {
+    "category": "graves_upgrade",
+    "description": "法力消耗减少20",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Coolant2.webp",
+    "id": "TFT17_GravesTrait_Offense_Coolant2",
+    "name": "冷却介质+"
+  },
+  "TFT17_GravesTrait_Offense_DoubleTap": {
+    "category": "graves_upgrade",
+    "description": "有20%几率攻击两次。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_DoubleTap.webp",
+    "id": "TFT17_GravesTrait_Offense_DoubleTap",
+    "name": "射手框架"
+  },
+  "TFT17_GravesTrait_Offense_DoubleTap2": {
+    "category": "graves_upgrade",
+    "description": "有30%几率攻击两次。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_DoubleTap2.webp",
+    "id": "TFT17_GravesTrait_Offense_DoubleTap2",
+    "name": "双发快射"
+  },
+  "TFT17_GravesTrait_Offense_EmergencyShielding": {
+    "category": "graves_upgrade",
+    "description": "在40%生命值时，获得一个相当于50%最大生命值的护盾，在2.5秒内持续衰减。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_EmergencyShielding.webp",
+    "id": "TFT17_GravesTrait_Offense_EmergencyShielding",
+    "name": "紧急护盾"
+  },
+  "TFT17_GravesTrait_Offense_EmergencyShielding2": {
+    "category": "graves_upgrade",
+    "description": "在40%生命值时，获得一个相当于75%最大生命值的护盾，在4秒内持续衰减。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_EmergencyShielding2.webp",
+    "id": "TFT17_GravesTrait_Offense_EmergencyShielding2",
+    "name": "紧急护盾+"
+  },
+  "TFT17_GravesTrait_Offense_Fission": {
+    "category": "graves_upgrade",
+    "description": "+2法力回复和10%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Fission.webp",
+    "id": "TFT17_GravesTrait_Offense_Fission",
+    "name": "裂变"
+  },
+  "TFT17_GravesTrait_Offense_Fission2": {
+    "category": "graves_upgrade",
+    "description": "+3法力回复和20%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Fission2.webp",
+    "id": "TFT17_GravesTrait_Offense_Fission2",
+    "name": "裂变+"
+  },
+  "TFT17_GravesTrait_Offense_Fission3": {
+    "category": "graves_upgrade",
+    "description": "+5法力回复和30%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Fission3.webp",
+    "id": "TFT17_GravesTrait_Offense_Fission3",
+    "name": "裂变++"
+  },
+  "TFT17_GravesTrait_Offense_FragmentationRounds": {
+    "category": "graves_upgrade",
+    "description": "攻击命中时向附近的敌人射出2块碎片，造成15%伤害。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_FragmentationRounds.webp",
+    "id": "TFT17_GravesTrait_Offense_FragmentationRounds",
+    "name": "分裂弹"
+  },
+  "TFT17_GravesTrait_Offense_FragmentationRounds2": {
+    "category": "graves_upgrade",
+    "description": "攻击命中时向附近的敌人射出3块碎片，造成20%伤害。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_FragmentationRounds2.webp",
+    "id": "TFT17_GravesTrait_Offense_FragmentationRounds2",
+    "name": "分裂弹+"
+  },
+  "TFT17_GravesTrait_Offense_GravBooster": {
+    "category": "graves_upgrade",
+    "description": "参与击杀时，冲向下一个目标，下2次攻击的速度加快70%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_GravBooster.webp",
+    "id": "TFT17_GravesTrait_Offense_GravBooster",
+    "name": "重力助推器"
+  },
+  "TFT17_GravesTrait_Offense_GravBooster2": {
+    "category": "graves_upgrade",
+    "description": "参与击杀时，冲向下一个目标，下3次攻击的速度加快70%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_GravBooster2.webp",
+    "id": "TFT17_GravesTrait_Offense_GravBooster2",
+    "name": "重力助推器+"
+  },
+  "TFT17_GravesTrait_Offense_Heartseeker": {
+    "category": "graves_upgrade",
+    "description": "+10%暴击几率和+5%暴击伤害",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Heartseeker.webp",
+    "id": "TFT17_GravesTrait_Offense_Heartseeker",
+    "name": "觅心者"
+  },
+  "TFT17_GravesTrait_Offense_Heartseeker2": {
+    "category": "graves_upgrade",
+    "description": "+25%暴击几率和+10%暴击伤害",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Heartseeker2.webp",
+    "id": "TFT17_GravesTrait_Offense_Heartseeker2",
+    "name": "觅心者+"
+  },
+  "TFT17_GravesTrait_Offense_Heartseeker3": {
+    "category": "graves_upgrade",
+    "description": "+40%暴击几率和+18%暴击伤害",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Heartseeker3.webp",
+    "id": "TFT17_GravesTrait_Offense_Heartseeker3",
+    "name": "觅心者++"
+  },
+  "TFT17_GravesTrait_Offense_HeavyPlating": {
+    "category": "graves_upgrade",
+    "description": "获得300基础生命值、30护甲和30魔抗。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_HeavyPlating.webp",
+    "id": "TFT17_GravesTrait_Offense_HeavyPlating",
+    "name": "重型镀层"
+  },
+  "TFT17_GravesTrait_Offense_LaserBallistics": {
+    "category": "graves_upgrade",
+    "description": "攻击范围额外扩大1格并穿透敌人，每穿透1个目标，伤害降低50%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_LaserBallistics.webp",
+    "id": "TFT17_GravesTrait_Offense_LaserBallistics",
+    "name": "镭射弹道"
+  },
+  "TFT17_GravesTrait_Offense_LaserBallistics2": {
+    "category": "graves_upgrade",
+    "description": "攻击范围额外扩大2格并穿透敌人，每穿透1个目标，伤害降低50%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_LaserBallistics2.webp",
+    "id": "TFT17_GravesTrait_Offense_LaserBallistics2",
+    "name": "镭射弹道+"
+  },
+  "TFT17_GravesTrait_Offense_LaserBallistics3": {
+    "category": "graves_upgrade",
+    "description": "攻击范围额外扩大3格并穿透敌人，每穿透1个目标，伤害降低40%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_LaserBallistics3.webp",
+    "id": "TFT17_GravesTrait_Offense_LaserBallistics3",
+    "name": "镭射弹道++"
+  },
+  "TFT17_GravesTrait_Offense_LatentExplosion": {
+    "category": "graves_upgrade",
+    "description": "储存对敌人所造成伤害的15%。参与击杀后，敌人会释放这个已储存伤害，在半径2格内造成物理伤害。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_LatentExplosion.webp",
+    "id": "TFT17_GravesTrait_Offense_LatentExplosion",
+    "name": "潜藏爆炸"
+  },
+  "TFT17_GravesTrait_Offense_LeechingImplants": {
+    "category": "graves_upgrade",
+    "description": "+10%全能吸血和15%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_LeechingImplants.webp",
+    "id": "TFT17_GravesTrait_Offense_LeechingImplants",
+    "name": "榨血植入"
+  },
+  "TFT17_GravesTrait_Offense_LeechingImplants2": {
+    "category": "graves_upgrade",
+    "description": "+15%全能吸血和30%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_LeechingImplants2.webp",
+    "id": "TFT17_GravesTrait_Offense_LeechingImplants2",
+    "name": "榨血植入+"
+  },
+  "TFT17_GravesTrait_Offense_Meltthrough": {
+    "category": "graves_upgrade",
+    "description": "每秒，使2格内敌人的护甲降低5，对邻格敌人的效果翻倍。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Meltthrough.webp",
+    "id": "TFT17_GravesTrait_Offense_Meltthrough",
+    "name": "熔穿"
+  },
+  "TFT17_GravesTrait_Offense_Nanomachines": {
+    "category": "graves_upgrade",
+    "description": "每秒回复3%最大生命值。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Nanomachines.webp",
+    "id": "TFT17_GravesTrait_Offense_Nanomachines",
+    "name": "纳米机械"
+  },
+  "TFT17_GravesTrait_Offense_PrecisionScope": {
+    "category": "graves_upgrade",
+    "description": "+1距离和10%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_PrecisionScope.webp",
+    "id": "TFT17_GravesTrait_Offense_PrecisionScope",
+    "name": "精密准镜"
+  },
+  "TFT17_GravesTrait_Offense_PrecisionScope2": {
+    "category": "graves_upgrade",
+    "description": "+2距离和20%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_PrecisionScope2.webp",
+    "id": "TFT17_GravesTrait_Offense_PrecisionScope2",
+    "name": "精密准镜+"
+  },
+  "TFT17_GravesTrait_Offense_PrecisionScope3": {
+    "category": "graves_upgrade",
+    "description": "+3距离和30%物理加成",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_PrecisionScope3.webp",
+    "id": "TFT17_GravesTrait_Offense_PrecisionScope3",
+    "name": "精密准镜++"
+  },
+  "TFT17_GravesTrait_Offense_ReactiveArmor": {
+    "category": "graves_upgrade",
+    "description": "承受敌人的伤害时额外获得4护甲和魔抗，最多获得50。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_ReactiveArmor.webp",
+    "id": "TFT17_GravesTrait_Offense_ReactiveArmor",
+    "name": "反应护甲"
+  },
+  "TFT17_GravesTrait_Offense_RevUp": {
+    "category": "graves_upgrade",
+    "description": "对相同目标的每次攻击获得8%攻击速度，最多获得80%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_RevUp.webp",
+    "id": "TFT17_GravesTrait_Offense_RevUp",
+    "name": "动力强化"
+  },
+  "TFT17_GravesTrait_Offense_RevUp2": {
+    "category": "graves_upgrade",
+    "description": "对相同目标的每次攻击获得15%攻击速度，最多获得150%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_RevUp2.webp",
+    "id": "TFT17_GravesTrait_Offense_RevUp2",
+    "name": "动力强化+"
+  },
+  "TFT17_GravesTrait_Offense_RipperBullets": {
+    "category": "graves_upgrade",
+    "description": "攻击使敌人的护甲和魔抗降低1。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_RipperBullets.webp",
+    "id": "TFT17_GravesTrait_Offense_RipperBullets",
+    "name": "破甲弹"
+  },
+  "TFT17_GravesTrait_Offense_RipperBullets2": {
+    "category": "graves_upgrade",
+    "description": "攻击使敌人的护甲和魔抗降低2。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_RipperBullets2.webp",
+    "id": "TFT17_GravesTrait_Offense_RipperBullets2",
+    "name": "破甲弹+"
+  },
+  "TFT17_GravesTrait_Offense_SharpshooterModule": {
+    "category": "graves_upgrade",
+    "description": "获得技能暴击，并且技能伤害提升5%。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_SharpshooterModule.webp",
+    "id": "TFT17_GravesTrait_Offense_SharpshooterModule",
+    "name": "动力框架"
+  },
+  "TFT17_GravesTrait_Offense_SheerMass": {
+    "category": "graves_upgrade",
+    "description": "获得25%最大生命值和体型提升。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_SheerMass.webp",
+    "id": "TFT17_GravesTrait_Offense_SheerMass",
+    "name": "纯粹质量"
+  },
+  "TFT17_GravesTrait_Offense_Shockwave": {
+    "category": "graves_upgrade",
+    "description": "对战开始时：向前方释放冲击波，造成相当于【格雷福斯】15%最大生命值的魔法伤害，同时晕眩命中的敌人2秒。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Shockwave.webp",
+    "id": "TFT17_GravesTrait_Offense_Shockwave",
+    "name": "冲击波"
+  },
+  "TFT17_GravesTrait_Offense_SympatheticDetonation": {
+    "category": "graves_upgrade",
+    "description": "在最近的敌人处引发第二次爆炸，半径为1格，造成30%伤害。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_SympatheticDetonation.webp",
+    "id": "TFT17_GravesTrait_Offense_SympatheticDetonation",
+    "name": "共鸣引爆"
+  },
+  "TFT17_GravesTrait_Offense_Tankbuster": {
+    "category": "graves_upgrade",
+    "description": "对抗坦克时获得15%伤害增幅。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_Tankbuster.webp",
+    "id": "TFT17_GravesTrait_Offense_Tankbuster",
+    "name": "坦克克星"
+  },
+  "TFT17_GravesTrait_Offense_TripleTap": {
+    "category": "graves_upgrade",
+    "description": "有18%几率攻击三次。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_TripleTap.webp",
+    "id": "TFT17_GravesTrait_Offense_TripleTap",
+    "name": "三连轰"
+  },
+  "TFT17_GravesTrait_Offense_VoidCoefficient": {
+    "category": "graves_upgrade",
+    "description": "每次施放技能降低15%法力消耗(最低降至10)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_GravesTrait_Offense_VoidCoefficient.webp",
+    "id": "TFT17_GravesTrait_Offense_VoidCoefficient",
+    "name": "虚空系数"
+  },
+  "TFT17_Item_ASTraitEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【挑战者】羁绊。参与击杀后，携带者的下3次攻击每次会治疗其5%最大生命值。",
+    "effects": {
+      "AS": 30
+    },
+    "icon": "/set17/item-webp/TFT17_Item_ASTraitEmblemItem.webp",
+    "id": "TFT17_Item_ASTraitEmblemItem",
+    "name": "挑战者纹章"
+  },
+  "TFT17_Item_AnimaSquadEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【幻灵战队】羁绊。",
+    "effects": {
+      "Health": 250
+    },
+    "icon": "/set17/item-webp/TFT17_Item_AnimaSquadEmblemItem.webp",
+    "id": "TFT17_Item_AnimaSquadEmblemItem",
+    "name": "幻灵战队纹章"
+  },
+  "TFT17_Item_Artifact_AhriArtifact": {
+    "category": "artifact",
+    "description": "携带者被3团狐火环绕。每团狐火造成55 {{icon:scaleAP}}魔法伤害，并且环绕轨道会扩展以命中携带者的当前目标。\n\n携带者每消耗20法力值，狐火移动速度就会加快5%，持续至战斗结束。",
+    "effects": {
+      "AP": 20,
+      "ManaRegen": 4
+    },
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_AhriArtifact.webp",
+    "id": "TFT17_Item_Artifact_AhriArtifact",
+    "name": "阿狸的光环"
+  },
+  "TFT17_Item_Artifact_EkkoArtifact": {
+    "category": "artifact",
+    "description": "技能总伤害提升45%，但改为2秒内分次造成伤害。",
+    "effects": {
+      "AD": 0.25,
+      "AP": 25
+    },
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_EkkoArtifact.webp",
+    "id": "TFT17_Item_Artifact_EkkoArtifact",
+    "name": "艾克的耐心"
+  },
+  "TFT17_Item_Artifact_EvelynnArtifact": {
+    "category": "artifact",
+    "description": "当转换目标时，闪烁到下一个目标旁。攻击和技能将直接处决生命值低于12%的目标。\n\n携带者可通过击杀获得在3秒内持续衰减的50%攻击速度。",
+    "effects": {
+      "AD": 0.1,
+      "AP": 10,
+      "AS": 40
+    },
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_EvelynnArtifact.webp",
+    "id": "TFT17_Item_Artifact_EvelynnArtifact",
+    "name": "伊芙琳的本能"
+  },
+  "TFT17_Item_Artifact_KayleArtifact": {
+    "category": "artifact",
+    "description": "战斗开始18秒后，携带者的这件装备和所有成装均变为光明版。",
+    "effects": {
+      "AD": 0.25,
+      "AP": 25,
+      "AS": 15
+    },
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_KayleArtifact.webp",
+    "id": "TFT17_Item_Artifact_KayleArtifact",
+    "name": "凯尔的崇拜"
+  },
+  "TFT17_Item_Artifact_SorakaArtifact": {
+    "category": "artifact",
+    "description": "携带者在最初的2次生命值降至50%以下时，奇迹将会降临，治疗携带者20%最大生命值。\n\n如果携带者在玩家对战中存活，本场对战中的每个奇迹可转化为1玩家生命值。",
+    "effects": {
+      "Durability": 0.1,
+      "Health": 100
+    },
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_SorakaArtifact.webp",
+    "id": "TFT17_Item_Artifact_SorakaArtifact",
+    "name": "索拉卡的奇迹"
+  },
+  "TFT17_Item_Artifact_ThreshLantern": {
+    "category": "artifact",
+    "description": "战斗开始6秒后，让备战席的最左侧的那个弈子上阵作战。该弈子存活期间，将摊分持有者所受全部伤害的20%。\n\n强制上阵的弈子不会激活羁绊",
+    "effects": {
+      "Armor": 25,
+      "Health": 400,
+      "MagicResist": 25
+    },
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_ThreshLantern.webp",
+    "id": "TFT17_Item_Artifact_ThreshLantern",
+    "name": "锤石的灯笼"
+  },
+  "TFT17_Item_Artifact_VarusArtifact": {
+    "category": "artifact",
+    "description": "对战开始时：你最强大的那个坦克成为【灵魂伴侣】。其每存活一秒，携带者获得3%可叠加的物理加成和法术加成。\n\n【灵魂伴侣】会获得携带者造成伤害20%的等额治疗。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_VarusArtifact.webp",
+    "id": "TFT17_Item_Artifact_VarusArtifact",
+    "name": "韦鲁斯的执念"
+  },
+  "TFT17_Item_Artifact_YasuoArtifact": {
+    "category": "artifact",
+    "description": "每3.5秒，你的下次攻击将变为一次双重攻击。",
+    "effects": {
+      "AD": 0.3,
+      "AS": 10
+    },
+    "icon": "/set17/item-webp/TFT17_Item_Artifact_YasuoArtifact.webp",
+    "id": "TFT17_Item_Artifact_YasuoArtifact",
+    "name": "亚索的剑艺"
+  },
+  "TFT17_Item_AssassinTraitEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【游侠】羁绊。在50%生命值时，获得40%全能吸血和控制免疫效果，持续5秒。",
+    "effects": {
+      "CritChance": 20
+    },
+    "icon": "/set17/item-webp/TFT17_Item_AssassinTraitEmblemItem.webp",
+    "id": "TFT17_Item_AssassinTraitEmblemItem",
+    "name": "游侠纹章"
+  },
+  "TFT17_Item_AstronautEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【木灵族】羁绊，并且每{{icon:set14AmpIcon}}就获得1额外法力回复。",
+    "effects": {
+      "Armor": 20,
+      "MagicResist": 20,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT17_Item_AstronautEmblemItem.webp",
+    "id": "TFT17_Item_AstronautEmblemItem",
+    "name": "木灵族纹章"
+  },
+  "TFT17_Item_DRXEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【新星特攻队】羁绊。\n\n新星特攻：获得45%攻击速度和40护甲与魔抗。其他友军获得10%攻击速度和20护甲与魔抗。",
+    "effects": {
+      "CritChance": 20,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT17_Item_DRXEmblemItem.webp",
+    "id": "TFT17_Item_DRXEmblemItem",
+    "name": "新星特攻队纹章"
+  },
+  "TFT17_Item_DarkStarEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【暗星】羁绊。",
+    "effects": {
+      "AD": 0.25,
+      "AP": 25
+    },
+    "icon": "/set17/item-webp/TFT17_Item_DarkStarEmblemItem.webp",
+    "id": "TFT17_Item_DarkStarEmblemItem",
+    "name": "暗星纹章"
+  },
+  "TFT17_Item_FavoredEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【法官】羁绊。",
+    "effects": {
+      "AS": 20,
+      "Armor": 20,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT17_Item_FavoredEmblemItem.webp",
+    "id": "TFT17_Item_FavoredEmblemItem",
+    "name": "法官纹章"
+  },
+  "TFT17_Item_FlexTraitEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【旅人】羁绊。\n\n对战开始时：基于携带者的角色定位，自身获得并为邻格的友军提供加成。\n-坦克：20护甲和魔抗\n-战士/刺客：18%全能吸血\n-其他角色定位：15%攻击速度",
+    "effects": {
+      "AD": 0.2,
+      "AP": 20
+    },
+    "icon": "/set17/item-webp/TFT17_Item_FlexTraitEmblemItem.webp",
+    "id": "TFT17_Item_FlexTraitEmblemItem",
+    "name": "旅人纹章"
+  },
+  "TFT17_Item_HPTankEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【斗士】羁绊。攻击会造成相当于携带者3%最大生命值的魔法伤害。",
+    "effects": {
+      "Health": 250
+    },
+    "icon": "/set17/item-webp/TFT17_Item_HPTankEmblemItem.webp",
+    "id": "TFT17_Item_HPTankEmblemItem",
+    "name": "斗士纹章"
+  },
+  "TFT17_Item_MeleeTraitEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【狂战士】羁绊，并且在击杀时有33%几率获得1金币。",
+    "effects": {
+      "AD": 0.2
+    },
+    "icon": "/set17/item-webp/TFT17_Item_MeleeTraitEmblemItem.webp",
+    "id": "TFT17_Item_MeleeTraitEmblemItem",
+    "name": "狂战士纹章"
+  },
+  "TFT17_Item_PrimordianEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【海魔人】羁绊。",
+    "effects": {
+      "Health": 450
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PrimordianEmblemItem.webp",
+    "id": "TFT17_Item_PrimordianEmblemItem",
+    "name": "海魔人纹章"
+  },
+  "TFT17_Item_PsyOpsEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【灵能特工】羁绊。",
+    "effects": {
+      "AD": 0.2,
+      "AP": 20,
+      "AS": 20,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOpsEmblemItem.webp",
+    "id": "TFT17_Item_PsyOpsEmblemItem",
+    "name": "灵能特工纹章"
+  },
+  "TFT17_Item_PsyOps_ChemicalCapacitorMod": {
+    "category": "psyops_mod",
+    "description": "对一个敌人造成物理伤害，可削减目标2护甲。(技能伤害冷却时间：0.75秒)\n\n推荐使用者：【易】和【派克】。",
+    "effects": {
+      "AD": 0.15,
+      "AS": 15
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_ChemicalCapacitorMod.webp",
+    "id": "TFT17_Item_PsyOps_ChemicalCapacitorMod",
+    "name": "恶意软件矩阵"
+  },
+  "TFT17_Item_PsyOps_ChemicalCapacitorMod_Radiant": {
+    "category": "psyops_mod",
+    "description": "对一个敌人造成物理伤害，可削减目标2护甲。(技能伤害冷却时间：0.75秒)\n\n在(4)层级时：如果携带者是【灵能特工】，则每第3次攻击发动顺劈，对附近敌人造成75  {{icon:scaleAD}}物理伤害。\n\n推荐使用者：【易】和【派克】。",
+    "effects": {
+      "AD": 0.15,
+      "AS": 15
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_ChemicalCapacitorMod_Radiant.webp",
+    "id": "TFT17_Item_PsyOps_ChemicalCapacitorMod_Radiant",
+    "name": "恶意软件矩阵"
+  },
+  "TFT17_Item_PsyOps_DroneMod": {
+    "category": "psyops_mod",
+    "description": "每3秒，一个无人机将来自携带者攻击和技能的25%伤害重复至相同目标。\n\n推荐使用者：【娑娜】和【维克托】。",
+    "effects": {
+      "AP": 25
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_DroneMod.webp",
+    "id": "TFT17_Item_PsyOps_DroneMod",
+    "name": "无人机上行链路"
+  },
+  "TFT17_Item_PsyOps_DroneMod_Radiant": {
+    "category": "psyops_mod",
+    "description": "每3秒，一个无人机将来自携带者攻击和技能的25%伤害重复至相同目标。\n\n在(4)层级时：如果携带者是【灵能特工】，获得一个额外的小型无人机，重复20%伤害。\n\n推荐使用者：【娑娜】和【维克托】。",
+    "effects": {
+      "AP": 25
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_DroneMod_Radiant.webp",
+    "id": "TFT17_Item_PsyOps_DroneMod_Radiant",
+    "name": "无人机上行链路"
+  },
+  "TFT17_Item_PsyOps_GrenadeMod": {
+    "category": "psyops_mod",
+    "description": "获得5%最大生命值，并部署3个【生命法球】。战斗中每经过8秒，1个【生命法球】就会掉落以治疗携带者18%的已损失生命值。\n\n推荐使用者：【古拉加斯】。",
+    "effects": {
+      "Health": 250
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_GrenadeMod.webp",
+    "id": "TFT17_Item_PsyOps_GrenadeMod",
+    "name": "生物质维护器"
+  },
+  "TFT17_Item_PsyOps_GrenadeMod_Radiant": {
+    "category": "psyops_mod",
+    "description": "获得5%最大生命值，并部署3个【生命法球】。战斗中每经过8秒，1个【生命法球】就会掉落以治疗携带者18%的已损失生命值。\n\n在(4)层级时：如果携带者是【灵能特工】，其可以从所有来源获得的治疗提升22%。\n\n推荐使用者：【古拉加斯】。",
+    "effects": {
+      "Health": 400
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_GrenadeMod_Radiant.webp",
+    "id": "TFT17_Item_PsyOps_GrenadeMod_Radiant",
+    "name": "生物质维护器"
+  },
+  "TFT17_Item_PsyOps_SemiconductorMod": {
+    "category": "psyops_mod",
+    "description": "每4次攻击和每受到8次攻击，震击相距最近的3个敌人，造成相当于该敌人7%生命值的魔法伤害。\n\n推荐使用者：【古拉加斯】和【易】。",
+    "effects": {
+      "Durability": 0.1,
+      "Health": 200
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_SemiconductorMod.webp",
+    "id": "TFT17_Item_PsyOps_SemiconductorMod",
+    "name": "半导体装置"
+  },
+  "TFT17_Item_PsyOps_SemiconductorMod_Radiant": {
+    "category": "psyops_mod",
+    "description": "每4次攻击和每受到12次攻击，震击相距最近的3个敌人，造成相当于该敌人7.5%生命值的魔法伤害。\n\n推荐使用者：【古拉加斯】和【易】。",
+    "effects": {
+      "Durability": 0.3,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_SemiconductorMod_Radiant.webp",
+    "id": "TFT17_Item_PsyOps_SemiconductorMod_Radiant",
+    "name": "半导体装置"
+  },
+  "TFT17_Item_PsyOps_SympatheticImplantMod": {
+    "category": "psyops_mod",
+    "description": "每5秒，获得1额外法力回复。\n\n推荐使用者：【娑娜】和【维克托】。",
+    "effects": {
+      "AP": 20,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_SympatheticImplantMod.webp",
+    "id": "TFT17_Item_PsyOps_SympatheticImplantMod",
+    "name": "共感植入"
+  },
+  "TFT17_Item_PsyOps_SympatheticImplantMod_Radiant": {
+    "category": "psyops_mod",
+    "description": "每5秒，每秒获得1额外法力值。\n\n在(4)层级时：如果携带者是【灵能特工】，其技能会转而造成20%原本技能伤害的真实伤害。\n\n推荐使用者：【娑娜】和【维克托】。",
+    "effects": {
+      "AP": 20,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_SympatheticImplantMod_Radiant.webp",
+    "id": "TFT17_Item_PsyOps_SympatheticImplantMod_Radiant",
+    "name": "共感植入"
+  },
+  "TFT17_Item_PsyOps_TargetlockMod": {
+    "category": "psyops_mod",
+    "description": "携带者对任何敌人的首次攻击造成150  {{icon:scaleAD}}额外伤害。\n\n推荐使用者：【派克】和【易】",
+    "effects": {
+      "AD": 0.15,
+      "AS": 35
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_TargetlockMod.webp",
+    "id": "TFT17_Item_PsyOps_TargetlockMod",
+    "name": "锁敌光学设备"
+  },
+  "TFT17_Item_PsyOps_TargetlockMod_Radiant": {
+    "category": "psyops_mod",
+    "description": "携带者对任何敌人的首次攻击造成150  {{icon:scaleAD}}额外伤害。\n\n在(4)层级时：如果携带者是【灵能特工】，会在其目标阵亡时回复自身15%最大生命值。\n\n推荐使用者：【派克】和【易】。",
+    "effects": {
+      "AD": 0.15,
+      "AS": 35
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PsyOps_TargetlockMod_Radiant.webp",
+    "id": "TFT17_Item_PsyOps_TargetlockMod_Radiant",
+    "name": "锁敌光学设备"
+  },
+  "TFT17_Item_PulsefireEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【未来战士】羁绊。",
+    "effects": {
+      "AS": 15,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT17_Item_PulsefireEmblemItem.webp",
+    "id": "TFT17_Item_PulsefireEmblemItem",
+    "name": "未来战士纹章"
+  },
+  "TFT17_Item_RangedTraitEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【狙神】羁绊和+1攻击距离。",
+    "effects": {
+      "AS": 20
+    },
+    "icon": "/set17/item-webp/TFT17_Item_RangedTraitEmblemItem.webp",
+    "id": "TFT17_Item_RangedTraitEmblemItem",
+    "name": "狙神纹章"
+  },
+  "TFT17_Item_ResistTankEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【堡垒卫士】羁绊。在战斗开始的最初10秒之后，携带者获得70%攻击速度。",
+    "effects": {
+      "Armor": 30,
+      "MagicResist": 30
+    },
+    "icon": "/set17/item-webp/TFT17_Item_ResistTankEmblemItem.webp",
+    "id": "TFT17_Item_ResistTankEmblemItem",
+    "name": "堡垒卫士纹章"
+  },
+  "TFT17_Item_ShieldTankEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【重装战士】羁绊。每当1名友军获得护盾时，获得3%法术加成。",
+    "effects": {
+      "Armor": 20,
+      "Health": 150,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT17_Item_ShieldTankEmblemItem.webp",
+    "id": "TFT17_Item_ShieldTankEmblemItem",
+    "name": "重装战士纹章"
+  },
+  "TFT17_Item_SpaceGrooveEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【太空律动】羁绊。施放技能时，携带者会进入{{groove:太空律动}}，持续3秒。",
+    "effects": {
+      "ManaRegen": 3
+    },
+    "icon": "/set17/item-webp/TFT17_Item_SpaceGrooveEmblemItem.webp",
+    "id": "TFT17_Item_SpaceGrooveEmblemItem",
+    "name": "太空律动纹章"
+  },
+  "TFT17_Item_StargazerEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【观星者】羁绊。",
+    "effects": {
+      "AD": 0.15,
+      "AP": 15
+    },
+    "icon": "/set17/item-webp/TFT17_Item_StargazerEmblemItem.webp",
+    "id": "TFT17_Item_StargazerEmblemItem",
+    "name": "观星者纹章"
+  },
+  "TFT17_Item_SummonTraitEmblemItem": {
+    "category": "emblem",
+    "description": "携带者获得【牧羊人】羁绊。在施放技能时，提供12%最大法力值至【群星誓约】。",
+    "effects": {
+      "ManaRegen": 3
+    },
+    "icon": "/set17/item-webp/TFT17_Item_SummonTraitEmblemItem.webp",
+    "id": "TFT17_Item_SummonTraitEmblemItem",
+    "name": "牧羊人纹章"
+  },
+  "TFT17_SonaUnique_Consumable_Debuff": {
+    "category": "sona_command",
+    "description": "指定一个弈子，其攻击造成灼烧、重伤和冰冷。获得8%攻击速度。\n（适合所有弈子）",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_Debuff.webp",
+    "id": "TFT17_SonaUnique_Consumable_Debuff",
+    "name": "指令模块：虚弱"
+  },
+  "TFT17_SonaUnique_Consumable_Doublestrike": {
+    "category": "sona_command",
+    "description": "指定一个单位，其在攻击时有25%几率攻击两次。\n\n(适合输出型弈子)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_Doublestrike.webp",
+    "id": "TFT17_SonaUnique_Consumable_Doublestrike",
+    "name": "指令模块：双重打击"
+  },
+  "TFT17_SonaUnique_Consumable_Experience": {
+    "category": "sona_command",
+    "description": "指定一个单位，其在玩家对战回合每存活3秒，就会为你提供1经验值。\n\n(适合后排弈子)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_Experience.webp",
+    "id": "TFT17_SonaUnique_Consumable_Experience",
+    "name": "指令模块：分析"
+  },
+  "TFT17_SonaUnique_Consumable_Freeze": {
+    "category": "sona_command",
+    "description": "指定一个单位，对战开始时，其获得一个持续8秒的20%生命值的护盾。\n\n(适合坦克弈子)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_Freeze.webp",
+    "id": "TFT17_SonaUnique_Consumable_Freeze",
+    "name": "指令模块：加固"
+  },
+  "TFT17_SonaUnique_Consumable_GoldOnKill": {
+    "category": "sona_command",
+    "description": "指定一个单位，其在玩家对战回合每击杀1名敌人，就会获得2金币。\n\n(适合输出型弈子)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_GoldOnKill.webp",
+    "id": "TFT17_SonaUnique_Consumable_GoldOnKill",
+    "name": "指令模块：质变"
+  },
+  "TFT17_SonaUnique_Consumable_IncreaseThreat": {
+    "category": "sona_command",
+    "description": "指定一个单位，其阵亡时会晕眩附近3格内的敌人1秒。\n\n(适合坦克弈子)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_IncreaseThreat.webp",
+    "id": "TFT17_SonaUnique_Consumable_IncreaseThreat",
+    "name": "指令模块：扰乱"
+  },
+  "TFT17_SonaUnique_Consumable_ReduceMana": {
+    "category": "sona_command",
+    "description": "指定一个单位，其法力消耗降低15%。\n\n(适合所有有法力值的弈子)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_ReduceMana.webp",
+    "id": "TFT17_SonaUnique_Consumable_ReduceMana",
+    "name": "指令模块：优化"
+  },
+  "TFT17_SonaUnique_Consumable_ReduceThreat": {
+    "category": "sona_command",
+    "description": "指定一个单位，其变得不可被选取，直到其他所有友军阵亡。",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_ReduceThreat.webp",
+    "id": "TFT17_SonaUnique_Consumable_ReduceThreat",
+    "name": "指令模块：伪装"
+  },
+  "TFT17_SonaUnique_Consumable_TempItem": {
+    "category": "sona_command",
+    "description": "指定一个单位，对战开始时，其暂时获得一个推荐装备。\n\n(适合所有弈子)",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT17_SonaUnique_Consumable_TempItem.webp",
+    "id": "TFT17_SonaUnique_Consumable_TempItem",
+    "name": "指令模块：装配"
+  },
+  "TFT4_Item_OrnnDeathsDefiance": {
+    "category": "artifact",
+    "description": "携带者受到的50%伤害会转而在4秒里作为非致命伤害来持续扣除。\n\n[唯一 - 每位英雄仅限1件]",
+    "effects": {
+      "AD": 0.25,
+      "AS": 15,
+      "Armor": 40
+    },
+    "icon": "/set17/item-webp/TFT4_Item_OrnnDeathsDefiance.webp",
+    "id": "TFT4_Item_OrnnDeathsDefiance",
+    "name": "死亡之蔑"
+  },
+  "TFT4_Item_OrnnInfinityForce": {
+    "category": "artifact",
+    "description": "成吨的一切！",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "AS": 30,
+      "Armor": 30,
+      "Health": 300,
+      "MagicResist": 30
+    },
+    "icon": "/set17/item-webp/TFT4_Item_OrnnInfinityForce.webp",
+    "id": "TFT4_Item_OrnnInfinityForce",
+    "name": "三相之力"
+  },
+  "TFT4_Item_OrnnTheCollector": {
+    "category": "artifact",
+    "description": "携带者的攻击和技能会处决低于12%最大生命值的目标。处决有33%几率掉落{{icon:goldCoins}}1金币。\n\n[唯一 - 每个弈子仅可装备1件]",
+    "effects": {
+      "AD": 0.4,
+      "CritChance": 20
+    },
+    "icon": "/set17/item-webp/TFT4_Item_OrnnTheCollector.webp",
+    "id": "TFT4_Item_OrnnTheCollector",
+    "name": "金币收集者"
+  },
+  "TFT4_Item_OrnnZhonyasParadox": {
+    "category": "artifact",
+    "description": "每场战斗一次：在40%生命值时，携带者进入持续3秒的免疫伤害和无法被选取状态。\n\n[唯一 - 每位英雄仅限1件]",
+    "effects": {
+      "AP": 25,
+      "Armor": 25,
+      "MagicResist": 25
+    },
+    "icon": "/set17/item-webp/TFT4_Item_OrnnZhonyasParadox.webp",
+    "id": "TFT4_Item_OrnnZhonyasParadox",
+    "name": "中娅悖论"
+  },
+  "TFT5_Item_AdaptiveHelmRadiant": {
+    "category": "radiant",
+    "description": "从所有来源中获得额外的30%法力值。携带者获得基于角色定位的一个额外加成：\n\n坦克/战士：获得80护甲和魔抗。\n\n射手/术师：获得25%物理加成和法术加成。",
+    "effects": {
+      "MagicResist": 40,
+      "ManaRegen": 6
+    },
+    "icon": "/set17/item-webp/TFT5_Item_AdaptiveHelmRadiant.webp",
+    "id": "TFT5_Item_AdaptiveHelmRadiant",
+    "name": "光明版适应性头盔"
+  },
+  "TFT5_Item_ArchangelsStaffRadiant": {
+    "category": "radiant",
+    "description": "战斗开始时：在战斗期间，每5秒获得40%法术加成。",
+    "effects": {
+      "AP": 60,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_ArchangelsStaffRadiant.webp",
+    "id": "TFT5_Item_ArchangelsStaffRadiant",
+    "name": "光明版大天使之杖"
+  },
+  "TFT5_Item_BloodthirsterRadiant": {
+    "category": "radiant",
+    "description": "每场战斗一次：在40%生命值时，获得一个护盾，护盾值相当于携带者50%的最大生命值，至多持续5秒。",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "MagicResist": 40
+    },
+    "icon": "/set17/item-webp/TFT5_Item_BloodthirsterRadiant.webp",
+    "id": "TFT5_Item_BloodthirsterRadiant",
+    "name": "光明版饮血剑"
+  },
+  "TFT5_Item_BlueBuffRadiant": {
+    "category": "radiant",
+    "description": "从所有来源中获得20%额外物理加成和法术加成。",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "ManaRegen": 10
+    },
+    "icon": "/set17/item-webp/TFT5_Item_BlueBuffRadiant.webp",
+    "id": "TFT5_Item_BlueBuffRadiant",
+    "name": "光明版蓝霸符"
+  },
+  "TFT5_Item_BrambleVestRadiant": {
+    "category": "radiant",
+    "description": "获得12%最大生命值。\n\n使来自攻击的伤害降低10%。在被任一攻击命中时，对邻格所有敌人造成200魔法伤害。\n\n冷却时间：2秒",
+    "effects": {
+      "Armor": 100
+    },
+    "icon": "/set17/item-webp/TFT5_Item_BrambleVestRadiant.webp",
+    "id": "TFT5_Item_BrambleVestRadiant",
+    "name": "光明版棘刺背心"
+  },
+  "TFT5_Item_CrownguardRadiant": {
+    "category": "radiant",
+    "description": "战斗开始时：获得持续8秒的相当于50%最大生命值的护盾值。\n\n在护盾到期时，获得50%法术加成。",
+    "effects": {
+      "AP": 40,
+      "Armor": 40,
+      "Health": 200
+    },
+    "icon": "/set17/item-webp/TFT5_Item_CrownguardRadiant.webp",
+    "id": "TFT5_Item_CrownguardRadiant",
+    "name": "光明版冕卫"
+  },
+  "TFT5_Item_DeathbladeRadiant": {
+    "category": "radiant",
+    "description": "它在敌人面前发光。或在朋友面前。或在任何活着的东西面前，真的。",
+    "effects": {
+      "AD": 1.1,
+      "BonusDamage": 0.2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_DeathbladeRadiant.webp",
+    "id": "TFT5_Item_DeathbladeRadiant",
+    "name": "光明版死亡之刃"
+  },
+  "TFT5_Item_DragonsClawRadiant": {
+    "category": "radiant",
+    "description": "获得22%最大生命值。\n\n每2秒治疗5%最大生命值。",
+    "effects": {
+      "MagicResist": 120
+    },
+    "icon": "/set17/item-webp/TFT5_Item_DragonsClawRadiant.webp",
+    "id": "TFT5_Item_DragonsClawRadiant",
+    "name": "光明版巨龙之爪"
+  },
+  "TFT5_Item_FrozenHeartRadiant": {
+    "category": "radiant",
+    "description": "战斗开始时：获得40法力值。\n\n在40%生命值时，获得30法力值和相当于40%最大生命值的护盾值。",
+    "effects": {
+      "Armor": 50,
+      "MagicResist": 50,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_FrozenHeartRadiant.webp",
+    "id": "TFT5_Item_FrozenHeartRadiant",
+    "name": "光明版圣盾使的誓约"
+  },
+  "TFT5_Item_GargoyleStoneplateRadiant": {
+    "category": "radiant",
+    "description": "每有一个敌人正在以携带者为目标，携带者就会获得25护甲和25魔抗。",
+    "effects": {
+      "Armor": 50,
+      "Health": 300,
+      "MagicResist": 60
+    },
+    "icon": "/set17/item-webp/TFT5_Item_GargoyleStoneplateRadiant.webp",
+    "id": "TFT5_Item_GargoyleStoneplateRadiant",
+    "name": "光明版石像鬼石板甲"
+  },
+  "TFT5_Item_GiantSlayerRadiant": {
+    "category": "radiant",
+    "description": "对抗坦克时获得30%额外伤害增幅。",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "AS": 30,
+      "DamageAmp": 0.3
+    },
+    "icon": "/set17/item-webp/TFT5_Item_GiantSlayerRadiant.webp",
+    "id": "TFT5_Item_GiantSlayerRadiant",
+    "name": "光明版巨人杀手"
+  },
+  "TFT5_Item_GuardianAngelRadiant": {
+    "category": "radiant",
+    "description": "在60%生命值时，短暂变为不可被选取状态、摆脱负面效果、并治疗所有已损失生命值。",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "AS": 30,
+      "Armor": 40
+    },
+    "icon": "/set17/item-webp/TFT5_Item_GuardianAngelRadiant.webp",
+    "id": "TFT5_Item_GuardianAngelRadiant",
+    "name": "光明版夜之锋刃"
+  },
+  "TFT5_Item_GuinsoosRagebladeRadiant": {
+    "category": "radiant",
+    "description": "每秒获得14%可叠加的攻击速度。",
+    "effects": {
+      "AP": 20,
+      "AS": 20
+    },
+    "icon": "/set17/item-webp/TFT5_Item_GuinsoosRagebladeRadiant.webp",
+    "id": "TFT5_Item_GuinsoosRagebladeRadiant",
+    "name": "光明版鬼索的狂暴之刃"
+  },
+  "TFT5_Item_HandOfJusticeRadiant": {
+    "category": "radiant",
+    "description": "获得2个效果：30%物理加成和30%法术加成。24%全能吸血。\n\n生命值高于50%时，物理加成和法术加成翻倍。生命值低于50%时，全能吸血效果翻倍。",
+    "effects": {
+      "CritChance": 40,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_HandOfJusticeRadiant.webp",
+    "id": "TFT5_Item_HandOfJusticeRadiant",
+    "name": "光明版正义之手"
+  },
+  "TFT5_Item_HextechGunbladeRadiant": {
+    "category": "radiant",
+    "description": "为生命值百分比最低的友军提供相当于40%造成伤害值的治疗。",
+    "effects": {
+      "AD": 0.4,
+      "AP": 40,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_HextechGunbladeRadiant.webp",
+    "id": "TFT5_Item_HextechGunbladeRadiant",
+    "name": "光明版海克斯科技枪刃"
+  },
+  "TFT5_Item_InfinityEdgeRadiant": {
+    "category": "radiant",
+    "description": "获得【技能暴击】。",
+    "effects": {
+      "AD": 0.75,
+      "CritChance": 75
+    },
+    "icon": "/set17/item-webp/TFT5_Item_InfinityEdgeRadiant.webp",
+    "id": "TFT5_Item_InfinityEdgeRadiant",
+    "name": "光明版无尽之刃"
+  },
+  "TFT5_Item_IonicSparkRadiant": {
+    "category": "radiant",
+    "description": "对2格内的敌人们施加30%魔抗击碎。在敌人施放一次技能时，对该敌人造成相当于该敌人300%法力值消耗的魔法伤害。\n[直接伤害类装备]\n魔抗击碎：降低魔抗值",
+    "effects": {
+      "AP": 30,
+      "Health": 500,
+      "MagicResist": 70
+    },
+    "icon": "/set17/item-webp/TFT5_Item_IonicSparkRadiant.webp",
+    "id": "TFT5_Item_IonicSparkRadiant",
+    "name": "光明版离子火花"
+  },
+  "TFT5_Item_JeweledGauntletRadiant": {
+    "category": "radiant",
+    "description": "获得【技能暴击】。",
+    "effects": {
+      "AP": 75,
+      "CritChance": 75
+    },
+    "icon": "/set17/item-webp/TFT5_Item_JeweledGauntletRadiant.webp",
+    "id": "TFT5_Item_JeweledGauntletRadiant",
+    "name": "光明版珠光护手"
+  },
+  "TFT5_Item_LastWhisperRadiant": {
+    "category": "radiant",
+    "description": "来自攻击和技能的伤害会对目标施加持续到战斗环节结束的30% 护甲击碎。这个效果不会叠加。\n\n护甲击碎：降低护甲值",
+    "effects": {
+      "AD": 0.45,
+      "AS": 40,
+      "CritChance": 40
+    },
+    "icon": "/set17/item-webp/TFT5_Item_LastWhisperRadiant.webp",
+    "id": "TFT5_Item_LastWhisperRadiant",
+    "name": "光明版最后的轻语"
+  },
+  "TFT5_Item_LeviathanRadiant": {
+    "category": "radiant",
+    "description": "每次普攻提供4额外法力值，如果暴击则提升至8额外法力值。",
+    "effects": {
+      "AP": 30,
+      "AS": 20,
+      "CritChance": 40,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT5_Item_LeviathanRadiant.webp",
+    "id": "TFT5_Item_LeviathanRadiant",
+    "name": "光明版纳什之牙"
+  },
+  "TFT5_Item_MorellonomiconRadiant": {
+    "category": "radiant",
+    "description": "攻击和技能的伤害对敌人们造成持续10秒的2%灼烧效果和33%重伤效果。\n\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果",
+    "effects": {
+      "AP": 40,
+      "Health": 300,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_MorellonomiconRadiant.webp",
+    "id": "TFT5_Item_MorellonomiconRadiant",
+    "name": "光明版莫雷洛秘典"
+  },
+  "TFT5_Item_NightHarvesterRadiant": {
+    "category": "radiant",
+    "description": "获得10%伤害减免。在高于50%生命值时，转而获得30%伤害减免。",
+    "effects": {
+      "Armor": 40,
+      "CritChance": 40,
+      "Health": 600
+    },
+    "icon": "/set17/item-webp/TFT5_Item_NightHarvesterRadiant.webp",
+    "id": "TFT5_Item_NightHarvesterRadiant",
+    "name": "光明版坚定之心"
+  },
+  "TFT5_Item_QuicksilverRadiant": {
+    "category": "radiant",
+    "description": "战斗开始时：获得持续45秒的控制免疫效果。\n\n每秒获得6%可叠加的攻击速度。",
+    "effects": {
+      "AS": 30,
+      "CritChance": 40,
+      "MagicResist": 40
+    },
+    "icon": "/set17/item-webp/TFT5_Item_QuicksilverRadiant.webp",
+    "id": "TFT5_Item_QuicksilverRadiant",
+    "name": "光明版水银"
+  },
+  "TFT5_Item_RabadonsDeathcapRadiant": {
+    "category": "radiant",
+    "description": "它见证过——并释放过——奇迹和灾难。",
+    "effects": {
+      "AP": 110,
+      "BonusDamage": 0.5
+    },
+    "icon": "/set17/item-webp/TFT5_Item_RabadonsDeathcapRadiant.webp",
+    "id": "TFT5_Item_RabadonsDeathcapRadiant",
+    "name": "光明版灭世者的死亡之帽"
+  },
+  "TFT5_Item_RapidFirecannonRadiant": {
+    "category": "radiant",
+    "description": "攻击和技能的伤害对敌人们造成持续5秒的2%灼烧效果和33%重伤效果。\n\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果",
+    "effects": {
+      "AS": 90,
+      "BonusDamage": 0.06
+    },
+    "icon": "/set17/item-webp/TFT5_Item_RapidFirecannonRadiant.webp",
+    "id": "TFT5_Item_RapidFirecannonRadiant",
+    "name": "光明版红霸符"
+  },
+  "TFT5_Item_RedemptionRadiant": {
+    "category": "radiant",
+    "description": "每秒回复4%已损失生命值。",
+    "effects": {
+      "Durability": 0.15,
+      "Health": 700,
+      "ManaRegen": 4
+    },
+    "icon": "/set17/item-webp/TFT5_Item_RedemptionRadiant.webp",
+    "id": "TFT5_Item_RedemptionRadiant",
+    "name": "光明版振奋盔甲"
+  },
+  "TFT5_Item_RunaansHurricaneRadiant": {
+    "category": "radiant",
+    "description": "攻击提供7%可叠加的物理加成，至多至15次攻击。在15次攻击后，获得30%攻击速度。",
+    "effects": {
+      "AD": 0.2,
+      "AS": 20,
+      "MagicResist": 40
+    },
+    "icon": "/set17/item-webp/TFT5_Item_RunaansHurricaneRadiant.webp",
+    "id": "TFT5_Item_RunaansHurricaneRadiant",
+    "name": "光明版海妖之怒"
+  },
+  "TFT5_Item_SpearOfShojinRadiant": {
+    "category": "radiant",
+    "description": "每次普攻提供10额外法力值。",
+    "effects": {
+      "AD": 0.3,
+      "AP": 30,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_SpearOfShojinRadiant.webp",
+    "id": "TFT5_Item_SpearOfShojinRadiant",
+    "name": "光明版朔极之矛"
+  },
+  "TFT5_Item_SpectralGauntletRadiant": {
+    "category": "radiant",
+    "description": "3格内的敌人们会被施加30%护甲削减。在战斗的最初20秒获得50护甲和魔抗。\n\n护甲击碎：降低护甲值",
+    "effects": {
+      "Health": 500,
+      "MagicResist": 40
+    },
+    "icon": "/set17/item-webp/TFT5_Item_SpectralGauntletRadiant.webp",
+    "id": "TFT5_Item_SpectralGauntletRadiant",
+    "name": "光明版薄暮法袍"
+  },
+  "TFT5_Item_StatikkShivRadiant": {
+    "category": "radiant",
+    "description": "来自攻击和技能的伤害会对目标施加持续至战斗环节结束的30%魔抗击碎。这个效果不会叠加。\n\n魔抗击碎：降低魔抗值",
+    "effects": {
+      "AP": 75,
+      "AS": 30,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT5_Item_StatikkShivRadiant.webp",
+    "id": "TFT5_Item_StatikkShivRadiant",
+    "name": "光明版虚空之杖"
+  },
+  "TFT5_Item_SteraksGageRadiant": {
+    "category": "radiant",
+    "description": "在60%生命值时，获得相当于携带者80%最大生命值的护盾值，在6秒内快速衰减。",
+    "effects": {
+      "AD": 0.9,
+      "Health": 600
+    },
+    "icon": "/set17/item-webp/TFT5_Item_SteraksGageRadiant.webp",
+    "id": "TFT5_Item_SteraksGageRadiant",
+    "name": "光明版斯特拉克的挑战护手"
+  },
+  "TFT5_Item_SunfireCapeRadiant": {
+    "category": "radiant",
+    "description": "获得16%最大生命值。\n\n每2秒，对2格内的一名敌人施加持续10秒的2%灼烧效果和33%重伤效果。\n\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果",
+    "effects": {
+      "Armor": 40,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT5_Item_SunfireCapeRadiant.webp",
+    "id": "TFT5_Item_SunfireCapeRadiant",
+    "name": "光明版日炎斗篷"
+  },
+  "TFT5_Item_ThiefsGlovesRadiant": {
+    "category": "radiant",
+    "description": "每一回合：装备2件随机光明武器。\n\n[需要用掉3个装备格。]",
+    "effects": {
+      "CritChance": 20,
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT5_Item_ThiefsGlovesRadiant.webp",
+    "id": "TFT5_Item_ThiefsGlovesRadiant",
+    "name": "光明版窃贼手套"
+  },
+  "TFT5_Item_TitansResolveRadiant": {
+    "category": "radiant",
+    "description": "在攻击或承受伤害时获得4%物理加成和4%法术加成，至多可叠加25次。\n\n在叠满层数后，获得20%伤害增幅，并获得控制免疫。",
+    "effects": {
+      "AS": 20,
+      "Armor": 40
+    },
+    "icon": "/set17/item-webp/TFT5_Item_TitansResolveRadiant.webp",
+    "id": "TFT5_Item_TitansResolveRadiant",
+    "name": "光明版泰坦的坚决"
+  },
+  "TFT5_Item_TrapClawRadiant": {
+    "category": "radiant",
+    "description": "暴击提供持续5秒的10%伤害增幅，可叠加至多4次。",
+    "effects": {
+      "AS": 20,
+      "BuffDamageAmp": 0.1,
+      "CritChance": 40,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT5_Item_TrapClawRadiant.webp",
+    "id": "TFT5_Item_TrapClawRadiant",
+    "name": "光明版强袭者的链枷"
+  },
+  "TFT5_Item_WarmogsArmorRadiant": {
+    "category": "radiant",
+    "description": "获得36%最大生命值。",
+    "effects": {
+      "Health": 1200
+    },
+    "icon": "/set17/item-webp/TFT5_Item_WarmogsArmorRadiant.webp",
+    "id": "TFT5_Item_WarmogsArmorRadiant",
+    "name": "光明版狂徒铠甲"
+  },
+  "TFT7_Item_ShimmerscaleGamblersBlade": {
+    "category": "artifact",
+    "description": "提供{{icon:scaleAS}} 1%x你的{{icon:goldCoins}}金币存款的额外攻击速度(在{{icon:goldCoins}} 30金币时达到最大值)。\n\n每次攻击有6%几率掉落{{icon:goldCoins}} 1金币。\n\n[唯一 - 每位英雄仅可装备1件]",
+    "effects": {
+      "AS": 55
+    },
+    "icon": "/set17/item-webp/TFT7_Item_ShimmerscaleGamblersBlade.webp",
+    "id": "TFT7_Item_ShimmerscaleGamblersBlade",
+    "name": "投机者之刃"
+  },
+  "TFT7_Item_ShimmerscaleMogulsMail": {
+    "category": "artifact",
+    "description": "在承受伤害时提供1护甲、1魔抗和8生命值，这个效果至多叠加至35次。\n\n在满层时，提供{{icon:goldCoins}}1金币并且每11秒继续获得{{icon:goldCoins}}1金币。\n\n[唯一 - 每位英雄仅可装备1件]",
+    "effects": {
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT7_Item_ShimmerscaleMogulsMail.webp",
+    "id": "TFT7_Item_ShimmerscaleMogulsMail",
+    "name": "大亨之铠"
+  },
+  "TFT9_Item_CrownOfDemacia": {
+    "category": "artifact",
+    "description": "如果携带者是一个【坦克】，则每2秒回复3-21%最大生命值(基于阶段)。如果不是，则转而每2秒获得10% {{icon:scaleAD}}物理加成和{{icon:scaleAP}}法术加成。\n\n如果这件装备的携带者阵亡，那么你会立刻输掉战斗。\n\n你可以通过将携带者移到备战席来移除这个装备。",
+    "effects": {
+      "AS": 30,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT9_Item_CrownOfDemacia.webp",
+    "id": "TFT9_Item_CrownOfDemacia",
+    "name": "德玛西亚王冠"
+  },
+  "TFT9_Item_OrnnHorizonFocus": {
+    "category": "artifact",
+    "description": "在对抗相距4格或更远的目标们时获得40%伤害增幅。",
+    "effects": {
+      "AD": 0.2,
+      "AP": 20,
+      "AS": 20,
+      "ManaRegen": 3
+    },
+    "icon": "/set17/item-webp/TFT9_Item_OrnnHorizonFocus.webp",
+    "id": "TFT9_Item_OrnnHorizonFocus",
+    "name": "狙击手的专注"
+  },
+  "TFT9_Item_OrnnHullbreaker": {
+    "category": "artifact",
+    "description": "战斗开始时：如果邻格内没有己方弈子，获得400生命值、10%物理加成和10%法术加成。",
+    "effects": {
+      "Armor": 60,
+      "MagicResist": 60
+    },
+    "icon": "/set17/item-webp/TFT9_Item_OrnnHullbreaker.webp",
+    "id": "TFT9_Item_OrnnHullbreaker",
+    "name": "碎舰者"
+  },
+  "TFT_Item_AdaptiveHelm": {
+    "category": "completed",
+    "description": "从所有来源中获得额外的15%法力值。携带者获得基于角色定位的一个额外加成：\n\n坦克和战士：获得30护甲和魔抗。\n\n其它角色定位：获得10%物理加成和法术加成。",
+    "effects": {
+      "MagicResist": 20,
+      "ManaRegen": 3
+    },
+    "icon": "/set17/item-webp/TFT_Item_AdaptiveHelm.webp",
+    "id": "TFT_Item_AdaptiveHelm",
+    "name": "适应性头盔"
+  },
+  "TFT_Item_ArchangelsStaff": {
+    "category": "completed",
+    "description": "战斗开始时：在战斗期间，每5秒获得20%法术加成。",
+    "effects": {
+      "AP": 30,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_ArchangelsStaff.webp",
+    "id": "TFT_Item_ArchangelsStaff",
+    "name": "大天使之杖"
+  },
+  "TFT_Item_Artifact_AegisOfDawn": {
+    "category": "artifact",
+    "description": "每2.5秒，从1格内的敌人们处偷取3护甲，并治疗相当于携带者%护甲值的生命值。\n\n如果还携带了【黄昏圣盾】，则转而每1.25秒触发这件装备的效果。\n\n治疗效果基于阶段提升。",
+    "effects": {
+      "Armor": 50,
+      "Health": 400
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_AegisOfDawn.webp",
+    "id": "TFT_Item_Artifact_AegisOfDawn",
+    "name": "黎明圣盾"
+  },
+  "TFT_Item_Artifact_AegisOfDusk": {
+    "category": "artifact",
+    "description": "每2.5秒，从1格内的敌人们处偷取3魔抗，并造成相当于携带者%魔抗值的魔法伤害。\n\n如果还携带了【黎明圣盾】，则转而每1.25秒触发这件装备的效果。\n\n伤害基于阶段提升。",
+    "effects": {
+      "Health": 400,
+      "MagicResist": 70
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_AegisOfDusk.webp",
+    "id": "TFT_Item_Artifact_AegisOfDusk",
+    "name": "黄昏圣盾"
+  },
+  "TFT_Item_Artifact_BlightingJewel": {
+    "category": "artifact",
+    "description": "造成魔法伤害时会将目标的魔抗削减4。如果目标的魔抗是0，则转而会为携带者提供2法力值。\n\n技能伤害每0.5秒仅能在每个敌人身上触发一次此效果。",
+    "effects": {
+      "AP": 60,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_BlightingJewel.webp",
+    "id": "TFT_Item_Artifact_BlightingJewel",
+    "name": "枯萎珠宝"
+  },
+  "TFT_Item_Artifact_CappaJuice": {
+    "category": "artifact",
+    "description": "携带者在每次参与击杀后带上一顶帽子。携带者从每顶帽子中获得1%物理加成和法术加成。阵亡时，失去20%总帽子数。",
+    "effects": {
+      "AD": 0.25,
+      "AP": 25,
+      "AS": 25
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_CappaJuice.webp",
+    "id": "TFT_Item_Artifact_CappaJuice",
+    "name": "帽子饮品"
+  },
+  "TFT_Item_Artifact_Dawncore": {
+    "category": "artifact",
+    "description": "携带者的最大法力值缩减10。后续的技能施放会使最大法力值缩减10%，直至最小值10。",
+    "effects": {
+      "AD": 0.2,
+      "AP": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_Dawncore.webp",
+    "id": "TFT_Item_Artifact_Dawncore",
+    "name": "黎明核心"
+  },
+  "TFT_Item_Artifact_EternalPact": {
+    "category": "artifact",
+    "description": "战斗开始时：与生命值最高的那个友方弈子形成一个契约，如果其阵亡，则获得10法力回复和40%法术加成。\n\n当该友军使用其技能时，获得15法力值。每6秒，为该友军提供护盾值，数额相当于携带者的200%法术加成。",
+    "effects": {
+      "AP": 40,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_EternalPact.webp",
+    "id": "TFT_Item_Artifact_EternalPact",
+    "name": "永恒契约"
+  },
+  "TFT_Item_Artifact_Fishbones": {
+    "category": "artifact",
+    "description": "携带者的攻击会瞄准随机的敌人。",
+    "effects": {
+      "AD": 0.5,
+      "AS": 50
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_Fishbones.webp",
+    "id": "TFT_Item_Artifact_Fishbones",
+    "name": "鱼骨头"
+  },
+  "TFT_Item_Artifact_HellfireHatchet": {
+    "category": "artifact",
+    "description": "攻击造成相当于携带者3%最大生命值的额外物理伤害。每1%已损失生命值，获得1%攻击速度。",
+    "effects": {
+      "AD": 0.2,
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_HellfireHatchet.webp",
+    "id": "TFT_Item_Artifact_HellfireHatchet",
+    "name": "恶火小斧"
+  },
+  "TFT_Item_Artifact_HorizonFocus": {
+    "category": "artifact",
+    "description": "将一名敌人晕眩时会引发闪电对其进行打击，造成相当于其30%最大生命值的魔法伤害。",
+    "effects": {
+      "Armor": 20,
+      "Health": 250,
+      "MagicResist": 20,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_HorizonFocus.webp",
+    "id": "TFT_Item_Artifact_HorizonFocus",
+    "name": "视界专注"
+  },
+  "TFT_Item_Artifact_LichBane": {
+    "category": "artifact",
+    "description": "携带者在每次技能施放后的第一次攻击造成额外魔法伤害。\n\n这个伤害基于阶段而提升。",
+    "effects": {
+      "AP": 55,
+      "AS": 10
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_LichBane.webp",
+    "id": "TFT_Item_Artifact_LichBane",
+    "name": "巫妖之祸"
+  },
+  "TFT_Item_Artifact_LightshieldCrest": {
+    "category": "artifact",
+    "description": "每3秒，为生命值百分比最低的那个友军提供护盾，护盾值相当于携带者70%的护甲与魔抗总和，持续5秒。\n\n在阵亡时，将这个护盾效果提供给所有友军。",
+    "effects": {
+      "Armor": 55,
+      "MagicResist": 55
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_LightshieldCrest.webp",
+    "id": "TFT_Item_Artifact_LightshieldCrest",
+    "name": "光盾徽章"
+  },
+  "TFT_Item_Artifact_LudensTempest": {
+    "category": "artifact",
+    "description": "在击杀目标时，会对与目标相距最近的3个敌人造成魔法伤害，伤害值为100%的过量伤害外加100。",
+    "effects": {
+      "AD": 0.55,
+      "AP": 55
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_LudensTempest.webp",
+    "id": "TFT_Item_Artifact_LudensTempest",
+    "name": "卢登的激荡"
+  },
+  "TFT_Item_Artifact_Mittens": {
+    "category": "artifact",
+    "description": "将携带者缩小，为其提供移动速度提升并免疫减速、灼烧以及重伤。",
+    "effects": {
+      "AS": 65
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_Mittens.webp",
+    "id": "TFT_Item_Artifact_Mittens",
+    "name": "连指手套"
+  },
+  "TFT_Item_Artifact_NavoriFlickerblades": {
+    "category": "artifact",
+    "description": "攻击提供5%可叠加的攻击速度。每3次攻击还会提供2%物理加成和2%法术加成。",
+    "effects": {
+      "AP": 10,
+      "AS": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_NavoriFlickerblades.webp",
+    "id": "TFT_Item_Artifact_NavoriFlickerblades",
+    "name": "烁刃"
+  },
+  "TFT_Item_Artifact_ProwlersClaw": {
+    "category": "artifact",
+    "description": "在击杀一个目标后，摆脱负面效果并冲刺到4格内相距最远的那个目标处。下两次暴击攻击造成50%额外暴击伤害。",
+    "effects": {
+      "AD": 0.35,
+      "CritChance": 45,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_ProwlersClaw.webp",
+    "id": "TFT_Item_Artifact_ProwlersClaw",
+    "name": "暗行者之爪"
+  },
+  "TFT_Item_Artifact_RapidFirecannon": {
+    "category": "artifact",
+    "description": "获得+1攻击距离，并且这个距离会在携带者每击杀一个敌人时提升1。",
+    "effects": {
+      "AS": 65
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_RapidFirecannon.webp",
+    "id": "TFT_Item_Artifact_RapidFirecannon",
+    "name": "疾射火炮"
+  },
+  "TFT_Item_Artifact_SeekersArmguard": {
+    "category": "artifact",
+    "description": "参与击杀后会使携带者的护甲、魔抗和法术加成提升20。",
+    "effects": {
+      "AP": 25,
+      "Armor": 10,
+      "MagicResist": 10
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_SeekersArmguard.webp",
+    "id": "TFT_Item_Artifact_SeekersArmguard",
+    "name": "探索者的护臂"
+  },
+  "TFT_Item_Artifact_SilvermereDawn": {
+    "category": "artifact",
+    "description": "为携带者提供免疫晕眩，并且携带者的攻击可以使目标晕眩0.8秒。\n\n携带者的攻击速度被锁定在0.5。",
+    "effects": {
+      "AD": 1.4,
+      "Armor": 80,
+      "MagicResist": 80
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_SilvermereDawn.webp",
+    "id": "TFT_Item_Artifact_SilvermereDawn",
+    "name": "密银黎明"
+  },
+  "TFT_Item_Artifact_StatikkShiv": {
+    "category": "artifact",
+    "description": "每第3次攻击对4名敌人造成30+50%携带者法术加成的额外魔法伤害。",
+    "effects": {
+      "AP": 15,
+      "AS": 50
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_StatikkShiv.webp",
+    "id": "TFT_Item_Artifact_StatikkShiv",
+    "name": "斯塔缇克电刃"
+  },
+  "TFT_Item_Artifact_TalismanOfAscension": {
+    "category": "artifact",
+    "description": "在22秒后，获得100%最大生命值和120%伤害增幅，持续到战斗环节结束。",
+    "effects": {
+      "AD": 0.2,
+      "AP": 20,
+      "DamageAmp": 1.2,
+      "Health": 450
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_TalismanOfAscension.webp",
+    "id": "TFT_Item_Artifact_TalismanOfAscension",
+    "name": "飞升护符"
+  },
+  "TFT_Item_Artifact_TheIndomitable": {
+    "category": "artifact",
+    "description": "携带者的移动速度大幅降低。\n\n获得15%最大生命值、晕眩免疫，并将当前目标拉到近战距离。",
+    "effects": {
+      "Armor": 20,
+      "Health": 500,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_TheIndomitable.webp",
+    "id": "TFT_Item_Artifact_TheIndomitable",
+    "name": "顽强不屈"
+  },
+  "TFT_Item_Artifact_TitanicHydra": {
+    "category": "artifact",
+    "description": "攻击对目标和邻格敌人造成相当于携带者4%最大生命值外加8%物理加成的额外物理伤害。",
+    "effects": {
+      "AD": 0.2,
+      "AS": 20,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_TitanicHydra.webp",
+    "id": "TFT_Item_Artifact_TitanicHydra",
+    "name": "巨型九头蛇"
+  },
+  "TFT_Item_Artifact_VoidGauntlet": {
+    "category": "artifact",
+    "description": "战斗开始时：储存30％最大生命值，并且每秒多储存2.5%。在阵亡时，释放相当于生命值储量的魔法伤害，分摊给半径4格内的敌人们。\n\n[唯一：一个弈子仅限一件]",
+    "effects": {
+      "Durability": 0.1,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_VoidGauntlet.webp",
+    "id": "TFT_Item_Artifact_VoidGauntlet",
+    "name": "虚空护手"
+  },
+  "TFT_Item_Artifact_WitsEnd": {
+    "category": "artifact",
+    "description": "攻击造成额外魔法伤害。\n\n治疗携带者，数额为30%的所有已造成魔法伤害。\n\n这个伤害基于阶段而提升。",
+    "effects": {
+      "AS": 25,
+      "Armor": 20,
+      "Health": 400,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_Artifact_WitsEnd.webp",
+    "id": "TFT_Item_Artifact_WitsEnd",
+    "name": "智慧末刃"
+  },
+  "TFT_Item_Bloodthirster": {
+    "category": "completed",
+    "description": "每场战斗仅触发1次：在40%生命值时，获得一个护盾，护盾值相当于携带者25%的最大生命值，至多持续5秒。",
+    "effects": {
+      "AD": 0.15,
+      "AP": 15,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_Bloodthirster.webp",
+    "id": "TFT_Item_Bloodthirster",
+    "name": "饮血剑"
+  },
+  "TFT_Item_BlueBuff": {
+    "category": "completed",
+    "description": "从所有来源中获得10%额外物理加成和法术加成。",
+    "effects": {
+      "AD": 0.15,
+      "AP": 15,
+      "ManaRegen": 5
+    },
+    "icon": "/set17/item-webp/TFT_Item_BlueBuff.webp",
+    "id": "TFT_Item_BlueBuff",
+    "name": "蓝霸符"
+  },
+  "TFT_Item_BrambleVest": {
+    "category": "completed",
+    "description": "获得6%最大生命值。\n\n使来自攻击的伤害降低5%。在被任一攻击命中时，对邻格所有敌人造成100魔法伤害。\n\n冷却时间：2秒",
+    "effects": {
+      "Armor": 50
+    },
+    "icon": "/set17/item-webp/TFT_Item_BrambleVest.webp",
+    "id": "TFT_Item_BrambleVest",
+    "name": "棘刺背心"
+  },
+  "TFT_Item_Crownguard": {
+    "category": "completed",
+    "description": "战斗开始时：获得持续8秒的相当于25%最大生命值的护盾值。\n\n在护盾到期时，获得25%法术加成。",
+    "effects": {
+      "AP": 20,
+      "Armor": 20,
+      "Health": 100
+    },
+    "icon": "/set17/item-webp/TFT_Item_Crownguard.webp",
+    "id": "TFT_Item_Crownguard",
+    "name": "冕卫"
+  },
+  "TFT_Item_Deathblade": {
+    "category": "completed",
+    "description": "将完美的安宁和平静带给携带者——和所有面对它的人。",
+    "effects": {
+      "AD": 0.55,
+      "BonusDamage": 0.1
+    },
+    "icon": "/set17/item-webp/TFT_Item_Deathblade.webp",
+    "id": "TFT_Item_Deathblade",
+    "name": "死亡之刃"
+  },
+  "TFT_Item_DragonsClaw": {
+    "category": "completed",
+    "description": "获得6%最大生命值。\n\n每2秒治疗2.5%最大生命值。",
+    "effects": {
+      "MagicResist": 60
+    },
+    "icon": "/set17/item-webp/TFT_Item_DragonsClaw.webp",
+    "id": "TFT_Item_DragonsClaw",
+    "name": "巨龙之爪"
+  },
+  "TFT_Item_ForceOfNature": {
+    "category": "completed",
+    "description": "你的队伍获得+1最大队伍规模。\n\n在你赢下战斗时，有10%几率掉落1金币。\n\n“……某位英雄的心……”",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT_Item_ForceOfNature.webp",
+    "id": "TFT_Item_ForceOfNature",
+    "name": "金铲铲冠冕"
+  },
+  "TFT_Item_FrozenHeart": {
+    "category": "completed",
+    "description": "战斗开始时：获得20法力值。\n\n在40%生命值时，获得15法力值和相当于20%最大生命值的护盾值。",
+    "effects": {
+      "Armor": 25,
+      "MagicResist": 25,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_FrozenHeart.webp",
+    "id": "TFT_Item_FrozenHeart",
+    "name": "圣盾使的誓约"
+  },
+  "TFT_Item_GargoyleStoneplate": {
+    "category": "completed",
+    "description": "每有一个敌人正在以携带者为目标，携带者就会获得10护甲和10魔抗。",
+    "effects": {
+      "Armor": 25,
+      "Health": 100,
+      "MagicResist": 25
+    },
+    "icon": "/set17/item-webp/TFT_Item_GargoyleStoneplate.webp",
+    "id": "TFT_Item_GargoyleStoneplate",
+    "name": "石像鬼石板甲"
+  },
+  "TFT_Item_GuardianAngel": {
+    "category": "completed",
+    "description": "在60%生命值时，短暂变为不可被选取状态、摆脱负面效果、并治疗30%已损失生命值。",
+    "effects": {
+      "AD": 0.1,
+      "AP": 10,
+      "AS": 15,
+      "Armor": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_GuardianAngel.webp",
+    "id": "TFT_Item_GuardianAngel",
+    "name": "夜之锋刃"
+  },
+  "TFT_Item_GuinsoosRageblade": {
+    "category": "completed",
+    "description": "每秒获得7%可叠加的攻击速度。",
+    "effects": {
+      "AP": 10,
+      "AS": 10
+    },
+    "icon": "/set17/item-webp/TFT_Item_GuinsoosRageblade.webp",
+    "id": "TFT_Item_GuinsoosRageblade",
+    "name": "鬼索的狂暴之刃"
+  },
+  "TFT_Item_HextechGunblade": {
+    "category": "completed",
+    "description": "为生命值百分比最低的友军提供相当于20%造成伤害值的治疗。",
+    "effects": {
+      "AD": 0.2,
+      "AP": 20,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_HextechGunblade.webp",
+    "id": "TFT_Item_HextechGunblade",
+    "name": "海克斯科技枪刃"
+  },
+  "TFT_Item_InfinityEdge": {
+    "category": "completed",
+    "description": "获得【技能暴击】。",
+    "effects": {
+      "AD": 0.35,
+      "CritChance": 35
+    },
+    "icon": "/set17/item-webp/TFT_Item_InfinityEdge.webp",
+    "id": "TFT_Item_InfinityEdge",
+    "name": "无尽之刃"
+  },
+  "TFT_Item_IonicSpark": {
+    "category": "completed",
+    "description": "对2格内的敌人们施加30%魔抗击碎。在敌人施放一次技能时，对该敌人造成相当于该敌人150%法力值消耗的魔法伤害。\n魔抗击碎：降低魔抗值",
+    "effects": {
+      "AP": 15,
+      "Health": 250,
+      "MagicResist": 35
+    },
+    "icon": "/set17/item-webp/TFT_Item_IonicSpark.webp",
+    "id": "TFT_Item_IonicSpark",
+    "name": "离子火花"
+  },
+  "TFT_Item_JeweledGauntlet": {
+    "category": "completed",
+    "description": "获得【技能暴击】。",
+    "effects": {
+      "AP": 35,
+      "CritChance": 35
+    },
+    "icon": "/set17/item-webp/TFT_Item_JeweledGauntlet.webp",
+    "id": "TFT_Item_JeweledGauntlet",
+    "name": "珠光护手"
+  },
+  "TFT_Item_LastWhisper": {
+    "category": "completed",
+    "description": "来自攻击和技能的伤害会对目标施加持续3秒的30%护甲击碎。这个效果不会叠加。\n\n护甲击碎：降低护甲值",
+    "effects": {
+      "AD": 0.15,
+      "AS": 20,
+      "CritChance": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_LastWhisper.webp",
+    "id": "TFT_Item_LastWhisper",
+    "name": "最后的轻语"
+  },
+  "TFT_Item_Leviathan": {
+    "category": "completed",
+    "description": "每次普攻提供2额外法力值，如果暴击则提升至4额外法力值。",
+    "effects": {
+      "AP": 15,
+      "AS": 10,
+      "CritChance": 20,
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT_Item_Leviathan.webp",
+    "id": "TFT_Item_Leviathan",
+    "name": "纳什之牙"
+  },
+  "TFT_Item_MadredsBloodrazor": {
+    "category": "completed",
+    "description": "对抗坦克时获得15%额外伤害增幅。",
+    "effects": {
+      "AD": 0.15,
+      "AP": 15,
+      "AS": 15,
+      "DamageAmp": 0.15
+    },
+    "icon": "/set17/item-webp/TFT_Item_MadredsBloodrazor.webp",
+    "id": "TFT_Item_MadredsBloodrazor",
+    "name": "巨人杀手"
+  },
+  "TFT_Item_Morellonomicon": {
+    "category": "completed",
+    "description": "攻击和技能的伤害对敌人们造成持续10秒的1%灼烧效果和33%重伤效果。\n\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果",
+    "effects": {
+      "AP": 20,
+      "Health": 150,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_Morellonomicon.webp",
+    "id": "TFT_Item_Morellonomicon",
+    "name": "莫雷洛秘典"
+  },
+  "TFT_Item_NightHarvester": {
+    "category": "completed",
+    "description": "获得5%伤害减免。在高于50%生命值时，转而获得15%伤害减免。",
+    "effects": {
+      "Armor": 20,
+      "CritChance": 20,
+      "Health": 250
+    },
+    "icon": "/set17/item-webp/TFT_Item_NightHarvester.webp",
+    "id": "TFT_Item_NightHarvester",
+    "name": "坚定之心"
+  },
+  "TFT_Item_PowerGauntlet": {
+    "category": "completed",
+    "description": "暴击提供持续5秒的5%伤害增幅，可叠加至多4次。",
+    "effects": {
+      "AS": 10,
+      "BuffDamageAmp": 0.05,
+      "CritChance": 20,
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT_Item_PowerGauntlet.webp",
+    "id": "TFT_Item_PowerGauntlet",
+    "name": "强袭者的链枷"
+  },
+  "TFT_Item_Quicksilver": {
+    "category": "completed",
+    "description": "战斗开始时：获得持续18秒的控制免疫效果。\n\n每秒获得3%可叠加的攻击速度。",
+    "effects": {
+      "AS": 15,
+      "CritChance": 20,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_Quicksilver.webp",
+    "id": "TFT_Item_Quicksilver",
+    "name": "水银"
+  },
+  "TFT_Item_RabadonsDeathcap": {
+    "category": "completed",
+    "description": "这顶不起眼的帽子可以帮助你创造，或毁灭，这个世界本身。",
+    "effects": {
+      "AP": 55,
+      "BonusDamage": 0.15
+    },
+    "icon": "/set17/item-webp/TFT_Item_RabadonsDeathcap.webp",
+    "id": "TFT_Item_RabadonsDeathcap",
+    "name": "灭世者的死亡之帽"
+  },
+  "TFT_Item_RapidFireCannon": {
+    "category": "completed",
+    "description": "攻击和技能的伤害对敌人们造成持续5秒的1%灼烧效果和33%重伤效果。\n\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果",
+    "effects": {
+      "AS": 45,
+      "BonusDamage": 0.06
+    },
+    "icon": "/set17/item-webp/TFT_Item_RapidFireCannon.webp",
+    "id": "TFT_Item_RapidFireCannon",
+    "name": "红霸符"
+  },
+  "TFT_Item_RedBuff": {
+    "category": "completed",
+    "description": "获得8%最大生命值。\n\n每过2秒，对2格内的一名敌人施加持续10秒的1%灼烧效果和33%重伤效果。\n\n灼烧：每秒造成目标一部分最大生命值的真实伤害\n重伤：降低受到的治疗效果",
+    "effects": {
+      "Armor": 20,
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT_Item_RedBuff.webp",
+    "id": "TFT_Item_RedBuff",
+    "name": "日炎斗篷"
+  },
+  "TFT_Item_Redemption": {
+    "category": "completed",
+    "description": "每秒回复2%已损失生命值。",
+    "effects": {
+      "Durability": 0.08,
+      "Health": 300,
+      "ManaRegen": 2
+    },
+    "icon": "/set17/item-webp/TFT_Item_Redemption.webp",
+    "id": "TFT_Item_Redemption",
+    "name": "振奋盔甲"
+  },
+  "TFT_Item_RunaansHurricane": {
+    "category": "completed",
+    "description": "攻击提供3.5%可叠加的物理加成，至多至15次攻击。在15次攻击后，获得15%攻击速度。",
+    "effects": {
+      "AD": 0.1,
+      "AS": 10,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_RunaansHurricane.webp",
+    "id": "TFT_Item_RunaansHurricane",
+    "name": "海妖之怒"
+  },
+  "TFT_Item_SpearOfShojin": {
+    "category": "completed",
+    "description": "每次普攻提供5额外法力值。",
+    "effects": {
+      "AD": 0.15,
+      "AP": 15,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_SpearOfShojin.webp",
+    "id": "TFT_Item_SpearOfShojin",
+    "name": "朔极之矛"
+  },
+  "TFT_Item_SpectralGauntlet": {
+    "category": "completed",
+    "description": "2格内的敌人们会被施加30%护甲削减。在战斗的最初15秒获得15护甲和魔抗。\n\n护甲击碎：降低护甲值",
+    "effects": {
+      "Health": 250,
+      "MagicResist": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_SpectralGauntlet.webp",
+    "id": "TFT_Item_SpectralGauntlet",
+    "name": "薄暮法袍"
+  },
+  "TFT_Item_StatikkShiv": {
+    "category": "completed",
+    "description": "来自攻击和技能的伤害会对目标施加持续5秒的30%魔抗击碎。这个效果不会叠加。\n\n魔抗击碎：降低魔抗值",
+    "effects": {
+      "AP": 35,
+      "AS": 15,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_StatikkShiv.webp",
+    "id": "TFT_Item_StatikkShiv",
+    "name": "虚空之杖"
+  },
+  "TFT_Item_SteraksGage": {
+    "category": "completed",
+    "description": "在60%生命值时，获得相当于携带者40%最大生命值的护盾值，在4秒内快速衰减。",
+    "effects": {
+      "AD": 0.45,
+      "Health": 300
+    },
+    "icon": "/set17/item-webp/TFT_Item_SteraksGage.webp",
+    "id": "TFT_Item_SteraksGage",
+    "name": "斯特拉克的挑战护手"
+  },
+  "TFT_Item_TacticiansRing": {
+    "category": "completed",
+    "description": "你的队伍获得+1最大队伍规模。\n\n在战斗10秒后，有10%几率掉落1金币。\n\n“……以及一点运气。”",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT_Item_TacticiansRing.webp",
+    "id": "TFT_Item_TacticiansRing",
+    "name": "金锅铲冠冕"
+  },
+  "TFT_Item_TacticiansScepter": {
+    "category": "completed",
+    "description": "你的队伍获得+1最大队伍规模。\n\n在携带者阵亡时，有10%几率掉落1金币。\n\n“充满了某位哲学家的智慧……”",
+    "effects": {},
+    "icon": "/set17/item-webp/TFT_Item_TacticiansScepter.webp",
+    "id": "TFT_Item_TacticiansScepter",
+    "name": "金锅锅冠冕"
+  },
+  "TFT_Item_ThiefsGloves": {
+    "category": "completed",
+    "description": "每一回合：装备2件随机装备。\n\n[需要用掉3个装备格。]",
+    "effects": {
+      "CritChance": 20,
+      "Health": 150
+    },
+    "icon": "/set17/item-webp/TFT_Item_ThiefsGloves.webp",
+    "id": "TFT_Item_ThiefsGloves",
+    "name": "窃贼手套"
+  },
+  "TFT_Item_TitansResolve": {
+    "category": "completed",
+    "description": "在攻击或承受伤害时获得2%物理加成和2%法术加成，至多可叠加25次。\n\n在叠满层数后，获得10%伤害增幅，并获得控制免疫。",
+    "effects": {
+      "AS": 10,
+      "Armor": 20
+    },
+    "icon": "/set17/item-webp/TFT_Item_TitansResolve.webp",
+    "id": "TFT_Item_TitansResolve",
+    "name": "泰坦的坚决"
+  },
+  "TFT_Item_UnstableConcoction": {
+    "category": "completed",
+    "description": "获得2个效果：15%物理加成和15%法术加成。12%全能吸血。\n\n生命值高于50%时，物理加成和法术加成翻倍。生命值低于50%时，全能吸血效果翻倍。",
+    "effects": {
+      "CritChance": 20,
+      "ManaRegen": 1
+    },
+    "icon": "/set17/item-webp/TFT_Item_UnstableConcoction.webp",
+    "id": "TFT_Item_UnstableConcoction",
+    "name": "正义之手"
+  },
+  "TFT_Item_WarmogsArmor": {
+    "category": "completed",
+    "description": "获得18%最大生命值。",
+    "effects": {
+      "Health": 500
+    },
+    "icon": "/set17/item-webp/TFT_Item_WarmogsArmor.webp",
+    "id": "TFT_Item_WarmogsArmor",
+    "name": "狂徒铠甲"
+  }
+}

@@ -1,0 +1,2412 @@
+{
+  "slug": "termeepnal_velocity",
+  "composition": {
+    "slug": "termeepnal_velocity",
+    "title": "Termeepnal Velocity",
+    "titles": {
+      "zh-CN": "飙速木灵",
+      "en-US": "Termeepnal Velocity",
+      "ko-KR": "Ter정령nal Velocity",
+      "ja-JP": "Terミィプnal Velocity",
+      "fr-FR": "TerMeepnal Velocity"
+    },
+    "overview": {
+      "stats": {
+        "avgPlacement": "5.03",
+        "avgPlacementValue": 5.031348644824208,
+        "winRate": "3.98%",
+        "winRateValue": 0.03983890279743115
+      },
+      "coreUnits": [
+        {
+          "id": "TFT17_Poppy",
+          "name": "Poppy",
+          "nameCn": "波比",
+          "nameEn": "Poppy",
+          "cost": 1,
+          "builds": [
+            {
+              "index": 1,
+              "items": [
+                {
+                  "id": "TFT_Item_InfinityEdge"
+                },
+                {
+                  "id": "TFT_Item_GuinsoosRageblade"
+                },
+                {
+                  "id": "TFT_Item_PowerGauntlet"
+                }
+              ]
+            },
+            {
+              "index": 2,
+              "items": [
+                {
+                  "id": "TFT_Item_InfinityEdge"
+                },
+                {
+                  "id": "TFT_Item_GuinsoosRageblade"
+                },
+                {
+                  "id": "TFT_Item_Deathblade"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TFT17_Rammus",
+          "name": "Rammus",
+          "nameCn": "拉莫斯",
+          "nameEn": "Rammus",
+          "cost": 4,
+          "builds": [
+            {
+              "index": 1,
+              "items": [
+                {
+                  "id": "TFT_Item_GargoyleStoneplate"
+                },
+                {
+                  "id": "TFT_Item_Redemption"
+                },
+                {
+                  "id": "TFT_Item_RedBuff"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "TFT17_Ornn",
+          "name": "Ornn",
+          "nameCn": "奥恩",
+          "nameEn": "Ornn",
+          "cost": 3,
+          "builds": []
+        },
+        {
+          "id": "TFT17_Corki",
+          "name": "Corki",
+          "nameCn": "库奇",
+          "nameEn": "Corki",
+          "cost": 4,
+          "builds": []
+        },
+        {
+          "id": "TFT17_IvernMinion",
+          "name": "Meepsie",
+          "nameCn": "小木灵",
+          "nameEn": "Meepsie",
+          "cost": 2,
+          "builds": []
+        },
+        {
+          "id": "TFT17_Veigar",
+          "name": "Veigar",
+          "nameCn": "维迦",
+          "nameEn": "Veigar",
+          "cost": 1,
+          "builds": []
+        },
+        {
+          "id": "TFT17_Fizz",
+          "name": "Fizz",
+          "nameCn": "菲兹",
+          "nameEn": "Fizz",
+          "cost": 3,
+          "builds": []
+        },
+        {
+          "id": "TFT17_Gnar",
+          "name": "Gnar",
+          "nameCn": "纳尔",
+          "nameEn": "Gnar",
+          "cost": 2,
+          "builds": []
+        }
+      ],
+      "traits": [
+        {
+          "id": "TFT17_Astronaut",
+          "icon": "/set17/trait-webp/TFT17_Astronaut.webp",
+          "unitsRequired": 7,
+          "tierIndex": 3
+        },
+        {
+          "id": "TFT17_ResistTank",
+          "icon": "/set17/trait-webp/TFT17_ResistTank.webp",
+          "unitsRequired": 2,
+          "tierIndex": 1
+        },
+        {
+          "id": "TFT17_SpaceGroove",
+          "icon": "/set17/trait-webp/TFT17_SpaceGroove.webp",
+          "unitsRequired": 1,
+          "tierIndex": 1
+        }
+      ],
+      "teamCode": "0201a018036019014016015017000000TFTSet17"
+    },
+    "summary": {
+      "sampleSize": 9187,
+      "winRate": "4.0%"
+    },
+    "metatftLink": "https://www.metatft.com/explorer?tab=items&sf%5B0%5D%5Bunit_tier_numitems_unique%5D=TFT17_Poppy-1_.*_3&item_holder=true&item_holder_unit=TFT17_Poppy-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_AdaptiveHelmRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_BrambleVestRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_CrownguardRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_DragonsClawRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_FrozenHeartRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_GargoyleStoneplateRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_IonicSparkRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_NightHarvesterRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_RedemptionRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_SpectralGauntletRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_SunfireCapeRadiant-1&unit_item=!TFT17_Poppy-1%26TFT5_Item_WarmogsArmorRadiant-1&unit_item=!TFT17_Poppy-1%26TFT_Item_AdaptiveHelm-1&unit_item=!TFT17_Poppy-1%26TFT_Item_BrambleVest-1&unit_item=!TFT17_Poppy-1%26TFT_Item_Crownguard-1&unit_item=!TFT17_Poppy-1%26TFT_Item_DragonsClaw-1&unit_item=!TFT17_Poppy-1%26TFT_Item_FrozenHeart-1&unit_item=!TFT17_Poppy-1%26TFT_Item_GargoyleStoneplate-1&unit_item=!TFT17_Poppy-1%26TFT_Item_IonicSpark-1&unit_item=!TFT17_Poppy-1%26TFT_Item_NightHarvester-1&unit_item=!TFT17_Poppy-1%26TFT_Item_RedBuff-1&unit_item=!TFT17_Poppy-1%26TFT_Item_Redemption-1&unit_item=!TFT17_Poppy-1%26TFT_Item_SpectralGauntlet-1&unit_item=!TFT17_Poppy-1%26TFT_Item_WarmogsArmor-1&set=TFTSet17",
+    "filters": {
+      "expr": "Poppy [Items=3]",
+      "carrierExclusions": [
+        "tank items：Poppy"
+      ]
+    },
+    "variants": [
+      {
+        "is_primary": true,
+        "variant_label": "primary",
+        "team_code": "0201901501701403601a018016000000TFTSet17",
+        "clustered_stats": {
+          "share": 0.5708,
+          "avg_placement": 5.01
+        },
+        "units": [
+          {
+            "id": "TFT17_Poppy"
+          },
+          {
+            "id": "TFT17_Rammus"
+          },
+          {
+            "id": "TFT17_Ornn"
+          },
+          {
+            "id": "TFT17_Corki"
+          },
+          {
+            "id": "TFT17_IvernMinion"
+          },
+          {
+            "id": "TFT17_Veigar"
+          },
+          {
+            "id": "TFT17_Fizz"
+          },
+          {
+            "id": "TFT17_Gnar"
+          }
+        ],
+        "traits": [
+          {
+            "id": "TFT17_Astronaut",
+            "icon": "/set17/trait-webp/TFT17_Astronaut.webp",
+            "units_required": 7,
+            "tierIndex": null
+          },
+          {
+            "id": "TFT17_ResistTank",
+            "icon": "/set17/trait-webp/TFT17_ResistTank.webp",
+            "units_required": 2,
+            "tierIndex": null
+          },
+          {
+            "id": "TFT17_SpaceGroove",
+            "icon": "/set17/trait-webp/TFT17_SpaceGroove.webp",
+            "units_required": 1,
+            "tierIndex": null
+          }
+        ]
+      },
+      {
+        "is_primary": false,
+        "variant_label": "variant_1",
+        "team_code": "0201d01b01902c03601a01803b000000TFTSet17",
+        "clustered_stats": {
+          "share": 0.4292,
+          "avg_placement": 4.83
+        },
+        "units": [
+          {
+            "id": "TFT17_Poppy"
+          },
+          {
+            "id": "TFT17_Rammus"
+          },
+          {
+            "id": "TFT17_Ornn"
+          },
+          {
+            "id": "TFT17_Corki"
+          },
+          {
+            "id": "TFT17_Caitlyn",
+            "variant_tag": true
+          },
+          {
+            "id": "TFT17_Aatrox",
+            "variant_tag": true
+          },
+          {
+            "id": "TFT17_Shen",
+            "variant_tag": true
+          },
+          {
+            "id": "TFT17_Jax",
+            "variant_tag": true
+          }
+        ],
+        "traits": [
+          {
+            "id": "TFT17_ResistTank",
+            "icon": "/set17/trait-webp/TFT17_ResistTank.webp",
+            "units_required": 6,
+            "tierIndex": null
+          },
+          {
+            "id": "TFT17_Astronaut",
+            "icon": "/set17/trait-webp/TFT17_Astronaut.webp",
+            "units_required": 3,
+            "tierIndex": null
+          },
+          {
+            "id": "TFT17_DRX",
+            "icon": "/set17/trait-webp/TFT17_DRX.webp",
+            "units_required": 2,
+            "tierIndex": null
+          },
+          {
+            "id": "TFT17_Fateweaver",
+            "icon": "/set17/trait-webp/TFT17_Fateweaver.webp",
+            "units_required": 2,
+            "tierIndex": null
+          },
+          {
+            "id": "TFT17_ShenUniqueTrait",
+            "icon": "/set17/trait-webp/TFT17_ShenUniqueTrait.webp",
+            "units_required": 1,
+            "tierIndex": null
+          },
+          {
+            "id": "TFT17_SpaceGroove",
+            "icon": "/set17/trait-webp/TFT17_SpaceGroove.webp",
+            "units_required": 1,
+            "tierIndex": null
+          }
+        ]
+      }
+    ],
+    "priorityMatrixRows": [
+      {
+        "unitId": "TFT17_Poppy",
+        "unitCost": 1,
+        "unitPriority": 7.95,
+        "bisItemIds": [
+          "TFT_Item_InfinityEdge",
+          "TFT_Item_GuinsoosRageblade"
+        ],
+        "buckets": {
+          "Core": [
+            {
+              "itemId": "TFT_Item_InfinityEdge",
+              "necessity": 0.18,
+              "priorityScore": 0.34
+            },
+            {
+              "itemId": "TFT_Item_GuinsoosRageblade",
+              "necessity": 0.11,
+              "priorityScore": 0.21
+            }
+          ],
+          "Important": [],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_Deathblade",
+              "necessity": 0.05,
+              "priorityScore": 0.08
+            },
+            {
+              "itemId": "TFT_Item_MadredsBloodrazor",
+              "necessity": 0.02,
+              "priorityScore": 0.04
+            },
+            {
+              "itemId": "TFT_Item_PowerGauntlet",
+              "necessity": 0.02,
+              "priorityScore": 0.03
+            },
+            {
+              "itemId": "TFT_Item_HextechGunblade",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT_Item_RunaansHurricane",
+              "necessity": 0,
+              "priorityScore": 0
+            }
+          ],
+          "HighFrequency": [
+            {
+              "itemId": "TFT_Item_SpearOfShojin",
+              "necessity": -0.05,
+              "priorityScore": -0.09
+            }
+          ]
+        }
+      },
+      {
+        "unitId": "TFT17_Rammus",
+        "unitCost": 4,
+        "unitPriority": 2.82,
+        "bisItemIds": null,
+        "buckets": {
+          "Core": [],
+          "Important": [
+            {
+              "itemId": "TFT_Item_GargoyleStoneplate",
+              "necessity": 0.1,
+              "priorityScore": 0.19
+            },
+            {
+              "itemId": "TFT_Item_Redemption",
+              "necessity": 0.09,
+              "priorityScore": 0.16
+            },
+            {
+              "itemId": "TFT_Item_WarmogsArmor",
+              "necessity": 0.08,
+              "priorityScore": 0.14
+            },
+            {
+              "itemId": "TFT_Item_BrambleVest",
+              "necessity": 0.08,
+              "priorityScore": 0.13
+            },
+            {
+              "itemId": "TFT_Item_RedBuff",
+              "necessity": 0.07,
+              "priorityScore": 0.12
+            }
+          ],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_FrozenHeart",
+              "necessity": 0.05,
+              "priorityScore": 0.07
+            },
+            {
+              "itemId": "TFT_Item_DragonsClaw",
+              "necessity": 0.05,
+              "priorityScore": 0.08
+            },
+            {
+              "itemId": "TFT_Item_NightHarvester",
+              "necessity": 0.04,
+              "priorityScore": 0.07
+            },
+            {
+              "itemId": "TFT_Item_SpectralGauntlet",
+              "necessity": 0.03,
+              "priorityScore": 0.05
+            },
+            {
+              "itemId": "TFT_Item_Crownguard",
+              "necessity": 0.03,
+              "priorityScore": 0.04
+            }
+          ],
+          "HighFrequency": []
+        }
+      },
+      {
+        "unitId": "TFT17_Ornn",
+        "unitCost": 3,
+        "unitPriority": 1.68,
+        "bisItemIds": null,
+        "buckets": {
+          "Core": [],
+          "Important": [
+            {
+              "itemId": "TFT_Item_AdaptiveHelm",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT17_Item_AstronautEmblemItem",
+              "necessity": 0,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_FrozenHeart",
+              "necessity": 0,
+              "priorityScore": 0
+            }
+          ],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_Crownguard",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT17_EkkoOffering_AnomalyItem",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT_Item_ThiefsGloves",
+              "necessity": 0,
+              "priorityScore": 0
+            }
+          ],
+          "HighFrequency": []
+        }
+      },
+      {
+        "unitId": "TFT17_Corki",
+        "unitCost": 4,
+        "unitPriority": 1.43,
+        "bisItemIds": null,
+        "buckets": {
+          "Core": [],
+          "Important": [
+            {
+              "itemId": "TFT_Item_InfinityEdge",
+              "necessity": 0.09,
+              "priorityScore": 0.16
+            },
+            {
+              "itemId": "TFT_Item_PowerGauntlet",
+              "necessity": 0.07,
+              "priorityScore": 0.12
+            },
+            {
+              "itemId": "TFT_Item_SpearOfShojin",
+              "necessity": 0.07,
+              "priorityScore": 0.12
+            },
+            {
+              "itemId": "TFT_Item_LastWhisper",
+              "necessity": 0.07,
+              "priorityScore": 0.12
+            },
+            {
+              "itemId": "TFT_Item_Deathblade",
+              "necessity": 0.06,
+              "priorityScore": 0.1
+            }
+          ],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_MadredsBloodrazor",
+              "necessity": 0.06,
+              "priorityScore": 0.09
+            },
+            {
+              "itemId": "TFT_Item_BlueBuff",
+              "necessity": 0.04,
+              "priorityScore": 0.07
+            },
+            {
+              "itemId": "TFT_Item_RapidFireCannon",
+              "necessity": 0.03,
+              "priorityScore": 0.05
+            },
+            {
+              "itemId": "TFT_Item_GuinsoosRageblade",
+              "necessity": 0.02,
+              "priorityScore": 0.03
+            },
+            {
+              "itemId": "TFT_Item_HextechGunblade",
+              "necessity": 0.02,
+              "priorityScore": 0.02
+            }
+          ],
+          "HighFrequency": []
+        }
+      },
+      {
+        "unitId": "TFT17_Bard",
+        "unitCost": 5,
+        "unitPriority": 1.06,
+        "bisItemIds": null,
+        "buckets": {
+          "Core": [],
+          "Important": [
+            {
+              "itemId": "TFT_Item_JeweledGauntlet",
+              "necessity": 0.05,
+              "priorityScore": 0.08
+            },
+            {
+              "itemId": "TFT_Item_Leviathan",
+              "necessity": 0.04,
+              "priorityScore": 0.06
+            },
+            {
+              "itemId": "TFT_Item_AdaptiveHelm",
+              "necessity": 0.04,
+              "priorityScore": 0.06
+            },
+            {
+              "itemId": "TFT_Item_RabadonsDeathcap",
+              "necessity": 0.04,
+              "priorityScore": 0.06
+            },
+            {
+              "itemId": "TFT_Item_Morellonomicon",
+              "necessity": 0.04,
+              "priorityScore": 0.05
+            }
+          ],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_SpearOfShojin",
+              "necessity": 0.04,
+              "priorityScore": 0.06
+            },
+            {
+              "itemId": "TFT_Item_StatikkShiv",
+              "necessity": 0.03,
+              "priorityScore": 0.05
+            },
+            {
+              "itemId": "TFT_Item_BlueBuff",
+              "necessity": 0.03,
+              "priorityScore": 0.04
+            },
+            {
+              "itemId": "TFT_Item_ArchangelsStaff",
+              "necessity": 0.02,
+              "priorityScore": 0.03
+            },
+            {
+              "itemId": "TFT_Item_MadredsBloodrazor",
+              "necessity": 0.02,
+              "priorityScore": 0.02
+            }
+          ],
+          "HighFrequency": []
+        }
+      },
+      {
+        "unitId": "TFT17_IvernMinion",
+        "unitCost": 2,
+        "unitPriority": 1.02,
+        "bisItemIds": null,
+        "buckets": {
+          "Core": [],
+          "Important": [
+            {
+              "itemId": "TFT_Item_FrozenHeart",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_NightHarvester",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_WarmogsArmor",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_BrambleVest",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_Crownguard",
+              "necessity": 0,
+              "priorityScore": 0
+            }
+          ],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_ThiefsGloves",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT_Item_AdaptiveHelm",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT17_Item_ResistTankEmblemItem",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT_Item_IonicSpark",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT_Item_DragonsClaw",
+              "necessity": 0,
+              "priorityScore": 0
+            }
+          ],
+          "HighFrequency": []
+        }
+      },
+      {
+        "unitId": "TFT17_Aatrox",
+        "unitCost": 1,
+        "unitPriority": 0.96,
+        "bisItemIds": null,
+        "buckets": {
+          "Core": [],
+          "Important": [
+            {
+              "itemId": "TFT_Item_WarmogsArmor",
+              "necessity": 0.02,
+              "priorityScore": 0.02
+            },
+            {
+              "itemId": "TFT_Item_NightHarvester",
+              "necessity": 0.01,
+              "priorityScore": 0.02
+            },
+            {
+              "itemId": "TFT_Item_BrambleVest",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_ThiefsGloves",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            }
+          ],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_AdaptiveHelm",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_GargoyleStoneplate",
+              "necessity": 0,
+              "priorityScore": 0
+            },
+            {
+              "itemId": "TFT_Item_FrozenHeart",
+              "necessity": 0,
+              "priorityScore": 0
+            }
+          ],
+          "HighFrequency": []
+        }
+      },
+      {
+        "unitId": "TFT17_Veigar",
+        "unitCost": 1,
+        "unitPriority": 0.8,
+        "bisItemIds": null,
+        "buckets": {
+          "Core": [],
+          "Important": [
+            {
+              "itemId": "TFT_Item_SpearOfShojin",
+              "necessity": 0.02,
+              "priorityScore": 0.03
+            },
+            {
+              "itemId": "TFT_Item_JeweledGauntlet",
+              "necessity": 0.02,
+              "priorityScore": 0.03
+            },
+            {
+              "itemId": "TFT_Item_StatikkShiv",
+              "necessity": 0.02,
+              "priorityScore": 0.02
+            },
+            {
+              "itemId": "TFT_Item_RabadonsDeathcap",
+              "necessity": 0.02,
+              "priorityScore": 0.02
+            },
+            {
+              "itemId": "TFT_Item_Morellonomicon",
+              "necessity": 0.01,
+              "priorityScore": 0.02
+            }
+          ],
+          "Optional": [
+            {
+              "itemId": "TFT_Item_BlueBuff",
+              "necessity": 0.01,
+              "priorityScore": 0.02
+            },
+            {
+              "itemId": "TFT_Item_ArchangelsStaff",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_RapidFireCannon",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_MadredsBloodrazor",
+              "necessity": 0.01,
+              "priorityScore": 0.01
+            },
+            {
+              "itemId": "TFT_Item_HextechGunblade",
+              "necessity": 0,
+              "priorityScore": 0
+            }
+          ],
+          "HighFrequency": []
+        }
+      }
+    ],
+    "specialGroups": {
+      "artifacts": [
+        {
+          "unitId": "TFT17_Poppy",
+          "items": [
+            {
+              "id": "TFT17_Item_Artifact_VarusArtifact",
+              "avgPlacement": 4.49
+            },
+            {
+              "id": "TFT9_Item_CrownOfDemacia",
+              "avgPlacement": 4.86
+            }
+          ]
+        }
+      ],
+      "radiants": [
+        {
+          "unitId": "TFT17_Poppy",
+          "items": [
+            {
+              "id": "TFT5_Item_InfinityEdgeRadiant",
+              "avgPlacement": 4.44
+            },
+            {
+              "id": "TFT5_Item_SpearOfShojinRadiant",
+              "avgPlacement": 4.73
+            },
+            {
+              "id": "TFT5_Item_GuinsoosRagebladeRadiant",
+              "avgPlacement": 4.95
+            }
+          ]
+        }
+      ],
+      "emblems": [
+        {
+          "itemId": "TFT17_Item_AstronautEmblemItem",
+          "avgPlacement": 4.86,
+          "appearanceRate": 0.0933,
+          "carriers": [
+            {
+              "unit_id": "TFT17_Ornn",
+              "best": true
+            },
+            {
+              "unit_id": "TFT17_Shen",
+              "best": false
+            },
+            {
+              "unit_id": "TFT17_Jax",
+              "best": false
+            }
+          ]
+        }
+      ]
+    },
+    "matchups": {
+      "benefits": [],
+      "counteredBy": [
+        {
+          "key": "meeple_corki",
+          "delta": 0.3979
+        },
+        {
+          "key": "mf_viktor",
+          "delta": 0.3377
+        },
+        {
+          "key": "kaisa_fizz",
+          "delta": 0.3527
+        },
+        {
+          "key": "leblanc_karma",
+          "delta": 0.3024
+        },
+        {
+          "key": "nova",
+          "delta": 0.1884
+        }
+      ],
+      "mutualConstraints": []
+    },
+    "dataSource": {
+      "patch": "17.1-pbe-0409",
+      "sample_count": 1835352
+    }
+  },
+  "details": {
+    "unitStats": [
+      {
+        "id": "TFT17_Poppy",
+        "name": "TFT17_Poppy",
+        "cost": 1,
+        "metrics": [
+          "9245",
+          "0.59%",
+          "6.16",
+          "99.37%",
+          "5.03",
+          "9187",
+          "8.00"
+        ]
+      },
+      {
+        "id": "TFT17_Rammus",
+        "name": "TFT17_Rammus",
+        "cost": 4,
+        "metrics": [
+          "7529",
+          "25.12%",
+          "5.23",
+          "54.67%",
+          "4.35",
+          "4116",
+          "5.16"
+        ]
+      },
+      {
+        "id": "TFT17_Corki",
+        "name": "TFT17_Corki",
+        "cost": 4,
+        "metrics": [
+          "6453",
+          "38.40%",
+          "5.04",
+          "28.48%",
+          "3.96",
+          "1838",
+          "5.01"
+        ]
+      },
+      {
+        "id": "TFT17_Ornn",
+        "name": "TFT17_Ornn",
+        "cost": 3,
+        "metrics": [
+          "5325",
+          "42.74%",
+          "4.89",
+          "33.95%",
+          "5.20",
+          "1808",
+          "4.96"
+        ]
+      },
+      {
+        "id": "TFT17_IvernMinion",
+        "name": "TFT17_IvernMinion",
+        "cost": 2,
+        "metrics": [
+          "6531",
+          "59.26%",
+          "5.07",
+          "19.98%",
+          "4.88",
+          "1305",
+          "5.08"
+        ]
+      },
+      {
+        "id": "TFT17_Aatrox",
+        "name": "TFT17_Aatrox",
+        "cost": 1,
+        "metrics": [
+          "3968",
+          "66.28%",
+          "5.11",
+          "18.62%",
+          "5.07",
+          "739",
+          "5.14"
+        ]
+      },
+      {
+        "id": "TFT17_Bard",
+        "name": "TFT17_Bard",
+        "cost": 5,
+        "metrics": [
+          "2904",
+          "43.08%",
+          "4.38",
+          "24.35%",
+          "3.61",
+          "707",
+          "4.35"
+        ]
+      },
+      {
+        "id": "TFT17_Veigar",
+        "name": "TFT17_Veigar",
+        "cost": 1,
+        "metrics": [
+          "4047",
+          "66.10%",
+          "5.28",
+          "14.92%",
+          "4.75",
+          "604",
+          "5.34"
+        ]
+      }
+    ],
+    "specialSections": [
+      {
+        "title": null,
+        "emptyMessage": null,
+        "rows": [
+          {
+            "itemId": "TFT17_Item_Artifact_VarusArtifact",
+            "name": "TFT17_Item_Artifact_VarusArtifact",
+            "metrics": [
+              "100",
+              "1.09%",
+              "93.15%",
+              "4.49",
+              "4.00%"
+            ],
+            "carrierId": "TFT17_Poppy",
+            "carrierName": "TFT17_Poppy"
+          },
+          {
+            "itemId": "TFT9_Item_CrownOfDemacia",
+            "name": "TFT9_Item_CrownOfDemacia",
+            "metrics": [
+              "136",
+              "1.48%",
+              "93.15%",
+              "4.86",
+              "3.68%"
+            ],
+            "carrierId": "TFT17_Poppy",
+            "carrierName": "TFT17_Poppy"
+          }
+        ]
+      },
+      {
+        "title": null,
+        "emptyMessage": null,
+        "rows": [
+          {
+            "itemId": "TFT5_Item_InfinityEdgeRadiant",
+            "name": "TFT5_Item_InfinityEdgeRadiant",
+            "metrics": [
+              "206",
+              "2.24%",
+              "91.26%",
+              "4.44",
+              "5.34%"
+            ],
+            "carrierId": "TFT17_Poppy",
+            "carrierName": "TFT17_Poppy"
+          },
+          {
+            "itemId": "TFT5_Item_SpearOfShojinRadiant",
+            "name": "TFT5_Item_SpearOfShojinRadiant",
+            "metrics": [
+              "104",
+              "1.13%",
+              "91.26%",
+              "4.73",
+              "2.88%"
+            ],
+            "carrierId": "TFT17_Poppy",
+            "carrierName": "TFT17_Poppy"
+          },
+          {
+            "itemId": "TFT5_Item_GuinsoosRagebladeRadiant",
+            "name": "TFT5_Item_GuinsoosRagebladeRadiant",
+            "metrics": [
+              "141",
+              "1.53%",
+              "91.26%",
+              "4.95",
+              "2.13%"
+            ],
+            "carrierId": "TFT17_Poppy",
+            "carrierName": "TFT17_Poppy"
+          }
+        ]
+      }
+    ],
+    "emblems": {
+      "rows": [
+        {
+          "itemId": "TFT17_Item_AstronautEmblemItem",
+          "name": "TFT17_Item_AstronautEmblemItem",
+          "metrics": [
+            "857",
+            "9.33%",
+            "4.86",
+            null
+          ],
+          "avgPlacement": 4.856476079346558,
+          "appearanceRate": 0.0932839882442582,
+          "carriers": [
+            {
+              "unit_id": "TFT17_Ornn",
+              "share": 0.3313885647607935,
+              "count": null,
+              "best": true
+            },
+            {
+              "unit_id": "TFT17_Shen",
+              "share": 0.1423570595099183,
+              "count": null,
+              "best": false
+            },
+            {
+              "unit_id": "TFT17_Jax",
+              "share": 0.09334889148191365,
+              "count": null,
+              "best": false
+            },
+            {
+              "unit_id": "TFT17_Aatrox",
+              "share": 0.073512252042007,
+              "count": null,
+              "best": false
+            },
+            {
+              "unit_id": "TFT17_Riven",
+              "share": 0.051341890315052506,
+              "count": null,
+              "best": false
+            }
+          ]
+        }
+      ],
+      "emptyMessage": null
+    },
+    "prioritySections": [
+      {
+        "unitId": "TFT17_Poppy",
+        "unitCost": 1,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_InfinityEdge",
+                "necessity": 0.18107012332972783,
+                "count": 6122,
+                "appearanceRate": 0.8105388587316298,
+                "rating": "Core"
+              },
+              {
+                "itemId": "TFT_Item_GuinsoosRageblade",
+                "necessity": 0.11402641010346493,
+                "count": 4327,
+                "appearanceRate": 0.5728849463789223,
+                "rating": "Core"
+              },
+              {
+                "itemId": "TFT_Item_Deathblade",
+                "necessity": 0.05107648855341562,
+                "count": 1091,
+                "appearanceRate": 0.14444591553025288,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_MadredsBloodrazor",
+                "necessity": 0.022509687148937196,
+                "count": 1234,
+                "appearanceRate": 0.16337878988481397,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_PowerGauntlet",
+                "necessity": 0.018853595326373096,
+                "count": 2244,
+                "appearanceRate": 0.2971004898715742,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_HextechGunblade",
+                "necessity": 0.004422487417574672,
+                "count": 137,
+                "appearanceRate": 0.01813848801800609,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_RunaansHurricane",
+                "necessity": 0.0032821623550534085,
+                "count": 471,
+                "appearanceRate": 0.062359327419568386,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_RapidFireCannon",
+                "necessity": -0.0017898975915846549,
+                "count": 248,
+                "appearanceRate": 0.0328346352442738,
+                "rating": null
+              },
+              {
+                "itemId": "TFT17_EkkoOffering_AnomalyItem",
+                "necessity": -0.0033609685605089368,
+                "count": 158,
+                "appearanceRate": 0.02091884019594863,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_BlueBuff",
+                "necessity": -0.005138595903605214,
+                "count": 985,
+                "appearanceRate": 0.130411756917781,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Quicksilver",
+                "necessity": -0.007257655656127682,
+                "count": 91,
+                "appearanceRate": 0.012048192771084338,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Leviathan",
+                "necessity": -0.008193172212624944,
+                "count": 252,
+                "appearanceRate": 0.033364226135310475,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Bloodthirster",
+                "necessity": -0.009846053928723286,
+                "count": 122,
+                "appearanceRate": 0.016152522176618563,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_UnstableConcoction",
+                "necessity": -0.011860529211238813,
+                "count": 390,
+                "appearanceRate": 0.05163511187607573,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_TitansResolve",
+                "necessity": -0.01347639799318845,
+                "count": 221,
+                "appearanceRate": 0.029259896729776247,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_LastWhisper",
+                "necessity": -0.024076260183798937,
+                "count": 527,
+                "appearanceRate": 0.06977359989408183,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_SpearOfShojin",
+                "necessity": -0.051182905879458396,
+                "count": 2718,
+                "appearanceRate": 0.3598570104594201,
+                "rating": "HighFrequency"
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.18",
+                  "0.11",
+                  "0.05",
+                  "0.02",
+                  "0.02",
+                  "0.00",
+                  "0.00",
+                  "-0.00",
+                  "-0.00",
+                  "-0.01",
+                  "-0.01",
+                  "-0.01",
+                  "-0.01",
+                  "-0.01",
+                  "-0.01",
+                  "-0.02",
+                  "-0.05"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "81.05%",
+                  "57.29%",
+                  "14.44%",
+                  "16.34%",
+                  "29.71%",
+                  "1.81%",
+                  "6.24%",
+                  "3.28%",
+                  "2.09%",
+                  "13.04%",
+                  "1.20%",
+                  "3.34%",
+                  "1.62%",
+                  "5.16%",
+                  "2.93%",
+                  "6.98%",
+                  "35.99%"
+                ]
+              }
+            ],
+            "minWidth": 2880
+          }
+        },
+        "adjusted": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_InfinityEdge",
+                "necessity": -0.08749611680646208,
+                "count": 469,
+                "appearanceRate": 0.8086206896551724,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "-0.09"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "80.86%"
+                ]
+              }
+            ],
+            "minWidth": 760
+          }
+        }
+      },
+      {
+        "unitId": "TFT17_Rammus",
+        "unitCost": 4,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_GargoyleStoneplate",
+                "necessity": 0.10367716289457274,
+                "count": 1849,
+                "appearanceRate": 0.2652417156792426,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_Redemption",
+                "necessity": 0.09149637808145084,
+                "count": 1522,
+                "appearanceRate": 0.2183330942475972,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_WarmogsArmor",
+                "necessity": 0.08165403854661335,
+                "count": 1322,
+                "appearanceRate": 0.18964280591019939,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_BrambleVest",
+                "necessity": 0.07800508545805052,
+                "count": 1065,
+                "appearanceRate": 0.15277578539664324,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_RedBuff",
+                "necessity": 0.07050252707557636,
+                "count": 1689,
+                "appearanceRate": 0.24228948500932435,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_FrozenHeart",
+                "necessity": 0.04648424045015087,
+                "count": 679,
+                "appearanceRate": 0.0974035289054655,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_DragonsClaw",
+                "necessity": 0.045342945140759205,
+                "count": 1088,
+                "appearanceRate": 0.15607516855544398,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_NightHarvester",
+                "necessity": 0.04482695226676192,
+                "count": 564,
+                "appearanceRate": 0.08090661311146177,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_SpectralGauntlet",
+                "necessity": 0.02791165894404024,
+                "count": 1034,
+                "appearanceRate": 0.14832879070434657,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_Crownguard",
+                "necessity": 0.025997608275207362,
+                "count": 356,
+                "appearanceRate": 0.05106871324056807,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_AdaptiveHelm",
+                "necessity": 0.016153332415255406,
+                "count": 373,
+                "appearanceRate": 0.05350738774924688,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_IonicSpark",
+                "necessity": 0.006806827917009706,
+                "count": 177,
+                "appearanceRate": 0.025390905178597045,
+                "rating": null
+              },
+              {
+                "itemId": "TFT17_EkkoOffering_AnomalyItem",
+                "necessity": 0.0025945784073915235,
+                "count": 324,
+                "appearanceRate": 0.04647826710658442,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_ThiefsGloves",
+                "necessity": -0.002783162412588247,
+                "count": 235,
+                "appearanceRate": 0.033711088796442405,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.10",
+                  "0.09",
+                  "0.08",
+                  "0.08",
+                  "0.07",
+                  "0.05",
+                  "0.05",
+                  "0.04",
+                  "0.03",
+                  "0.03",
+                  "0.02",
+                  "0.01",
+                  "0.00",
+                  "-0.00"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "26.52%",
+                  "21.83%",
+                  "18.96%",
+                  "15.28%",
+                  "24.23%",
+                  "9.74%",
+                  "15.61%",
+                  "8.09%",
+                  "14.83%",
+                  "5.11%",
+                  "5.35%",
+                  "2.54%",
+                  "4.65%",
+                  "3.37%"
+                ]
+              }
+            ],
+            "minWidth": 2400
+          }
+        },
+        "adjusted": null
+      },
+      {
+        "unitId": "TFT17_Ornn",
+        "unitCost": 3,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_AdaptiveHelm",
+                "necessity": 0.007992143919913097,
+                "count": 202,
+                "appearanceRate": 0.039913060659948624,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT17_Item_AstronautEmblemItem",
+                "necessity": 0.0043658007756874895,
+                "count": 277,
+                "appearanceRate": 0.05473226635052361,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_FrozenHeart",
+                "necessity": 0.003629339879827498,
+                "count": 304,
+                "appearanceRate": 0.06006718039913061,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_Crownguard",
+                "necessity": 0.00211006920876855,
+                "count": 166,
+                "appearanceRate": 0.032799841928472635,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT17_EkkoOffering_AnomalyItem",
+                "necessity": 0.0010374436296629597,
+                "count": 83,
+                "appearanceRate": 0.016399920964236318,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_ThiefsGloves",
+                "necessity": 0.0009721655282541874,
+                "count": 128,
+                "appearanceRate": 0.02529144437858131,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_IonicSpark",
+                "necessity": -4.003910090677465e-05,
+                "count": 57,
+                "appearanceRate": 0.011262596324836989,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_NightHarvester",
+                "necessity": -0.0016909141348815382,
+                "count": 279,
+                "appearanceRate": 0.05512744516893894,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_WarmogsArmor",
+                "necessity": -0.0022026028865846925,
+                "count": 664,
+                "appearanceRate": 0.13119936771389054,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Redemption",
+                "necessity": -0.009180083334279665,
+                "count": 730,
+                "appearanceRate": 0.1442402687215965,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_BrambleVest",
+                "necessity": -0.01683541109346809,
+                "count": 429,
+                "appearanceRate": 0.08476585655008892,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_DragonsClaw",
+                "necessity": -0.022356702535445194,
+                "count": 498,
+                "appearanceRate": 0.0983995257854179,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_SpectralGauntlet",
+                "necessity": -0.037560847174042955,
+                "count": 514,
+                "appearanceRate": 0.10156095633274057,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_RedBuff",
+                "necessity": -0.05707985413703831,
+                "count": 787,
+                "appearanceRate": 0.1555028650464335,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_GargoyleStoneplate",
+                "necessity": -0.05969520406492812,
+                "count": 769,
+                "appearanceRate": 0.1519462556806955,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.01",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "-0.00",
+                  "-0.00",
+                  "-0.00",
+                  "-0.01",
+                  "-0.02",
+                  "-0.02",
+                  "-0.04",
+                  "-0.06",
+                  "-0.06"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "3.99%",
+                  "5.47%",
+                  "6.01%",
+                  "3.28%",
+                  "1.64%",
+                  "2.53%",
+                  "1.13%",
+                  "5.51%",
+                  "13.12%",
+                  "14.42%",
+                  "8.48%",
+                  "9.84%",
+                  "10.16%",
+                  "15.55%",
+                  "15.19%"
+                ]
+              }
+            ],
+            "minWidth": 2560
+          }
+        },
+        "adjusted": null
+      },
+      {
+        "unitId": "TFT17_Corki",
+        "unitCost": 4,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_InfinityEdge",
+                "necessity": 0.092674643515811,
+                "count": 915,
+                "appearanceRate": 0.14748549323017407,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_PowerGauntlet",
+                "necessity": 0.07210772369695206,
+                "count": 490,
+                "appearanceRate": 0.0789813023855577,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_SpearOfShojin",
+                "necessity": 0.07106851884414755,
+                "count": 880,
+                "appearanceRate": 0.14184397163120568,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_LastWhisper",
+                "necessity": 0.0705853143653421,
+                "count": 748,
+                "appearanceRate": 0.12056737588652482,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_Deathblade",
+                "necessity": 0.06399438973636506,
+                "count": 542,
+                "appearanceRate": 0.08736299161831076,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_MadredsBloodrazor",
+                "necessity": 0.05745745305626926,
+                "count": 683,
+                "appearanceRate": 0.1100902643455835,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_BlueBuff",
+                "necessity": 0.044104290790354383,
+                "count": 522,
+                "appearanceRate": 0.08413926499032882,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_RapidFireCannon",
+                "necessity": 0.03149527676633124,
+                "count": 391,
+                "appearanceRate": 0.06302385557704707,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_GuinsoosRageblade",
+                "necessity": 0.021413258164039384,
+                "count": 683,
+                "appearanceRate": 0.1100902643455835,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_HextechGunblade",
+                "necessity": 0.01571727917472643,
+                "count": 204,
+                "appearanceRate": 0.03288201160541586,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_UnstableConcoction",
+                "necessity": 0.011847529880354202,
+                "count": 181,
+                "appearanceRate": 0.029174725983236623,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_RunaansHurricane",
+                "necessity": 0.010780304384810258,
+                "count": 254,
+                "appearanceRate": 0.04094132817537073,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Leviathan",
+                "necessity": 0.0067147435948147205,
+                "count": 91,
+                "appearanceRate": 0.01466795615731786,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_ThiefsGloves",
+                "necessity": 0.003157418848819482,
+                "count": 190,
+                "appearanceRate": 0.030625402965828497,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_AdaptiveHelm",
+                "necessity": 0.003073300117134359,
+                "count": 92,
+                "appearanceRate": 0.014829142488716958,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Quicksilver",
+                "necessity": 0.0021560546849297424,
+                "count": 79,
+                "appearanceRate": 0.012733720180528691,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Morellonomicon",
+                "necessity": 0.0019074637247831205,
+                "count": 81,
+                "appearanceRate": 0.013056092843326886,
+                "rating": null
+              },
+              {
+                "itemId": "TFT17_EkkoOffering_AnomalyItem",
+                "necessity": -0.00505148002095801,
+                "count": 87,
+                "appearanceRate": 0.01402321083172147,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.09",
+                  "0.07",
+                  "0.07",
+                  "0.07",
+                  "0.06",
+                  "0.06",
+                  "0.04",
+                  "0.03",
+                  "0.02",
+                  "0.02",
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "-0.01"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "14.75%",
+                  "7.90%",
+                  "14.18%",
+                  "12.06%",
+                  "8.74%",
+                  "11.01%",
+                  "8.41%",
+                  "6.30%",
+                  "11.01%",
+                  "3.29%",
+                  "2.92%",
+                  "4.09%",
+                  "1.47%",
+                  "3.06%",
+                  "1.48%",
+                  "1.27%",
+                  "1.31%",
+                  "1.40%"
+                ]
+              }
+            ],
+            "minWidth": 3040
+          }
+        },
+        "adjusted": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_InfinityEdge",
+                "necessity": 0.08944840171269952,
+                "count": 469,
+                "appearanceRate": 0.13446100917431192,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.09"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "13.45%"
+                ]
+              }
+            ],
+            "minWidth": 760
+          }
+        }
+      },
+      {
+        "unitId": "TFT17_Bard",
+        "unitCost": 5,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_JeweledGauntlet",
+                "necessity": 0.04772435707073708,
+                "count": 441,
+                "appearanceRate": 0.1561061946902655,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_Leviathan",
+                "necessity": 0.04055187055811338,
+                "count": 174,
+                "appearanceRate": 0.061592920353982304,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_AdaptiveHelm",
+                "necessity": 0.03967441128511151,
+                "count": 182,
+                "appearanceRate": 0.06442477876106195,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_RabadonsDeathcap",
+                "necessity": 0.039174764356381786,
+                "count": 214,
+                "appearanceRate": 0.07575221238938053,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_Morellonomicon",
+                "necessity": 0.03728715632665125,
+                "count": 166,
+                "appearanceRate": 0.05876106194690266,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_SpearOfShojin",
+                "necessity": 0.037227615194361796,
+                "count": 349,
+                "appearanceRate": 0.12353982300884955,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_StatikkShiv",
+                "necessity": 0.034927464573179634,
+                "count": 194,
+                "appearanceRate": 0.06867256637168141,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_BlueBuff",
+                "necessity": 0.026010129509076663,
+                "count": 253,
+                "appearanceRate": 0.0895575221238938,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_ArchangelsStaff",
+                "necessity": 0.019888187822955317,
+                "count": 191,
+                "appearanceRate": 0.06761061946902655,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_MadredsBloodrazor",
+                "necessity": 0.015668497721751606,
+                "count": 104,
+                "appearanceRate": 0.036814159292035395,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_ThiefsGloves",
+                "necessity": 0.010559865990559913,
+                "count": 99,
+                "appearanceRate": 0.035044247787610616,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_HextechGunblade",
+                "necessity": 0.009292199582970895,
+                "count": 130,
+                "appearanceRate": 0.04601769911504425,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_RapidFireCannon",
+                "necessity": 0.00035073475684033184,
+                "count": 100,
+                "appearanceRate": 0.035398230088495575,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_GuinsoosRageblade",
+                "necessity": -0.0038926085250956532,
+                "count": 163,
+                "appearanceRate": 0.05769911504424779,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.05",
+                  "0.04",
+                  "0.04",
+                  "0.04",
+                  "0.04",
+                  "0.04",
+                  "0.03",
+                  "0.03",
+                  "0.02",
+                  "0.02",
+                  "0.01",
+                  "0.01",
+                  "0.00",
+                  "-0.00"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "15.61%",
+                  "6.16%",
+                  "6.44%",
+                  "7.58%",
+                  "5.88%",
+                  "12.35%",
+                  "6.87%",
+                  "8.96%",
+                  "6.76%",
+                  "3.68%",
+                  "3.50%",
+                  "4.60%",
+                  "3.54%",
+                  "5.77%"
+                ]
+              }
+            ],
+            "minWidth": 2400
+          }
+        },
+        "adjusted": null
+      },
+      {
+        "unitId": "TFT17_IvernMinion",
+        "unitCost": 2,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_FrozenHeart",
+                "necessity": 0.010232317331271723,
+                "count": 204,
+                "appearanceRate": 0.032304038004750596,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_NightHarvester",
+                "necessity": 0.009439924685329615,
+                "count": 189,
+                "appearanceRate": 0.02992874109263658,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_WarmogsArmor",
+                "necessity": 0.008058910337187974,
+                "count": 564,
+                "appearanceRate": 0.08931116389548693,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_BrambleVest",
+                "necessity": 0.005087255254961676,
+                "count": 292,
+                "appearanceRate": 0.046239113222486146,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_Crownguard",
+                "necessity": 0.004393703830478657,
+                "count": 132,
+                "appearanceRate": 0.020902612826603325,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_ThiefsGloves",
+                "necessity": 0.004063878173141688,
+                "count": 210,
+                "appearanceRate": 0.0332541567695962,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_AdaptiveHelm",
+                "necessity": 0.0031320808341588346,
+                "count": 136,
+                "appearanceRate": 0.021536025336500397,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT17_Item_ResistTankEmblemItem",
+                "necessity": 0.0028447688545938377,
+                "count": 80,
+                "appearanceRate": 0.012668250197941409,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_IonicSpark",
+                "necessity": 0.0027002345826412366,
+                "count": 82,
+                "appearanceRate": 0.012984956452889945,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_DragonsClaw",
+                "necessity": 0.0025352792419459647,
+                "count": 386,
+                "appearanceRate": 0.0611243072050673,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT17_EkkoOffering_AnomalyItem",
+                "necessity": 0.0018513026315076786,
+                "count": 76,
+                "appearanceRate": 0.012034837688044338,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Redemption",
+                "necessity": -4.6357898519922e-05,
+                "count": 508,
+                "appearanceRate": 0.08044338875692796,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_GargoyleStoneplate",
+                "necessity": -0.0016643150550512686,
+                "count": 699,
+                "appearanceRate": 0.11068883610451306,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_SpectralGauntlet",
+                "necessity": -0.007310369281283258,
+                "count": 478,
+                "appearanceRate": 0.07569279493269992,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_RedBuff",
+                "necessity": -0.0107492603242072,
+                "count": 615,
+                "appearanceRate": 0.09738717339667459,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "-0.00",
+                  "-0.00",
+                  "-0.01",
+                  "-0.01"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "3.23%",
+                  "2.99%",
+                  "8.93%",
+                  "4.62%",
+                  "2.09%",
+                  "3.33%",
+                  "2.15%",
+                  "1.27%",
+                  "1.30%",
+                  "6.11%",
+                  "1.20%",
+                  "8.04%",
+                  "11.07%",
+                  "7.57%",
+                  "9.74%"
+                ]
+              }
+            ],
+            "minWidth": 2560
+          }
+        },
+        "adjusted": null
+      },
+      {
+        "unitId": "TFT17_Aatrox",
+        "unitCost": 1,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_WarmogsArmor",
+                "necessity": 0.01563982215184989,
+                "count": 195,
+                "appearanceRate": 0.050518134715025906,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_NightHarvester",
+                "necessity": 0.014826703548500575,
+                "count": 95,
+                "appearanceRate": 0.02461139896373057,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_BrambleVest",
+                "necessity": 0.008878708519972633,
+                "count": 273,
+                "appearanceRate": 0.07072538860103626,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_ThiefsGloves",
+                "necessity": 0.008036370916057578,
+                "count": 133,
+                "appearanceRate": 0.0344559585492228,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_AdaptiveHelm",
+                "necessity": 0.005617872909112975,
+                "count": 76,
+                "appearanceRate": 0.019689119170984457,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_GargoyleStoneplate",
+                "necessity": 0.0026180443278889243,
+                "count": 197,
+                "appearanceRate": 0.051036269430051816,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_FrozenHeart",
+                "necessity": 0.001122163420243183,
+                "count": 120,
+                "appearanceRate": 0.031088082901554404,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_DragonsClaw",
+                "necessity": -0.003660961951116981,
+                "count": 296,
+                "appearanceRate": 0.0766839378238342,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Redemption",
+                "necessity": -0.005188057228212806,
+                "count": 308,
+                "appearanceRate": 0.07979274611398963,
+                "rating": null
+              },
+              {
+                "itemId": "TFT17_Item_AstronautEmblemItem",
+                "necessity": -0.006188209671938338,
+                "count": 63,
+                "appearanceRate": 0.016321243523316063,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_SpectralGauntlet",
+                "necessity": -0.013924280730772232,
+                "count": 126,
+                "appearanceRate": 0.032642487046632127,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_RedBuff",
+                "necessity": -0.021584113774063773,
+                "count": 447,
+                "appearanceRate": 0.11580310880829016,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.02",
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.00",
+                  "0.00",
+                  "-0.00",
+                  "-0.01",
+                  "-0.01",
+                  "-0.01",
+                  "-0.02"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "5.05%",
+                  "2.46%",
+                  "7.07%",
+                  "3.45%",
+                  "1.97%",
+                  "5.10%",
+                  "3.11%",
+                  "7.67%",
+                  "7.98%",
+                  "1.63%",
+                  "3.26%",
+                  "11.58%"
+                ]
+              }
+            ],
+            "minWidth": 2080
+          }
+        },
+        "adjusted": null
+      },
+      {
+        "unitId": "TFT17_Veigar",
+        "unitCost": 1,
+        "baseline": {
+          "matrix": {
+            "items": [
+              {
+                "itemId": "TFT_Item_SpearOfShojin",
+                "necessity": 0.022700627040268095,
+                "count": 254,
+                "appearanceRate": 0.06412522090381217,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_JeweledGauntlet",
+                "necessity": 0.022286995172629886,
+                "count": 496,
+                "appearanceRate": 0.12522090381216863,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_StatikkShiv",
+                "necessity": 0.01886143522533157,
+                "count": 166,
+                "appearanceRate": 0.04190860893713708,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_RabadonsDeathcap",
+                "necessity": 0.018485754546162525,
+                "count": 219,
+                "appearanceRate": 0.0552890684170664,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_Morellonomicon",
+                "necessity": 0.014478591573111821,
+                "count": 112,
+                "appearanceRate": 0.02827568795758647,
+                "rating": "Important"
+              },
+              {
+                "itemId": "TFT_Item_BlueBuff",
+                "necessity": 0.013078231994767542,
+                "count": 207,
+                "appearanceRate": 0.0522595304216107,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_ArchangelsStaff",
+                "necessity": 0.012526600528515175,
+                "count": 177,
+                "appearanceRate": 0.044685685432971474,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_RapidFireCannon",
+                "necessity": 0.009704599346576082,
+                "count": 58,
+                "appearanceRate": 0.01464276697803585,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_MadredsBloodrazor",
+                "necessity": 0.007198627575901284,
+                "count": 74,
+                "appearanceRate": 0.018682150971976775,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_HextechGunblade",
+                "necessity": 0.004930271125128449,
+                "count": 90,
+                "appearanceRate": 0.022721534965917698,
+                "rating": "Optional"
+              },
+              {
+                "itemId": "TFT_Item_AdaptiveHelm",
+                "necessity": 0.004559918454608791,
+                "count": 96,
+                "appearanceRate": 0.024236303963645543,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_Leviathan",
+                "necessity": 0.004113268587688346,
+                "count": 216,
+                "appearanceRate": 0.05453168391820248,
+                "rating": null
+              },
+              {
+                "itemId": "TFT_Item_GuinsoosRageblade",
+                "necessity": 0.0014386981043488234,
+                "count": 88,
+                "appearanceRate": 0.02221661196667508,
+                "rating": null
+              }
+            ],
+            "metrics": [
+              {
+                "label": "Necessity",
+                "values": [
+                  "0.02",
+                  "0.02",
+                  "0.02",
+                  "0.02",
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.01",
+                  "0.00",
+                  "0.00",
+                  "0.00",
+                  "0.00"
+                ]
+              },
+              {
+                "label": "Freq",
+                "values": [
+                  "6.41%",
+                  "12.52%",
+                  "4.19%",
+                  "5.53%",
+                  "2.83%",
+                  "5.23%",
+                  "4.47%",
+                  "1.46%",
+                  "1.87%",
+                  "2.27%",
+                  "2.42%",
+                  "5.45%",
+                  "2.22%"
+                ]
+              }
+            ],
+            "minWidth": 2240
+          }
+        },
+        "adjusted": null
+      }
+    ]
+  }
+}

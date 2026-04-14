@@ -1,0 +1,10 @@
+# TFT Assistant — Python 依赖
+# 安装：pip install -r requirements.txt
+
+requests>=2.31.0         # HTTP 请求（爬虫）
+PyQt6>=6.6.0             # 悬浮窗口 UI
+pyautogui>=0.9.54        # 自动拿牌点击
+opencv-python>=4.8.0     # OCR 预处理
+mss>=9.0.1               # OCR 截图
+rapidocr>=3.8.0          # RapidOCR rec-only
+onnxruntime>=1.17.0      # ONNX Runtime CPU 推理

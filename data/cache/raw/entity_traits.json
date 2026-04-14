@@ -1,0 +1,1945 @@
+{
+  "TFT17_ADMIN": {
+    "description": "制订一份独特的神圣律法，可使你选择一个成因，以及该成因达成时施加至【法官】们的一个效果。",
+    "icon": "/set17/trait-webp/TFT17_ADMIN.webp",
+    "id": "TFT17_ADMIN",
+    "judgeLaw": {
+      "causes": [
+        {
+          "description": "当1名【法官】攻击3次时，",
+          "id": "TFT17_FavoredCause_EveryXAttacks",
+          "key": "EveryXAttacks",
+          "params": {
+            "NumAttacks": 3
+          },
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": [
+              6,
+              9
+            ],
+            "GainsArmor": null,
+            "GainsAttackSpeed": [
+              3,
+              5
+            ],
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "当1名【法官】造成10次伤害时，",
+          "id": "TFT17_FavoredCause_DealDamage",
+          "key": "DealDamage",
+          "params": {
+            "DamageInstances": 10
+          },
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": [
+              8,
+              12
+            ],
+            "GainsArmor": null,
+            "GainsAttackSpeed": [
+              5,
+              8
+            ],
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "当1名【法官】消耗50法力值时，",
+          "id": "TFT17_FavoredCause_SpendMana",
+          "key": "SpendMana",
+          "params": {
+            "ManaToSpend": 50
+          },
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": null,
+            "GainsArmor": null,
+            "GainsAttackSpeed": null,
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": [
+              4,
+              4
+            ],
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "每4秒，",
+          "id": "TFT17_FavoredCause_EveryXSeconds",
+          "key": "EveryXSeconds",
+          "params": {
+            "NumSeconds": 4
+          },
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": null,
+            "GainsArmor": null,
+            "GainsAttackSpeed": null,
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "每名【法官】的生命值首次降至40%时，",
+          "id": "TFT17_FavoredCause_FallBelowXHealth",
+          "key": "FallBelowXHealth",
+          "params": {
+            "HealthThreshold": 0.4
+          },
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": null,
+            "GainsArmor": null,
+            "GainsAttackSpeed": null,
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "当一名敌人阵亡时，",
+          "id": "TFT17_FavoredCause_Takedown",
+          "key": "Takedown",
+          "params": {},
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": null,
+            "GainsArmor": null,
+            "GainsAttackSpeed": null,
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "对战开始时：【法官】的星级总数每有1，",
+          "id": "TFT17_FavoredCause_StarLevels",
+          "key": "StarLevels",
+          "params": {},
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": null,
+            "GainsArmor": null,
+            "GainsAttackSpeed": null,
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "对战开始时：你每有1应得利息，也会",
+          "id": "TFT17_FavoredCause_EveryInterest",
+          "key": "EveryInterest",
+          "params": {},
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": null,
+            "GainsArmor": null,
+            "GainsAttackSpeed": null,
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        },
+        {
+          "description": "战斗开始时：如果你在前一个备战环节进行过刷新，",
+          "id": "TFT17_FavoredCause_CombatStartRerolled",
+          "key": "CombatStartRerolled",
+          "params": {},
+          "values": {
+            "GainLeona": null,
+            "GainMana": null,
+            "GainShield": null,
+            "GainsAbilityPower": null,
+            "GainsArmor": null,
+            "GainsAttackSpeed": null,
+            "GainsPermanentMaxHealth": null,
+            "GenerateGold": null,
+            "GenerateReroll": null
+          }
+        }
+      ],
+      "effects": [
+        {
+          "description": "所有【法官】获得X法术加成。",
+          "id": "TFT17_FavoredEffect_GainsAbilityPower",
+          "key": "GainsAbilityPower",
+          "unit": "flat"
+        },
+        {
+          "description": "所有【法官】获得X%攻击速度。",
+          "id": "TFT17_FavoredEffect_GainsAttackSpeed",
+          "key": "GainsAttackSpeed",
+          "unit": "percent"
+        },
+        {
+          "description": "所有【法官】获得X护甲与魔抗。",
+          "id": "TFT17_FavoredEffect_GainsArmor",
+          "key": "GainsArmor",
+          "unit": "flat"
+        },
+        {
+          "description": "所有【法官】获得X法力值。",
+          "id": "TFT17_FavoredEffect_GainMana",
+          "key": "GainMana",
+          "unit": "flat"
+        },
+        {
+          "description": "所有【法官】获得一个持续X秒的X%最大生命值护盾。",
+          "id": "TFT17_FavoredEffect_GainShield",
+          "key": "GainShield",
+          "unit": "percentHP"
+        },
+        {
+          "description": "所有【法官】获得X永久最大生命值。",
+          "id": "TFT17_FavoredEffect_GainsPermanentMaxHealth",
+          "key": "GainsPermanentMaxHealth",
+          "unit": "flat"
+        },
+        {
+          "description": "在对战结束时，你有X%的几率获得X金币。",
+          "id": "TFT17_FavoredEffect_GenerateGold",
+          "key": "GenerateGold",
+          "unit": "chance"
+        },
+        {
+          "description": "在对战结束时，你有X%的几率获得X次免费商店刷新。",
+          "id": "TFT17_FavoredEffect_GenerateReroll",
+          "key": "GenerateReroll",
+          "unit": "chance"
+        },
+        {
+          "description": "在对战结束时，你有X%的几率获得1个【蕾欧娜】。",
+          "id": "TFT17_FavoredEffect_GainLeona",
+          "key": "GainLeona",
+          "unit": "chance"
+        }
+      ]
+    },
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Leona"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Zoe"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Diana"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Leblanc"
+      }
+    ],
+    "name": "法官",
+    "tiers": [
+      {
+        "effect": "为你的律法选择1个成因和效果",
+        "minUnits": 2
+      },
+      {
+        "effect": "效果变得更强。",
+        "minUnits": 3
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_APTrait": {
+    "description": "【魔术师】施放技能时，会以削减过的效能触发第二次。",
+    "icon": "/set17/trait-webp/TFT17_APTrait.webp",
+    "id": "TFT17_APTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Lissandra"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Veigar"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Pantheon"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Lulu"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Nami"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_MissFortune"
+      }
+    ],
+    "name": "魔术师",
+    "tiers": [
+      {
+        "effect": "22%效能",
+        "minUnits": 2
+      },
+      {
+        "effect": "45%效能",
+        "minUnits": 4
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_ASTrait": {
+    "description": "你的队伍获得10%攻击速度。【挑战者】获得额外攻击速度。当其目标阵亡时，【挑战者】会冲刺向一个新的目标，并提高他们的攻击速度50%，持续2.5秒。",
+    "icon": "/set17/trait-webp/TFT17_ASTrait.webp",
+    "id": "TFT17_ASTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 2,
+        "id": "TFT17_Belveth"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Jinx"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Diana"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Kindred"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_MissFortune"
+      }
+    ],
+    "name": "挑战者",
+    "tiers": [
+      {
+        "effect": "15% {{icon:scaleAS}}",
+        "minUnits": 2
+      },
+      {
+        "effect": "22% {{icon:scaleAS}}",
+        "minUnits": 3
+      },
+      {
+        "effect": "36% {{icon:scaleAS}}",
+        "minUnits": 4
+      },
+      {
+        "effect": "48% {{icon:scaleAS}}",
+        "minUnits": 5
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_AnimaSquad": {
+    "description": "在输掉1场玩家对战后，获得20【科技点】，并且会额外增加相当于你连败回合数5倍的【科技点】。此外，每个【幻灵战队】参与击杀时都会获得2【科技点】。\n\n每当【幻灵战队】们获得100科技点，他们就会制造新的幻灵武器原型。你可以选择立刻拿走这些装备，或者保留你的【科技点】直到下一次获取更加强力的武器。",
+    "icon": "/set17/trait-webp/TFT17_AnimaSquad.webp",
+    "id": "TFT17_AnimaSquad",
+    "linkedItemIds": [
+      "TFT17_AnimaSquadItem_Tier0_ClunkyPrototype",
+      "TFT17_AnimaSquadItem_Tier0_LeakyPrototype",
+      "TFT17_AnimaSquadItem_Tier0_SparkingPrototype",
+      "TFT17_AnimaSquadItem_Tier1_GuidingHex",
+      "TFT17_AnimaSquadItem_Tier1_RocketSwarm",
+      "TFT17_AnimaSquadItem_Tier1_SavageSlicer",
+      "TFT17_AnimaSquadItem_Tier1_TentacleSlam",
+      "TFT17_AnimaSquadItem_Tier2_Annihilator",
+      "TFT17_AnimaSquadItem_Tier2_BattleBunnyCrossbow",
+      "TFT17_AnimaSquadItem_Tier2_CyclonicSlicers",
+      "TFT17_AnimaSquadItem_Tier2_EchoingBatblades",
+      "TFT17_AnimaSquadItem_Tier2_IceblastArmor",
+      "TFT17_AnimaSquadItem_Tier2_LionessLament",
+      "TFT17_AnimaSquadItem_Tier2_SearingShortbow",
+      "TFT17_AnimaSquadItem_Tier2_UwuBlaster",
+      "TFT17_AnimaSquadItem_Tier3_Annihilator",
+      "TFT17_AnimaSquadItem_Tier3_BattleBunnyCrossbow",
+      "TFT17_AnimaSquadItem_Tier3_CyclonicSlicers",
+      "TFT17_AnimaSquadItem_Tier3_EchoingBatblades",
+      "TFT17_AnimaSquadItem_Tier3_IceblastArmor",
+      "TFT17_AnimaSquadItem_Tier3_LionessLament",
+      "TFT17_AnimaSquadItem_Tier3_SearingShortbow",
+      "TFT17_AnimaSquadItem_Tier3_UwuBlaster",
+      "TFT17_AnimaSquadItem_Tier4_Omniweapon"
+    ],
+    "linkedItemsCollapsible": true,
+    "linkedItemsLabel": {
+      "en-US": "Anima Weapons",
+      "zh-CN": "幻灵武器"
+    },
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Briar"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Jinx"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Aurora"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Illaoi"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Fiora"
+      }
+    ],
+    "name": "幻灵战队",
+    "tiers": [
+      {
+        "effect": "研发启动！",
+        "minUnits": 3
+      },
+      {
+        "effect": "在赢得一场玩家对战之后，获得战利品！",
+        "minUnits": 6
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_AssassinTrait": {
+    "description": "【游侠】们获得物理加成和法术加成。当其生命值首次降至50%时，他们会遁入暗影。原本以其为目标的敌人将会选取1名附近的敌人作为新的目标(坦克优先)。",
+    "icon": "/set17/trait-webp/TFT17_AssassinTrait.webp",
+    "id": "TFT17_AssassinTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Briar"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Talon"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Gwen"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Fizz"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Kaisa"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Riven"
+      }
+    ],
+    "name": "游侠",
+    "tiers": [
+      {
+        "effect": "12% {{icon:scaleAD}} {{icon:scaleAP}}",
+        "minUnits": 2
+      },
+      {
+        "effect": "25% {{icon:scaleAD}} {{icon:scaleAP}}",
+        "minUnits": 3
+      },
+      {
+        "effect": "40% {{icon:scaleAD}} {{icon:scaleAP}}",
+        "minUnits": 4
+      },
+      {
+        "effect": "55% {{icon:scaleAD}} {{icon:scaleAP}}",
+        "minUnits": 5
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_Astronaut": {
+    "description": "【木灵族】吸引木灵，木灵会以木灵的方式强化【木灵族】的技能。他们还会获得额外生命值。",
+    "icon": "/set17/trait-webp/TFT17_Astronaut.webp",
+    "id": "TFT17_Astronaut",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Poppy"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Veigar"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Gnar"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_IvernMinion"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Fizz"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Corki"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Rammus"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Bard"
+      }
+    ],
+    "name": "木灵族",
+    "tiers": [
+      {
+        "effect": "2 {{icon:set14AmpIcon}}，100 {{icon:scaleHealth}}",
+        "minUnits": 3
+      },
+      {
+        "effect": "3 {{icon:set14AmpIcon}}，400 {{icon:scaleHealth}}",
+        "minUnits": 5
+      },
+      {
+        "effect": "4 {{icon:set14AmpIcon}}，400 {{icon:scaleHealth}}。在你的备战席上生成一个克隆栏位。在克隆完成时，获得放置在该栏位的弈子的一个1星版本以及金币。",
+        "minUnits": 7
+      },
+      {
+        "effect": "6 {{icon:set14AmpIcon}}，500 {{icon:scaleHealth}}。召唤四大木灵领主！",
+        "minUnits": 10
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_BlitzcrankUniqueTrait": {
+    "description": "每场战斗仅一次，在生命值降至45%后，变得不可被选取并且每秒回复15%最大生命值。生命值回满或没有其他友军存活时，返回战斗。如果生命值已回满，【布里茨】进入{{groove:太空律动}}状态，并且【派对破坏王】的被动会以四倍速召唤雷电，持续至战斗结束。",
+    "icon": "/set17/trait-webp/TFT17_BlitzcrankUniqueTrait.webp",
+    "id": "TFT17_BlitzcrankUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Blitzcrank"
+      }
+    ],
+    "name": "汪星机器人",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_DRX": {
+    "description": "能量涌动：\n亚托克斯：友方伤害 30% 破甲和碎甲\n凯特琳：为友军提供 20% 攻击速度\n阿卡丽：友军获得精准\n茂凯：友军回复 12% 最大生命值\n千珏：为最强的坦克提供 800 护盾\n纹章：友军造成 10% 叠加真实伤害",
+    "icon": "/set17/trait-webp/TFT17_DRX.webp",
+    "id": "TFT17_DRX",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Aatrox"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Caitlyn"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Akali"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Maokai"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Kindred"
+      }
+    ],
+    "name": "新星特攻队",
+    "tiers": [
+      {
+        "effect": "对战开始6秒后，【新星特攻队】基于弈子效果，为友军提供一阵【能量激增】。",
+        "minUnits": 2
+      },
+      {
+        "effect": "获得1个【特攻队员选择器】。被选择的【新星特攻队】弈子会在【能量激增】期间激活其特攻技能。",
+        "minUnits": 5
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_DarkStar": {
+    "description": "",
+    "icon": "/set17/trait-webp/TFT17_DarkStar.webp",
+    "id": "TFT17_DarkStar",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Chogath"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Lissandra"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Mordekaiser"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Kaisa"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Karma"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Jhin"
+      }
+    ],
+    "name": "暗星",
+    "tiers": [
+      {
+        "effect": "【暗星】创造【黑洞】，【黑洞】会吞噬最大生命值低于8%的敌人。",
+        "minUnits": 2
+      },
+      {
+        "effect": "并且他们获得40% {{icon:scaleAD}}{{icon:scaleAP}}。",
+        "minUnits": 4
+      },
+      {
+        "effect": "并且最强大的【暗星】单位进入【超大质量】状态，获得85%效能的【暗星】加成，并生成2个小型【黑洞】。",
+        "minUnits": 6
+      },
+      {
+        "effect": "所有的【暗星】进入【超大质量】状态。达到10级后，吞！噬！天！地！万！物！。",
+        "minUnits": 9
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_Fateweaver": {
+    "description": "固有能力：【织命人】拥有技能暴击。",
+    "icon": "/set17/trait-webp/TFT17_Fateweaver.webp",
+    "id": "TFT17_Fateweaver",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Caitlyn"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_TwistedFate"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Milio"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Corki"
+      }
+    ],
+    "name": "织命人",
+    "tiers": [
+      {
+        "effect": "技能中几率触发的效果拥有幸运。",
+        "minUnits": 2
+      },
+      {
+        "effect": "获得20%暴击几率和20% 暴击伤害。暴击也会拥有幸运。",
+        "minUnits": 4
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_FioraUniqueTrait": {
+    "description": "你的小小英雄在获胜时回复相当于15%造成小小英雄伤害的生命值。\n\n【菲奥娜】总会在一对一的对决中胜出。",
+    "icon": "/set17/trait-webp/TFT17_FioraUniqueTrait.webp",
+    "id": "TFT17_FioraUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Fiora"
+      }
+    ],
+    "name": "斗神",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_FlexTrait": {
+    "description": "战斗开始时：你的坦克们获得持续15秒的护盾。你的其他友军获得伤害增幅。\n【旅人】获得两倍此加成。",
+    "icon": "/set17/trait-webp/TFT17_FlexTrait.webp",
+    "id": "TFT17_FlexTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 2,
+        "id": "TFT17_IvernMinion"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Pyke"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Aurora"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Galio"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Karma"
+      }
+    ],
+    "name": "旅人",
+    "tiers": [
+      {
+        "effect": "175护盾；9% {{icon:scaleDA}}",
+        "minUnits": 2
+      },
+      {
+        "effect": "250护盾；15% {{icon:scaleDA}}",
+        "minUnits": 3
+      },
+      {
+        "effect": "350护盾；18% {{icon:scaleDA}}",
+        "minUnits": 4
+      },
+      {
+        "effect": "500护盾；22% {{icon:scaleDA}}",
+        "minUnits": 5
+      },
+      {
+        "effect": "700护盾；27% {{icon:scaleDA}}",
+        "minUnits": 6
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_GravesTrait": {
+    "description": "参与对战后，打开一个武器库为你最强大的【格雷福斯】购买*永久*【升级】。\n\n每有3个【升级】，后续【升级】都将多需要1回合。",
+    "icon": "/set17/trait-webp/TFT17_GravesTrait.webp",
+    "id": "TFT17_GravesTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Graves"
+      }
+    ],
+    "name": "军工1号",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_HPTank": {
+    "description": "你的队伍获得5%生命值。【斗士】获得更多。",
+    "icon": "/set17/trait-webp/TFT17_HPTank.webp",
+    "id": "TFT17_HPTank",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Chogath"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Reksai"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Gragas"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Pantheon"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Maokai"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Urgot"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_TahmKench"
+      }
+    ],
+    "name": "斗士",
+    "tiers": [
+      {
+        "effect": "+20%最大生命值",
+        "minUnits": 2
+      },
+      {
+        "effect": "+40%最大生命值",
+        "minUnits": 4
+      },
+      {
+        "effect": "+60%最大生命值",
+        "minUnits": 6
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_JhinUniqueTrait": {
+    "description": "敌人的护甲和魔抗降低10%。",
+    "icon": "/set17/trait-webp/TFT17_JhinUniqueTrait.webp",
+    "id": "TFT17_JhinUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Jhin"
+      }
+    ],
+    "name": "灭星尊",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_ManaTrait": {
+    "description": "固有能力：【神谕】们从所有来源中获得额外20%法力值。\n\n你的队伍获得法力回复，【神谕】们获得更多。",
+    "icon": "/set17/trait-webp/TFT17_ManaTrait.webp",
+    "id": "TFT17_ManaTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 2,
+        "id": "TFT17_Mordekaiser"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Zoe"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Viktor"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_AurelionSol"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Bard"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_MissFortune"
+      }
+    ],
+    "name": "神谕",
+    "tiers": [
+      {
+        "effect": "1 {{icon:TFTManaRegen}} | 3 {{icon:TFTManaRegen}}",
+        "minUnits": 2
+      },
+      {
+        "effect": "1 {{icon:TFTManaRegen}} | 5 {{icon:TFTManaRegen}}",
+        "minUnits": 3
+      },
+      {
+        "effect": "2 {{icon:TFTManaRegen}} | 7 {{icon:TFTManaRegen}}",
+        "minUnits": 4
+      },
+      {
+        "effect": "3 {{icon:TFTManaRegen}} | 9 {{icon:TFTManaRegen}}",
+        "minUnits": 5
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_Mecha": {
+    "description": "固有能力：【霸天机甲】单位们可以变形为其【究极形态】，升级其技能并获得50%生命值。【已变形的霸天机甲】占用2个弈子栏位，并为【霸天机甲】羁绊提供双倍羁绊计数。",
+    "icon": "/set17/trait-webp/TFT17_Mecha.webp",
+    "id": "TFT17_Mecha",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 3,
+        "id": "TFT17_Urgot"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_AurelionSol"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Galio"
+      }
+    ],
+    "name": "霸天机甲",
+    "tiers": [
+      {
+        "effect": "能量电芯：【霸天机甲】们获得20% {{icon:scaleAD}}{{icon:scaleAP}}。",
+        "minUnits": 3
+      },
+      {
+        "effect": "超频电容：提升至35% {{icon:scaleAD}}{{icon:scaleAP}}。",
+        "minUnits": 4
+      },
+      {
+        "effect": "精密工学：+1最大队伍规模",
+        "minUnits": 6
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_MeleeTrait": {
+    "description": "你的队伍获得5%全能吸血。【狂战士】获得额外全能吸血、物理加成，并且其全能吸血的过量治疗将转化为护盾(至多至25%最大生命值)",
+    "icon": "/set17/trait-webp/TFT17_MeleeTrait.webp",
+    "id": "TFT17_MeleeTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 2,
+        "id": "TFT17_Akali"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Belveth"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Urgot"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_MasterYi"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Fiora"
+      }
+    ],
+    "name": "狂战士",
+    "tiers": [
+      {
+        "effect": "5% {{icon:scaleSV}}, 20% {{icon:scaleAD}}",
+        "minUnits": 2
+      },
+      {
+        "effect": "7% {{icon:scaleSV}}, 40% {{icon:scaleAD}}",
+        "minUnits": 4
+      },
+      {
+        "effect": "10% {{icon:scaleSV}}, 60% {{icon:scaleAD}}",
+        "minUnits": 6
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_MissFortuneUniqueTrait": {
+    "description": "当你登场【厄运小姐】时，需要在【神谕模式】、【挑战者模式】、以及【魔术师模式】中选择一种。【厄运小姐】的每个模式都会为其提供1个独特的技能，同时她获得对应的羁绊。",
+    "icon": "/set17/trait-webp/TFT17_MissFortuneUniqueTrait.webp",
+    "id": "TFT17_MissFortuneUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 3,
+        "id": "TFT17_MissFortune"
+      }
+    ],
+    "name": "武装战姬",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_MorganaUniqueTrait": {
+    "description": "友军受到的技能伤害减少5%，当莫甘娜处于【黑暗形态】时，该效果提升至10%。",
+    "icon": "/set17/trait-webp/TFT17_MorganaUniqueTrait.webp",
+    "id": "TFT17_MorganaUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Morgana"
+      }
+    ],
+    "name": "黑暗魔女",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_Primordian": {
+    "description": "",
+    "icon": "/set17/trait-webp/TFT17_Primordian.webp",
+    "id": "TFT17_Primordian",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Briar"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Reksai"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Belveth"
+      }
+    ],
+    "name": "海魔人",
+    "tiers": [
+      {
+        "effect": "造成伤害时会基于独特【海魔人】的星级召唤【狂潮虫】。",
+        "minUnits": 2
+      },
+      {
+        "effect": "召唤额外的45%【狂潮虫】！在每场玩家对战后，获得1个随机的1费或2费弈子。",
+        "minUnits": 3
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_PsyOps": {
+    "description": "获得【灵能特工装备】，任何友军都可以携带。",
+    "icon": "/set17/trait-webp/TFT17_PsyOps.webp",
+    "id": "TFT17_PsyOps",
+    "linkedItemIds": [
+      "TFT17_Item_PsyOps_ChemicalCapacitorMod",
+      "TFT17_Item_PsyOps_DroneMod",
+      "TFT17_Item_PsyOps_GrenadeMod",
+      "TFT17_Item_PsyOps_SemiconductorMod",
+      "TFT17_Item_PsyOps_SympatheticImplantMod",
+      "TFT17_Item_PsyOps_TargetlockMod"
+    ],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 2,
+        "id": "TFT17_Gragas"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Pyke"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Viktor"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_MasterYi"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Sona"
+      }
+    ],
+    "name": "灵能特工",
+    "tiers": [
+      {
+        "effect": "获得【灵能特工装备】",
+        "minUnits": 2
+      },
+      {
+        "effect": "获得【灵能特工装备】，【灵能特工】携带【灵能特工装备】时获得额外效果",
+        "minUnits": 4
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_RangedTrait": {
+    "description": "【狙神】获得伤害增幅，这个加成会在对抗更远目标时获得提升。",
+    "icon": "/set17/trait-webp/TFT17_RangedTrait.webp",
+    "id": "TFT17_RangedTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Ezreal"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Gnar"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Samira"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Xayah"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Jhin"
+      }
+    ],
+    "name": "狙神",
+    "tiers": [
+      {
+        "effect": "18% {{icon:scaleDA}}；+2% {{icon:scaleDA}}每格",
+        "minUnits": 2
+      },
+      {
+        "effect": "24% {{icon:scaleDA}}；+3% {{icon:scaleDA}}每格",
+        "minUnits": 3
+      },
+      {
+        "effect": "28% {{icon:scaleDA}}；+4% {{icon:scaleDA}}每格",
+        "minUnits": 4
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_ResistTank": {
+    "description": "你的队伍获得15护甲和魔抗。\n\n【堡垒卫士】们获得更多，并且该加成在对战的最初10秒内翻倍。",
+    "icon": "/set17/trait-webp/TFT17_ResistTank.webp",
+    "id": "TFT17_ResistTank",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Aatrox"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Poppy"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Jax"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Ornn"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Rammus"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Shen"
+      }
+    ],
+    "name": "堡垒卫士",
+    "tiers": [
+      {
+        "effect": "16 {{icon:scaleArmor}}{{icon:scaleMR}}",
+        "minUnits": 2
+      },
+      {
+        "effect": "40 {{icon:scaleArmor}}{{icon:scaleMR}}",
+        "minUnits": 4
+      },
+      {
+        "effect": "60 {{icon:scaleArmor}}{{icon:scaleMR}}；非【堡垒卫士】单位额外获得20 {{icon:scaleArmor}}{{icon:scaleMR}}",
+        "minUnits": 6
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_RhaastUniqueTrait": {
+    "description": "",
+    "icon": "/set17/trait-webp/TFT17_RhaastUniqueTrait.webp",
+    "id": "TFT17_RhaastUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 3,
+        "id": "TFT17_Rhaast"
+      }
+    ],
+    "name": "救世主",
+    "tiers": [
+      {
+        "effect": "每激活一个非唯一羁绊，你的队伍获得2%/2.5%/3%攻击速度，和2/2.5/3护甲和魔抗。",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_ShenUniqueTrait": {
+    "description": "召唤一个可放置的【圣物】。对战开始时，【圣物】可为邻格友军提供一个10%最大生命值的护盾和10%攻击速度。",
+    "icon": "/set17/trait-webp/TFT17_ShenUniqueTrait.webp",
+    "id": "TFT17_ShenUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Shen"
+      }
+    ],
+    "name": "暮光铁壁",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_ShieldTank": {
+    "description": "【重装战士】在拥有护盾时获得5%伤害减免。\n\n对战开始时以及50% 生命值时：获得一个最大生命值护盾，持续10秒。",
+    "icon": "/set17/trait-webp/TFT17_ShieldTank.webp",
+    "id": "TFT17_ShieldTank",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Leona"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Nasus"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Mordekaiser"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Illaoi"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Nunu"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Blitzcrank"
+      }
+    ],
+    "name": "重装战士",
+    "tiers": [
+      {
+        "effect": "16%最大生命值",
+        "minUnits": 2
+      },
+      {
+        "effect": "30%最大生命值",
+        "minUnits": 4
+      },
+      {
+        "effect": "40%最大生命值；\n拥有护盾时：8% {{icon:scaleDR}}",
+        "minUnits": 6
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_SonaUniqueTrait": {
+    "description": "(1) 每2回合，娑娜都会提供一个随机【指令模块】，它可允许你变更一个友军在战斗期间的行为方式。【指令模块】持续2个玩家战斗回合，不论是否被装备。",
+    "icon": "/set17/trait-webp/TFT17_SonaUniqueTrait.webp",
+    "id": "TFT17_SonaUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Sona"
+      }
+    ],
+    "name": "最高指挥官",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_SpaceGroove": {
+    "description": "{{groove:太空律动}}：每个己方太空律动单位提供 12% {{icon:scaleAS}} + 0.85% 最大{{icon:scaleHealth}}回复。",
+    "icon": "/set17/trait-webp/TFT17_SpaceGroove.webp",
+    "id": "TFT17_SpaceGroove",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Nasus"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Teemo"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Gwen"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Ornn"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Samira"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Nami"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Blitzcrank"
+      }
+    ],
+    "name": "太空律动",
+    "tiers": [
+      {
+        "effect": "【太空律动】舞者们能够进入{{groove:太空律动}}。当进入这种状态时，他们获得攻击速度和最大生命值回复，你的队伍每有1名【太空律动】舞者还会进一步提升该加成。",
+        "minUnits": 1
+      },
+      {
+        "effect": "所有【太空律动】舞者在对战开始时进入{{groove:太空律动}}，持续3秒。",
+        "minUnits": 3
+      },
+      {
+        "effect": "在{{groove:太空律动}}状态中每秒会获得5%可叠加的物理加成和法术加成。",
+        "minUnits": 5
+      },
+      {
+        "effect": "提升这些加成10%!",
+        "minUnits": 7
+      },
+      {
+        "effect": "{{groove:太空律动}}",
+        "minUnits": 10
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_Stargazer": {
+    "constellations": [
+      {
+        "constellationName": "泉水",
+        "description": "【观星者】每局游戏会观测到一个不同的星座。本局游戏：泉水。\n\n强化格内的友军获得1法力回复。强化格内的【观星者】获得更多，并且他们的技能现在会治疗最低生命值的友军。",
+        "id": "TFT17_Stargazer_Fountain",
+        "members": [
+          {
+            "cost": 1,
+            "id": "TFT17_Talon"
+          },
+          {
+            "cost": 1,
+            "id": "TFT17_TwistedFate"
+          },
+          {
+            "cost": 2,
+            "id": "TFT17_Jax"
+          },
+          {
+            "cost": 3,
+            "id": "TFT17_Lulu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Nunu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Xayah"
+          }
+        ],
+        "name": "观星者",
+        "tiers": [
+          {
+            "effect": "1 {{icon:TFTManaRegen}}，18%技能伤害治疗",
+            "minUnits": 3
+          },
+          {
+            "effect": "5 {{icon:TFTManaRegen}}，25%技能伤害治疗",
+            "minUnits": 5
+          }
+        ],
+        "type": "origin"
+      },
+      {
+        "constellationName": "女猎手",
+        "description": "【观星者】每局游戏会观测到一个不同的星座。本局游戏：女猎手。\n\n对战开始时：标记最高生命值的敌人。\n\n强化格内的友军获得15%攻击速度。【观星者】获得更多，并且当1名被标记的敌人阵亡时，治疗他们10%最大生命值。",
+        "id": "TFT17_Stargazer_Huntress",
+        "members": [
+          {
+            "cost": 1,
+            "id": "TFT17_Talon"
+          },
+          {
+            "cost": 1,
+            "id": "TFT17_TwistedFate"
+          },
+          {
+            "cost": 2,
+            "id": "TFT17_Jax"
+          },
+          {
+            "cost": 3,
+            "id": "TFT17_Lulu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Nunu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Xayah"
+          }
+        ],
+        "name": "观星者",
+        "tiers": [
+          {
+            "effect": "10% {{icon:scaleAS}}，3个标记",
+            "minUnits": 3
+          },
+          {
+            "effect": "30% {{icon:scaleAS}}，5个标记",
+            "minUnits": 5
+          },
+          {
+            "effect": "45% {{icon:scaleAS}}，7个标记",
+            "minUnits": 7
+          }
+        ],
+        "type": "origin"
+      },
+      {
+        "constellationName": "勋章",
+        "description": "【观星者】每局游戏会观测到一个不同的星座。本局游戏：勋章。",
+        "id": "TFT17_Stargazer_Medallion",
+        "members": [
+          {
+            "cost": 1,
+            "id": "TFT17_Talon"
+          },
+          {
+            "cost": 1,
+            "id": "TFT17_TwistedFate"
+          },
+          {
+            "cost": 2,
+            "id": "TFT17_Jax"
+          },
+          {
+            "cost": 3,
+            "id": "TFT17_Lulu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Nunu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Xayah"
+          }
+        ],
+        "name": "观星者",
+        "tiers": [
+          {
+            "effect": "强化格内的友军获得12%伤害增幅，每个3星友军弈子都会使该加成提高6.5%。",
+            "minUnits": 3
+          }
+        ],
+        "type": "origin"
+      },
+      {
+        "constellationName": "秀山",
+        "description": "【观星者】每局游戏会观测到一个不同的星座。本局游戏：秀山\n\n每经过5个玩家对战回合，获得1个【观星者纹章】。强化格内的【观星者】获得多种加成。",
+        "id": "TFT17_Stargazer_Mountain",
+        "members": [
+          {
+            "cost": 1,
+            "id": "TFT17_Talon"
+          },
+          {
+            "cost": 1,
+            "id": "TFT17_TwistedFate"
+          },
+          {
+            "cost": 2,
+            "id": "TFT17_Jax"
+          },
+          {
+            "cost": 3,
+            "id": "TFT17_Lulu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Nunu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Xayah"
+          }
+        ],
+        "name": "观星者",
+        "tiers": [
+          {
+            "effect": "获得12%生命值",
+            "minUnits": 3
+          },
+          {
+            "effect": "以及12%物理加成和法术加成",
+            "minUnits": 4
+          },
+          {
+            "effect": "以及12护甲和魔抗",
+            "minUnits": 5
+          },
+          {
+            "effect": "以及12%攻击速度",
+            "minUnits": 6
+          },
+          {
+            "effect": "以及6%伤害减免",
+            "minUnits": 7
+          },
+          {
+            "effect": "以及提升其它所有加成10%",
+            "minUnits": 8
+          },
+          {
+            "effect": "获得12%生命值",
+            "minUnits": 9
+          },
+          {
+            "effect": "以及12%物理加成和法术加成",
+            "minUnits": 10
+          },
+          {
+            "effect": "以及12护甲和魔抗",
+            "minUnits": 11
+          }
+        ],
+        "type": "origin"
+      },
+      {
+        "constellationName": "蝰蛇",
+        "description": "【观星者】每局游戏会观测到一个不同的星座。本局游戏：蝰蛇。\n\n强化格内的友军获得5%伤害减免。强化格内的【观星者】获得更多，并且其技能现在会使敌人中毒，在3秒内重复造成相当于一部分造成伤害的魔法伤害。",
+        "id": "TFT17_Stargazer_Serpent",
+        "members": [
+          {
+            "cost": 1,
+            "id": "TFT17_Talon"
+          },
+          {
+            "cost": 1,
+            "id": "TFT17_TwistedFate"
+          },
+          {
+            "cost": 2,
+            "id": "TFT17_Jax"
+          },
+          {
+            "cost": 3,
+            "id": "TFT17_Lulu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Nunu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Xayah"
+          }
+        ],
+        "name": "观星者",
+        "tiers": [
+          {
+            "effect": "5% {{icon:scaleDR}}，25%中毒伤害",
+            "minUnits": 3
+          },
+          {
+            "effect": "10% {{icon:scaleDR}}，40%中毒伤害",
+            "minUnits": 5
+          },
+          {
+            "effect": "15% {{icon:scaleDR}}，60%中毒伤害",
+            "minUnits": 7
+          }
+        ],
+        "type": "origin"
+      },
+      {
+        "constellationName": "圣坛",
+        "description": "【观星者】每局游戏都会观测到一个不同的星座。这局游戏：圣坛。",
+        "id": "TFT17_Stargazer_Shield",
+        "members": [
+          {
+            "cost": 1,
+            "id": "TFT17_Talon"
+          },
+          {
+            "cost": 1,
+            "id": "TFT17_TwistedFate"
+          },
+          {
+            "cost": 2,
+            "id": "TFT17_Jax"
+          },
+          {
+            "cost": 3,
+            "id": "TFT17_Lulu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Nunu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Xayah"
+          }
+        ],
+        "name": "观星者",
+        "tiers": [
+          {
+            "effect": "*任意*弈子阵亡时，将其献祭到圣坛。强化格中的友军获得8%生命值和8%攻击速度。\n\n献祭60次后，强化格中的【观星者】获得额外20% {{icon:scaleHealth}}和18% {{icon:scaleAS}}",
+            "minUnits": 3
+          }
+        ],
+        "type": "origin"
+      },
+      {
+        "constellationName": "野猪",
+        "description": "【观星者】每局游戏会观测到一个不同的星座。本局游戏：野猪。\n\n赢下玩家对战时获得金币。强化格中的友军获得8%生命值、物理加成和法术加成。【观星者】获得更多。",
+        "id": "TFT17_Stargazer_Wolf",
+        "members": [
+          {
+            "cost": 1,
+            "id": "TFT17_Talon"
+          },
+          {
+            "cost": 1,
+            "id": "TFT17_TwistedFate"
+          },
+          {
+            "cost": 2,
+            "id": "TFT17_Jax"
+          },
+          {
+            "cost": 3,
+            "id": "TFT17_Lulu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Nunu"
+          },
+          {
+            "cost": 4,
+            "id": "TFT17_Xayah"
+          }
+        ],
+        "name": "观星者",
+        "tiers": [
+          {
+            "effect": "1金币，2% {{icon:scaleHealth}}，10% {{icon:scaleAD}}{{icon:scaleAP}}",
+            "minUnits": 3
+          },
+          {
+            "effect": "2金币，8% {{icon:scaleHealth}}，15% {{icon:scaleAD}}{{icon:scaleAP}}",
+            "minUnits": 4
+          },
+          {
+            "effect": "4金币，15% {{icon:scaleHealth}}，25% {{icon:scaleAD}}{{icon:scaleAP}}",
+            "minUnits": 5
+          },
+          {
+            "effect": "6金币，22% {{icon:scaleHealth}}，30% {{icon:scaleAD}}{{icon:scaleAP}}",
+            "minUnits": 6
+          }
+        ],
+        "type": "origin"
+      }
+    ],
+    "description": "【观星者】每局游戏会观测到一个不同的星座。\n\n【观星者】处于强化格内可获得多种加成，最初为(3/5/7)个单位。\n\n玩家每提升1级，就会有更多的格子显露出来。",
+    "icon": "/set17/trait-webp/TFT17_Stargazer.webp",
+    "id": "TFT17_Stargazer",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Talon"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_TwistedFate"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Jax"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Lulu"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Nunu"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Xayah"
+      }
+    ],
+    "name": "观星者",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 3
+      },
+      {
+        "effect": "",
+        "minUnits": 5
+      },
+      {
+        "effect": "",
+        "minUnits": 7
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_SummonTrait": {
+    "description": "【牧羊人】召唤【群星誓约】并辅助其战斗。",
+    "icon": "/set17/trait-webp/TFT17_SummonTrait.webp",
+    "id": "TFT17_SummonTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [
+      "TFT17_Summon"
+    ],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Lissandra"
+      },
+      {
+        "cost": 1,
+        "id": "TFT17_Teemo"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_IvernMinion"
+      },
+      {
+        "cost": 3,
+        "id": "TFT17_Illaoi"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Leblanc"
+      },
+      {
+        "cost": 5,
+        "id": "TFT17_Sona"
+      }
+    ],
+    "name": "牧羊人",
+    "tiers": [
+      {
+        "effect": "召唤【羊咩咩】",
+        "minUnits": 3
+      },
+      {
+        "effect": "召唤【咩咩羊】",
+        "minUnits": 5
+      },
+      {
+        "effect": "【羊咩咩】和【咩咩羊】的誓约更加深厚",
+        "minUnits": 7
+      }
+    ],
+    "type": "class"
+  },
+  "TFT17_TahmKenchUniqueTrait": {
+    "description": "每3回合，【塔姆】都会提供一个奖励！",
+    "icon": "/set17/trait-webp/TFT17_TahmKenchUniqueTrait.webp",
+    "id": "TFT17_TahmKenchUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 4,
+        "id": "TFT17_TahmKench"
+      }
+    ],
+    "name": "命运祭司",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_Timebreaker": {
+    "description": "",
+    "icon": "/set17/trait-webp/TFT17_Timebreaker.webp",
+    "id": "TFT17_Timebreaker",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 1,
+        "id": "TFT17_Ezreal"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Milio"
+      },
+      {
+        "cost": 2,
+        "id": "TFT17_Pantheon"
+      },
+      {
+        "cost": 4,
+        "id": "TFT17_Riven"
+      }
+    ],
+    "name": "未来战士",
+    "tiers": [
+      {
+        "effect": "当你输掉对战时，获得免费刷新次数。当你赢下对战时，将经验值储存至【时空核心】中(随阶段提升)。",
+        "minUnits": 2
+      },
+      {
+        "effect": "并且友军获得25%攻击速度。",
+        "minUnits": 3
+      },
+      {
+        "effect": "并且【未来战士】们额外获得40%攻击速度",
+        "minUnits": 4
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_VexUniqueTrait": {
+    "description": "对战开始时：将所有敌人刻印上【末日】标记。\n\n每场对战敌人首次受到伤害时，他们的【末日】标记将被消耗，你最强大的【薇古丝】会从他们身上窃取12%物理加成和法术加成。",
+    "icon": "/set17/trait-webp/TFT17_VexUniqueTrait.webp",
+    "id": "TFT17_VexUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Vex"
+      }
+    ],
+    "name": "末日使者",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  },
+  "TFT17_ZedUniqueTrait": {
+    "description": "【劫】仅可通过强化符文【天煞灭影：劫】获得。\n\n当至少有1个影分身存活时，【劫】额外获得40%物理加成。",
+    "icon": "/set17/trait-webp/TFT17_ZedUniqueTrait.webp",
+    "id": "TFT17_ZedUniqueTrait",
+    "linkedItemIds": [],
+    "linkedUnitIds": [],
+    "members": [
+      {
+        "cost": 5,
+        "id": "TFT17_Zed"
+      }
+    ],
+    "name": "天煞",
+    "tiers": [
+      {
+        "effect": "",
+        "minUnits": 1
+      }
+    ],
+    "type": "origin"
+  }
+}
