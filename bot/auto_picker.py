@@ -46,6 +46,7 @@ class AutoPicker(QThread):
     loading_changed = pyqtSignal(bool)
 
     _instance: "AutoPicker | None" = None
+    _platform_warned = False
 
     @classmethod
     def instance(cls) -> "AutoPicker":
@@ -258,9 +259,8 @@ class AutoPicker(QThread):
         logger.info("本轮 OCR 结果 | %s", " | ".join(slot_logs))
 
     def _click_slot(self, config: RegionConfig, slot_idx: int):
-        """通过 pyautogui 点击指定 slot 的购买位置。"""
+        """通过 pydirectinput 点击指定 slot 的购买位置。"""
         try:
-            import pyautogui
             click_points = self._ocr.resolve_native_click_points(config)
             x, y = click_points[slot_idx]
 
@@ -268,12 +268,31 @@ class AutoPicker(QThread):
             self._activate_game_window()
             time.sleep(0.05)  # 等待窗口激活生效
 
-            pyautogui.click(x, y)
+            self._perform_click(x, y)
             logger.info("已点击 slot %d 坐标 (%d, %d)", slot_idx + 1, x, y)
         except ImportError:
-            logger.error("缺少依赖: pip install pyautogui")
+            logger.error("缺少依赖: pip install pydirectinput")
         except IndexError:
             logger.error("无效的 slot_idx: %d", slot_idx)
+
+    def _perform_click(self, x: int, y: int):
+        """
+        执行一次“移动到目标点 + 按下 + 抬起”点击流程。
+        使用 pydirectinput（更容易被 DirectX 游戏接收）。
+        说明：pydirectinput 为纯 Python 包，Windows 32/64 位均可运行。
+        """
+        if sys.platform != "win32":
+            if not self._platform_warned:
+                self._platform_warned = True
+                logger.warning("pydirectinput 当前仅支持 Windows；已跳过自动点击")
+            return
+
+        import pydirectinput
+
+        pydirectinput.moveTo(x, y)
+        pydirectinput.mouseDown(button="left")
+        time.sleep(0.02)
+        pydirectinput.mouseUp(button="left")
 
     # ──────────────────────────────────────────────────────────
     # 游戏窗口激活
