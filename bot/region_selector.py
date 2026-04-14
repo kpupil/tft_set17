@@ -336,6 +336,142 @@ class _SelectorOverlay(QWidget):
         )
 
 
+class _PreviewOverlay(QWidget):
+    """把当前保存的 OCR 区域和点击点直接画到桌面上，便于排查漂移。"""
+
+    def __init__(self, config: RegionConfig, on_close):
+        super().__init__()
+        self._config = config
+        self._on_close = on_close
+        self._desktop_rect = self._compute_desktop_rect()
+        self._setup_window()
+        self._setup_shortcuts()
+
+    def _compute_desktop_rect(self) -> QRect:
+        screens = QApplication.screens()
+        if not screens:
+            return QRect(0, 0, 1920, 1080)
+        rect = QRect(screens[0].geometry())
+        for screen in screens[1:]:
+            rect = rect.united(screen.geometry())
+        return rect
+
+    def _setup_window(self):
+        self.setWindowFlags(
+            Qt.WindowType.FramelessWindowHint |
+            Qt.WindowType.WindowStaysOnTopHint |
+            Qt.WindowType.Tool,
+        )
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
+        self.setGeometry(self._desktop_rect)
+        self.show()
+        self.activateWindow()
+        self.raise_()
+
+    def _setup_shortcuts(self):
+        esc = QShortcut(QKeySequence("Escape"), self)
+        esc.activated.connect(self._close)
+
+        enter = QShortcut(QKeySequence("Return"), self)
+        enter.activated.connect(self._close)
+
+        space = QShortcut(QKeySequence("Space"), self)
+        space.activated.connect(self._close)
+
+    def mousePressEvent(self, _e):
+        self._close()
+
+    def _close(self):
+        self.hide()
+        self._on_close()
+
+    def paintEvent(self, _event):
+        p = QPainter(self)
+        p.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+        # 轻微暗化桌面，其余区域仍可见。
+        p.fillRect(self.rect(), QColor(0, 0, 0, 72))
+
+        for idx, rect_data in enumerate(self._config.ocr_rects, start=1):
+            if len(rect_data) != 4:
+                continue
+            rect = QRect(*rect_data).translated(-self._desktop_rect.topLeft())
+            self._draw_ocr_rect(p, rect, idx)
+
+        for idx, point_data in enumerate(self._config.click_points, start=1):
+            if len(point_data) != 2:
+                continue
+            pt = QPoint(*point_data) - self._desktop_rect.topLeft()
+            self._draw_click_point(p, pt, idx)
+
+        self._draw_hint(p)
+        p.end()
+
+    def _draw_ocr_rect(self, p: QPainter, rect: QRect, idx: int):
+        fill = QColor(90, 180, 255, 50)
+        border = QColor(90, 180, 255, 220)
+        p.fillRect(rect, QBrush(fill))
+        p.setPen(QPen(border, 2))
+        p.setBrush(Qt.BrushStyle.NoBrush)
+        p.drawRect(rect)
+
+        lbl_rect = QRect(rect.x(), rect.y() - 22, 72, 20)
+        p.fillRect(lbl_rect, QBrush(HINT_BG))
+        p.setPen(TEXT_COL)
+        f = QFont()
+        f.setPointSize(10)
+        f.setBold(True)
+        p.setFont(f)
+        p.drawText(lbl_rect, Qt.AlignmentFlag.AlignCenter, f"OCR {idx}")
+
+    def _draw_click_point(self, p: QPainter, pt: QPoint, idx: int):
+        color = QColor(255, 180, 70, 230)
+        p.setPen(QPen(color, 2))
+        p.setBrush(QBrush(color))
+        p.drawEllipse(pt, 10, 10)
+
+        p.setPen(QPen(QColor(255, 255, 255, 220), 1))
+        p.drawLine(pt.x() - 16, pt.y(), pt.x() + 16, pt.y())
+        p.drawLine(pt.x(), pt.y() - 16, pt.x(), pt.y() + 16)
+
+        lbl = QRect(pt.x() + 14, pt.y() - 10, 38, 20)
+        p.fillRect(lbl, QBrush(HINT_BG))
+        p.setPen(color)
+        f = QFont()
+        f.setPointSize(9)
+        f.setBold(True)
+        p.setFont(f)
+        p.drawText(lbl, Qt.AlignmentFlag.AlignCenter, f"#{idx}")
+
+    def _draw_hint(self, p: QPainter):
+        bar = QRect(0, 0, self.width(), 54)
+        p.fillRect(bar, QBrush(HINT_BG))
+
+        p.setPen(TEXT_COL)
+        f = QFont()
+        f.setPointSize(12)
+        f.setBold(True)
+        p.setFont(f)
+        label = "区域校验模式：蓝框 = OCR 区域，橙点 = 点击位置，按 ESC / Enter / 空格 或单击退出"
+        p.drawText(bar, Qt.AlignmentFlag.AlignCenter, label)
+
+        if self._config.screen_rect:
+            meta = (
+                f"screen={self._config.screen_name or '-'}  "
+                f"saved_rect={self._config.screen_rect}"
+            )
+            p.setPen(QColor(220, 220, 220, 220))
+            f2 = QFont()
+            f2.setPointSize(9)
+            p.setFont(f2)
+            p.drawText(
+                QRect(0, 28, self.width(), 22),
+                Qt.AlignmentFlag.AlignCenter,
+                meta,
+            )
+
+
 # ─────────────────────────────────────────────────────────────
 # 公开接口
 # ─────────────────────────────────────────────────────────────
@@ -403,3 +539,20 @@ class RegionSelector:
     def _on_cancel(self):
         self.config = None
         self._done  = True
+
+
+class RegionPreviewer:
+    """阻塞式区域可视化预览器，用于检查当前配置是否漂移。"""
+
+    def __init__(self, config: RegionConfig):
+        self.config = config
+        self._overlay: _PreviewOverlay | None = None
+        self._done = False
+
+    def run(self):
+        self._overlay = _PreviewOverlay(self.config, self._on_close)
+        while not self._done:
+            QApplication.processEvents()
+
+    def _on_close(self):
+        self._done = True

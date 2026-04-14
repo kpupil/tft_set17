@@ -26,7 +26,7 @@ from PyQt6.QtWidgets import (
 )
 
 from bot.auto_picker import AutoPicker
-from bot.region_selector import RegionConfig, RegionSelector
+from bot.region_selector import RegionConfig, RegionSelector, RegionPreviewer
 from data.manager import DataManager
 from ui.image_cache import ImageCache
 from ui.widgets.hero_selector import HeroSelectorDialog
@@ -265,6 +265,10 @@ class PickListPanel(QWidget):
         self._region_btn.clicked.connect(self._on_select_region)
         c_lay.addWidget(self._region_btn)
 
+        self._preview_btn = _btn("👁 校验", TEXT_SEC)
+        self._preview_btn.clicked.connect(self._on_preview_region)
+        c_lay.addWidget(self._preview_btn)
+
         clear_btn = _btn("✕ 清除", RED)
         clear_btn.clicked.connect(self._clear_all)
         c_lay.addWidget(clear_btn)
@@ -374,6 +378,26 @@ class PickListPanel(QWidget):
         if sel.config:
             self.picker.set_region_config(sel.config)
             self._status_lbl.setText("区域已更新  •  未开启")
+
+    def _on_preview_region(self):
+        """把当前保存的区域直接叠加到桌面上，便于肉眼检查漂移。"""
+        cfg = RegionConfig.load()
+        if not cfg or not cfg.is_valid():
+            self._status_lbl.setText("⚠ 暂无可校验区域")
+            return
+
+        win = self.window()
+        if win:
+            win.hide()
+
+        from PyQt6.QtWidgets import QApplication
+        QApplication.processEvents()
+
+        RegionPreviewer(cfg).run()
+
+        if win:
+            win.show()
+        self._status_lbl.setText("区域校验完成  •  未开启")
 
     # ──────────────────────────────────────────────────────────
     # 拿取列表管理
