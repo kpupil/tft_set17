@@ -313,7 +313,7 @@ class PickListPanel(QWidget):
         root.addWidget(import_row)
 
         # 快捷键已移至 overlay.py 通过 GlobalHotkeyManager 全局注册
-        # Ctrl+Alt+Z → self._on_toggle
+        # Ctrl+Alt+X → self._on_toggle
 
     # ──────────────────────────────────────────────────────────
     # 信号连接
