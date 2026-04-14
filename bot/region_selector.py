@@ -48,6 +48,8 @@ class RegionConfig:
     """商店区域配置，保存 5 个 OCR 区域 + 5 个点击中心。"""
     ocr_rects:     list[list[int]] = field(default_factory=list)  # [[x,y,w,h]×5]
     click_points:  list[list[int]] = field(default_factory=list)  # [[x,y]×5]
+    screen_name:   str = ""
+    screen_rect:   list[int] = field(default_factory=list)        # [x,y,w,h]
 
     @staticmethod
     def load() -> Optional["RegionConfig"]:
@@ -57,6 +59,8 @@ class RegionConfig:
                 return RegionConfig(
                     ocr_rects=d.get("ocr_rects", []),
                     click_points=d.get("click_points", []),
+                    screen_name=d.get("screen_name", ""),
+                    screen_rect=d.get("screen_rect", []),
                 )
             except Exception:
                 return None
@@ -97,6 +101,8 @@ class _SelectorOverlay(QWidget):
         super().__init__()
         self._on_done   = on_done
         self._on_cancel = on_cancel
+        self._screen_name = ""
+        self._screen_rect = QRect()
 
         self._phase = "ocr"          # "ocr" | "click" | "done"
         self._ocr_rects:    list[QRect]  = []
@@ -118,11 +124,24 @@ class _SelectorOverlay(QWidget):
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         self.setCursor(QCursor(Qt.CursorShape.CrossCursor))
 
-        screen = QApplication.primaryScreen().geometry()
-        self.setGeometry(screen)
+        screen = QApplication.screenAt(QCursor.pos()) or QApplication.primaryScreen()
+        if screen is None:
+            raise RuntimeError("未检测到可用屏幕，无法启动区域选择器")
+
+        self._screen_name = screen.name() or ""
+        self._screen_rect = screen.geometry()
+        self.setGeometry(self._screen_rect)
         self.show()
         self.activateWindow()
         self.raise_()
+
+    @property
+    def screen_name(self) -> str:
+        return self._screen_name
+
+    @property
+    def screen_rect(self) -> QRect:
+        return QRect(self._screen_rect)
 
     def _setup_shortcuts(self):
         esc = QShortcut(QKeySequence("Escape"), self)
@@ -348,14 +367,33 @@ class RegionSelector:
             QApplication.processEvents()
 
     def _on_done(self, ocr_rects: list[QRect], click_points: list[QPoint]):
+        if self._overlay is None:
+            self.config = None
+            self._done = True
+            return
+
+        screen_rect = self._overlay.screen_rect
+        origin = screen_rect.topLeft()
         cfg = RegionConfig(
             ocr_rects=[
-                [r.x(), r.y(), r.width(), r.height()]
+                [
+                    r.x() + origin.x(),
+                    r.y() + origin.y(),
+                    r.width(),
+                    r.height(),
+                ]
                 for r in ocr_rects
             ],
             click_points=[
-                [p.x(), p.y()]
+                [p.x() + origin.x(), p.y() + origin.y()]
                 for p in click_points
+            ],
+            screen_name=self._overlay.screen_name,
+            screen_rect=[
+                screen_rect.x(),
+                screen_rect.y(),
+                screen_rect.width(),
+                screen_rect.height(),
             ],
         )
         cfg.save()
