@@ -182,13 +182,25 @@ class OCREngine:
         top = min(r[1] for r in rects)
         right = max(r[0] + r[2] for r in rects)
         bottom = max(r[1] + r[3] for r in rects)
+        logical_width = max(1, right - left)
+        logical_height = max(1, bottom - top)
 
-        merged = self.screenshot_region([left, top, right - left, bottom - top])
+        merged = self.screenshot_region([left, top, logical_width, logical_height])
+        actual_height, actual_width = merged.shape[:2]
+        scale_x = actual_width / logical_width
+        scale_y = actual_height / logical_height
         crops = []
         for x, y, w, h in rects:
-            rel_x = x - left
-            rel_y = y - top
-            crops.append(merged[rel_y:rel_y + h, rel_x:rel_x + w].copy())
+            rel_x = int(round((x - left) * scale_x))
+            rel_y = int(round((y - top) * scale_y))
+            crop_w = max(1, int(round(w * scale_x)))
+            crop_h = max(1, int(round(h * scale_y)))
+
+            x2 = min(actual_width, rel_x + crop_w)
+            y2 = min(actual_height, rel_y + crop_h)
+            rel_x = max(0, min(rel_x, actual_width - 1))
+            rel_y = max(0, min(rel_y, actual_height - 1))
+            crops.append(merged[rel_y:y2, rel_x:x2].copy())
         return crops
 
     def recognize_slot(self, rect: list[int]) -> tuple[Optional[str], float]:
