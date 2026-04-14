@@ -50,6 +50,8 @@ class RegionConfig:
     click_points:  list[list[int]] = field(default_factory=list)  # [[x,y]×5]
     screen_name:   str = ""
     screen_rect:   list[int] = field(default_factory=list)        # [x,y,w,h]
+    ocr_rects_relative: list[list[float]] = field(default_factory=list)   # [[rx,ry,rw,rh]×5]
+    click_points_relative: list[list[float]] = field(default_factory=list) # [[rx,ry]×5]
 
     @staticmethod
     def load() -> Optional["RegionConfig"]:
@@ -61,6 +63,8 @@ class RegionConfig:
                     click_points=d.get("click_points", []),
                     screen_name=d.get("screen_name", ""),
                     screen_rect=d.get("screen_rect", []),
+                    ocr_rects_relative=d.get("ocr_rects_relative", []),
+                    click_points_relative=d.get("click_points_relative", []),
                 )
             except Exception:
                 return None
@@ -78,6 +82,105 @@ class RegionConfig:
             len(self.ocr_rects)    == SLOT_COUNT and
             len(self.click_points) == SLOT_COUNT
         )
+
+    def _saved_screen_rect(self) -> QRect:
+        if len(self.screen_rect) != 4:
+            return QRect()
+        x, y, w, h = self.screen_rect
+        return QRect(int(x), int(y), int(w), int(h))
+
+    def _fallback_relative_rects(self) -> list[list[float]]:
+        screen = self._saved_screen_rect()
+        if not screen.isValid() or screen.width() <= 0 or screen.height() <= 0:
+            return []
+        rels: list[list[float]] = []
+        for rect in self.ocr_rects:
+            if len(rect) != 4:
+                continue
+            x, y, w, h = rect
+            rels.append([
+                (x - screen.x()) / screen.width(),
+                (y - screen.y()) / screen.height(),
+                w / screen.width(),
+                h / screen.height(),
+            ])
+        return rels
+
+    def _fallback_relative_points(self) -> list[list[float]]:
+        screen = self._saved_screen_rect()
+        if not screen.isValid() or screen.width() <= 0 or screen.height() <= 0:
+            return []
+        rels: list[list[float]] = []
+        for point in self.click_points:
+            if len(point) != 2:
+                continue
+            x, y = point
+            rels.append([
+                (x - screen.x()) / screen.width(),
+                (y - screen.y()) / screen.height(),
+            ])
+        return rels
+
+    def resolved_screen_rect(self) -> QRect:
+        saved = self._saved_screen_rect()
+        app = QApplication.instance()
+        screens = app.screens() if app else []
+        if not screens:
+            return saved
+
+        if saved.isValid():
+            def _score(screen) -> int:
+                rect = screen.geometry()
+                name_penalty = 0 if not self.screen_name or screen.name() == self.screen_name else 100_000
+                size_delta = abs(rect.width() - saved.width()) + abs(rect.height() - saved.height())
+                pos_delta = abs(rect.x() - saved.x()) + abs(rect.y() - saved.y())
+                return name_penalty + size_delta * 10 + pos_delta
+
+            return min(screens, key=_score).geometry()
+
+        if self.screen_name:
+            named = [screen for screen in screens if screen.name() == self.screen_name]
+            if named:
+                return named[0].geometry()
+
+        active = QApplication.screenAt(QCursor.pos()) or QApplication.primaryScreen() or screens[0]
+        return active.geometry()
+
+    def resolved_ocr_rects(self) -> list[list[int]]:
+        target = self.resolved_screen_rect()
+        rels = self.ocr_rects_relative or self._fallback_relative_rects()
+        if target.isValid() and len(rels) == SLOT_COUNT:
+            rects: list[list[int]] = []
+            for rel in rels:
+                if len(rel) != 4:
+                    continue
+                rx, ry, rw, rh = rel
+                rects.append([
+                    int(round(target.x() + rx * target.width())),
+                    int(round(target.y() + ry * target.height())),
+                    max(1, int(round(rw * target.width()))),
+                    max(1, int(round(rh * target.height()))),
+                ])
+            if len(rects) == SLOT_COUNT:
+                return rects
+        return [[int(v) for v in rect] for rect in self.ocr_rects if len(rect) == 4]
+
+    def resolved_click_points(self) -> list[list[int]]:
+        target = self.resolved_screen_rect()
+        rels = self.click_points_relative or self._fallback_relative_points()
+        if target.isValid() and len(rels) == SLOT_COUNT:
+            points: list[list[int]] = []
+            for rel in rels:
+                if len(rel) != 2:
+                    continue
+                rx, ry = rel
+                points.append([
+                    int(round(target.x() + rx * target.width())),
+                    int(round(target.y() + ry * target.height())),
+                ])
+            if len(points) == SLOT_COUNT:
+                return points
+        return [[int(v) for v in point] for point in self.click_points if len(point) == 2]
 
 
 # ─────────────────────────────────────────────────────────────
@@ -343,7 +446,9 @@ class _PreviewOverlay(QWidget):
         super().__init__()
         self._config = config
         self._on_close = on_close
-        self._desktop_rect = self._compute_desktop_rect()
+        self._target_rect = config.resolved_screen_rect()
+        if not self._target_rect.isValid():
+            self._target_rect = self._compute_desktop_rect()
         self._setup_window()
         self._setup_shortcuts()
 
@@ -364,7 +469,7 @@ class _PreviewOverlay(QWidget):
         )
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
         self.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.setGeometry(self._desktop_rect)
+        self.setGeometry(self._target_rect)
         self.show()
         self.activateWindow()
         self.raise_()
@@ -393,16 +498,16 @@ class _PreviewOverlay(QWidget):
         # 轻微暗化桌面，其余区域仍可见。
         p.fillRect(self.rect(), QColor(0, 0, 0, 72))
 
-        for idx, rect_data in enumerate(self._config.ocr_rects, start=1):
+        for idx, rect_data in enumerate(self._config.resolved_ocr_rects(), start=1):
             if len(rect_data) != 4:
                 continue
-            rect = QRect(*rect_data).translated(-self._desktop_rect.topLeft())
+            rect = QRect(*rect_data).translated(-self._target_rect.topLeft())
             self._draw_ocr_rect(p, rect, idx)
 
-        for idx, point_data in enumerate(self._config.click_points, start=1):
+        for idx, point_data in enumerate(self._config.resolved_click_points(), start=1):
             if len(point_data) != 2:
                 continue
-            pt = QPoint(*point_data) - self._desktop_rect.topLeft()
+            pt = QPoint(*point_data) - self._target_rect.topLeft()
             self._draw_click_point(p, pt, idx)
 
         self._draw_hint(p)
@@ -459,7 +564,8 @@ class _PreviewOverlay(QWidget):
         if self._config.screen_rect:
             meta = (
                 f"screen={self._config.screen_name or '-'}  "
-                f"saved_rect={self._config.screen_rect}"
+                f"saved_rect={self._config.screen_rect}  "
+                f"resolved_rect={[self._target_rect.x(), self._target_rect.y(), self._target_rect.width(), self._target_rect.height()]}"
             )
             p.setPen(QColor(220, 220, 220, 220))
             f2 = QFont()
@@ -509,19 +615,20 @@ class RegionSelector:
             return
 
         screen_rect = self._overlay.screen_rect
-        origin = screen_rect.topLeft()
+        screen_w = max(1, screen_rect.width())
+        screen_h = max(1, screen_rect.height())
         cfg = RegionConfig(
             ocr_rects=[
                 [
-                    r.x() + origin.x(),
-                    r.y() + origin.y(),
+                    self._overlay.mapToGlobal(r.topLeft()).x(),
+                    self._overlay.mapToGlobal(r.topLeft()).y(),
                     r.width(),
                     r.height(),
                 ]
                 for r in ocr_rects
             ],
             click_points=[
-                [p.x() + origin.x(), p.y() + origin.y()]
+                [self._overlay.mapToGlobal(p).x(), self._overlay.mapToGlobal(p).y()]
                 for p in click_points
             ],
             screen_name=self._overlay.screen_name,
@@ -530,6 +637,19 @@ class RegionSelector:
                 screen_rect.y(),
                 screen_rect.width(),
                 screen_rect.height(),
+            ],
+            ocr_rects_relative=[
+                [
+                    r.x() / screen_w,
+                    r.y() / screen_h,
+                    r.width() / screen_w,
+                    r.height() / screen_h,
+                ]
+                for r in ocr_rects
+            ],
+            click_points_relative=[
+                [p.x() / screen_w, p.y() / screen_h]
+                for p in click_points
             ],
         )
         cfg.save()

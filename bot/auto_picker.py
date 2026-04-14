@@ -211,7 +211,12 @@ class AutoPicker(QThread):
         if not config or not pick_set:
             return
 
-        details = self._ocr.recognize_all_details(config.ocr_rects)
+        ocr_rects = config.resolved_ocr_rects()
+        if len(ocr_rects) != 5:
+            logger.warning("区域配置无效：OCR 区域数量异常")
+            return
+
+        details = self._ocr.recognize_all_details(ocr_rects)
         results = [(d["hero_id"], d["score"]) for d in details]
         self._log_ocr_results(details, pick_set)
 
@@ -256,7 +261,8 @@ class AutoPicker(QThread):
         """通过 pyautogui 点击指定 slot 的购买位置。"""
         try:
             import pyautogui
-            x, y = config.click_points[slot_idx]
+            click_points = config.resolved_click_points()
+            x, y = click_points[slot_idx]
             pyautogui.click(x, y)
         except ImportError:
             logger.error("缺少依赖: pip install pyautogui")
