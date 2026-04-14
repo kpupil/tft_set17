@@ -18,7 +18,6 @@ from __future__ import annotations
 from PyQt6.QtCore import Qt, QRect, QPoint
 from PyQt6.QtGui import (
     QColor, QFont, QPainter, QPainterPath, QPixmap, QPen, QBrush, QCursor,
-    QKeySequence, QShortcut,
 )
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
@@ -313,9 +312,8 @@ class PickListPanel(QWidget):
 
         root.addWidget(import_row)
 
-        # ── 快捷键 ────────────────────────────────────────────
-        sc = QShortcut(QKeySequence("Ctrl+A"), self.window() or self)
-        sc.activated.connect(self._on_toggle)
+        # 快捷键已移至 overlay.py 通过 GlobalHotkeyManager 全局注册
+        # Ctrl+Shift+A → self._on_toggle
 
     # ──────────────────────────────────────────────────────────
     # 信号连接

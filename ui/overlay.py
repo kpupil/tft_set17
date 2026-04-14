@@ -7,7 +7,7 @@ TFT Assistant — 悬浮窗口
 - 无标题栏，可拖动
 - 始终置顶（游戏内可见）
 - 最小化 / 关闭按钮
-- 快捷键 Ctrl+Shift+T 切换显示/隐藏
+- 全局快捷键 Ctrl+Shift+T 切换显示/隐藏（不依赖窗口焦点）
 - 透明背景（背后游戏画面仍可见）
 
 启动：
@@ -21,7 +21,7 @@ import sys
 
 from PyQt6.QtCore import Qt, QPoint, pyqtSignal, QSize, QObject, QTimer
 from PyQt6.QtGui import (
-    QColor, QFont, QKeySequence, QShortcut,
+    QColor, QFont,
     QPainter, QPainterPath, QBrush,
 )
 from PyQt6.QtWidgets import (
@@ -31,6 +31,7 @@ from PyQt6.QtWidgets import (
 
 from config import UI
 from data.manager import DataManager
+from ui.global_hotkey import GlobalHotkeyManager
 from ui.widgets.comp_panel import CompPanel
 from ui.widgets.pick_list import PickListPanel
 
@@ -241,10 +242,17 @@ class TFTOverlay(QMainWindow):
         )
 
     def _setup_hotkey(self):
-        shortcut = QShortcut(
-            QKeySequence(UI.get("hotkey_toggle", "Ctrl+Shift+T")), self
+        # 全局热键：无论焦点在哪个窗口都能触发
+        hk = GlobalHotkeyManager.instance()
+        hk.register(
+            UI.get("hotkey_toggle", "<ctrl>+<shift>+t"),
+            self.toggle_visible,
         )
-        shortcut.activated.connect(self.toggle_visible)
+        hk.register(
+            UI.get("hotkey_autopick", "<ctrl>+<shift>+a"),
+            self._pick_panel._on_toggle,
+        )
+        hk.start()
 
     def toggle_visible(self):
         if self.isVisible():
@@ -271,6 +279,10 @@ class TFTOverlay(QMainWindow):
     # ──────────────────────────────────────────────────────────
     # 绘制圆角背景
     # ──────────────────────────────────────────────────────────
+
+    def closeEvent(self, event):
+        GlobalHotkeyManager.instance().stop()
+        super().closeEvent(event)
 
     def paintEvent(self, _event):
         pass   # 由 _RoundedWidget 负责绘制

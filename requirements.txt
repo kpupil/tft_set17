@@ -8,3 +8,4 @@ opencv-python>=4.8.0     # OCR 预处理
 mss>=9.0.1               # OCR 截图
 rapidocr>=3.8.0          # RapidOCR rec-only
 onnxruntime>=1.17.0      # ONNX Runtime CPU 推理
+pynput>=1.7.6            # 全局快捷键监听
