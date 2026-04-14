@@ -25,6 +25,5 @@ to build both platforms automatically and upload the resulting artifacts.
 
 - Bundled app resources are read-only.
 - User-writable cache/config files are stored in the platform app-data directory.
-- Windows build requests administrator privileges so native mouse input can reach elevated game windows.
 - A local RapidOCR rec-only ONNX model will be bundled when found at:
   `~/.rapidocr_models/ch_PP-OCRv5_rec_mobile.onnx`

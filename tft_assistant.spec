@@ -27,6 +27,12 @@ if bundled_model.exists():
     datas.append((str(bundled_model), "models"))
 
 hiddenimports = [
+    "pyautogui",
+    "mouseinfo",
+    "pyscreeze",
+    "pygetwindow",
+    "pymsgbox",
+    "pytweening",
     "PIL",
     "omegaconf",
     "rapidocr",
@@ -70,7 +76,6 @@ exe = EXE(
     console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
-    uac_admin=True,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,

@@ -3,6 +3,7 @@
 
 requests>=2.31.0         # HTTP 请求（爬虫）
 PyQt6>=6.6.0             # 悬浮窗口 UI
+pydirectinput>=1.0.4     # 自动拿牌点击（Windows 游戏更稳）
 opencv-python>=4.8.0     # OCR 预处理
 mss>=9.0.1               # OCR 截图
 rapidocr>=3.8.0          # RapidOCR rec-only
