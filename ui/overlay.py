@@ -7,7 +7,7 @@ TFT Assistant — 悬浮窗口
 - 无标题栏，可拖动
 - 始终置顶（游戏内可见）
 - 最小化 / 关闭按钮
-- 全局快捷键 Ctrl+Shift+T 切换显示/隐藏、Ctrl+Alt+A 开关自动拿牌（不依赖窗口焦点）
+- 全局快捷键 Ctrl+Shift+T 切换显示/隐藏、Ctrl+Alt+Z 开关自动拿牌（不依赖窗口焦点）
 - 透明背景（背后游戏画面仍可见）
 
 启动：
@@ -249,7 +249,7 @@ class TFTOverlay(QMainWindow):
             self.toggle_visible,
         )
         hk.register(
-            UI.get("hotkey_autopick", "<ctrl>+<shift>+a"),
+            UI.get("hotkey_autopick", "<ctrl>+<alt>+z"),
             self._pick_panel._on_toggle,
         )
         hk.start()

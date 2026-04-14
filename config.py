@@ -137,7 +137,7 @@ UI = {
     "default_height": 600,
     "theme": "dark",
     "hotkey_toggle": "<ctrl>+<shift>+t",      # pynput 格式：切换窗口显隐
-    "hotkey_autopick": "<ctrl>+<alt>+a",      # pynput 格式：开关自动拿牌
+    "hotkey_autopick": "<ctrl>+<alt>+z",      # pynput 格式：开关自动拿牌
 }
 
 
