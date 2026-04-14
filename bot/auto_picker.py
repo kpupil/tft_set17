@@ -264,10 +264,6 @@ class AutoPicker(QThread):
             click_points = self._ocr.resolve_native_click_points(config)
             x, y = click_points[slot_idx]
 
-            # 点击前先激活游戏窗口，确保点击能被游戏接收
-            self._activate_game_window()
-            time.sleep(0.05)  # 等待窗口激活生效
-
             self._perform_click(x, y)
             logger.info("已点击 slot %d 坐标 (%d, %d)", slot_idx + 1, x, y)
         except ImportError:
@@ -293,87 +289,3 @@ class AutoPicker(QThread):
         pydirectinput.mouseDown(button="left")
         time.sleep(0.02)
         pydirectinput.mouseUp(button="left")
-
-    # ──────────────────────────────────────────────────────────
-    # 游戏窗口激活
-    # ──────────────────────────────────────────────────────────
-
-    _game_hwnd = None  # 缓存游戏窗口句柄，避免每次枚举
-
-    @classmethod
-    def _activate_game_window(cls):
-        """
-        在点击购买前，将游戏窗口设为前台，
-        确保 pyautogui.click() 能被游戏正确接收。
-        """
-        if sys.platform == "win32":
-            cls._activate_game_window_win32()
-        elif sys.platform == "darwin":
-            cls._activate_game_window_macos()
-
-    @classmethod
-    def _activate_game_window_win32(cls):
-        """Windows: 通过 user32 API 将游戏窗口设为前台。"""
-        try:
-            import ctypes
-            from ctypes import wintypes
-
-            user32 = ctypes.windll.user32
-
-            # 游戏窗口标题关键词（League of Legends 客户端）
-            GAME_KEYWORDS = [
-                "League of Legends",
-                "League of Legends (TM) Client",
-            ]
-
-            # 如果有缓存的句柄且窗口仍存在，直接使用
-            if cls._game_hwnd and user32.IsWindow(cls._game_hwnd):
-                user32.SetForegroundWindow(cls._game_hwnd)
-                return
-
-            # 枚举所有窗口，查找游戏窗口
-            WNDENUMPROC = ctypes.WINFUNCTYPE(
-                ctypes.c_bool, wintypes.HWND, wintypes.LPARAM
-            )
-            found_hwnd = None
-
-            def _enum_cb(hwnd, _lparam):
-                nonlocal found_hwnd
-                if not user32.IsWindowVisible(hwnd):
-                    return True
-                buf = ctypes.create_unicode_buffer(256)
-                user32.GetWindowTextW(hwnd, buf, 256)
-                title = buf.value
-                for kw in GAME_KEYWORDS:
-                    if kw in title:
-                        found_hwnd = hwnd
-                        return False  # 找到，停止枚举
-                return True
-
-            user32.EnumWindows(WNDENUMPROC(_enum_cb), 0)
-
-            if found_hwnd:
-                cls._game_hwnd = found_hwnd
-                user32.SetForegroundWindow(found_hwnd)
-                logger.debug("已激活游戏窗口 (hwnd=%s)", found_hwnd)
-            else:
-                logger.debug("未找到游戏窗口，跳过激活")
-
-        except Exception as exc:
-            logger.warning("激活游戏窗口失败: %s", exc)
-
-    @classmethod
-    def _activate_game_window_macos(cls):
-        """macOS: 通过 osascript 将游戏窗口置前。"""
-        try:
-            import subprocess
-            subprocess.Popen(
-                [
-                    "osascript", "-e",
-                    'tell application "League of Legends" to activate',
-                ],
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-        except Exception as exc:
-            logger.warning("激活游戏窗口失败 (macOS): %s", exc)
