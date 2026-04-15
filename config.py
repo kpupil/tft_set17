@@ -145,6 +145,6 @@ UI = {
 BOT = {
     "enabled": False,
     "confidence": 0.85,
-    "pick_delay_ms": 200,
-    "scan_interval_ms": 500,
+    "pick_delay_ms": 10,
+    "scan_interval_ms": 40,
 }

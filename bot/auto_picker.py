@@ -31,8 +31,8 @@ from config import BOT
 
 logger = logging.getLogger("tft.picker")
 
-POLL_INTERVAL = BOT.get("scan_interval_ms", 500) / 1000   # 一轮扫描的目标总间隔（秒）
-CLICK_DELAY   = BOT.get("pick_delay_ms", 200) / 1000      # 每次点击后等待（秒，防连点）
+POLL_INTERVAL = BOT.get("scan_interval_ms", 40) / 1000   # 一轮扫描的目标总间隔（秒）
+CLICK_DELAY   = BOT.get("pick_delay_ms", 10) / 1000      # 每次点击后等待（秒，防连点）
 
 
 class AutoPicker(QThread):
@@ -285,6 +285,5 @@ class AutoPicker(QThread):
         import pydirectinput
 
         pydirectinput.moveTo(x, y)
-        time.sleep(0.01)
         pydirectinput.mouseDown(button="left")
         pydirectinput.mouseUp(button="left")
