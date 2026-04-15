@@ -74,6 +74,8 @@ exe = EXE(
     strip=False,
     upx=False,
     console=False,
+    # On Windows, embed a manifest that always requests elevation on launch.
+    uac_admin=sys.platform == "win32",
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,

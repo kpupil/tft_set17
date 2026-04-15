@@ -15,6 +15,9 @@ Outputs:
 - macOS: `dist/TFT Assistant.app`
 - Windows: `dist/TFT Assistant/`
 
+Windows builds embed a UAC manifest that requests administrator permission
+when `TFT Assistant.exe` is launched.
+
 ## Cross-platform artifacts
 
 Windows and macOS binaries should be built on their native platforms.
@@ -25,5 +28,7 @@ to build both platforms automatically and upload the resulting artifacts.
 
 - Bundled app resources are read-only.
 - User-writable cache/config files are stored in the platform app-data directory.
+- On Windows, users will still see the normal UAC confirmation prompt; this
+  setting only makes elevation the default launch behavior.
 - A local RapidOCR rec-only ONNX model will be bundled when found at:
   `~/.rapidocr_models/ch_PP-OCRv5_rec_mobile.onnx`
