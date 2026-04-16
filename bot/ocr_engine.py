@@ -61,6 +61,17 @@ def _lazy_import():
         )
 
 
+def _env_int(name: str, default: int) -> int:
+    value = os.environ.get(name)
+    if value is None or value == "":
+        return default
+    try:
+        return int(value)
+    except ValueError:
+        logger.warning("环境变量 %s=%r 不是合法整数，回退为 %d", name, value, default)
+        return default
+
+
 class OCREngine:
     """
     单例 OCR 引擎。首次调用 recognize() 时懒加载模型。
@@ -80,7 +91,9 @@ class OCREngine:
         self._loaded = False
         self._thread_local = threading.local()
         self._model_root_dir = APP_DATA_ROOT / "models"
-        self._bundled_model_path = RESOURCE_ROOT / "models" / "ch_PP-OCRv5_rec_mobile.onnx"
+        self._bundled_model_path = RESOURCE_ROOT / "models" / "ch_PP-OCRv4_rec_mobile.onnx"
+        self._ort_intra_threads = _env_int("TFT_OCR_ORT_INTRA_THREADS", 4)
+        self._ort_inter_threads = _env_int("TFT_OCR_ORT_INTER_THREADS", 2)
 
     def load(self):
         """加载 OCR 依赖与英雄名称库。"""
@@ -91,8 +104,10 @@ class OCREngine:
         self._load_hero_names()
         self._loaded = True
         logger.info(
-            "OCR 引擎加载完成，共 %d 个英雄，backend=RapidOCR(rec-only)",
+            "OCR 引擎加载完成，共 %d 个英雄，backend=RapidOCR(rec-only), model=PP-OCRv4, ort_threads=(intra=%d, inter=%d)",
             len(self._hero_names),
+            self._ort_intra_threads,
+            self._ort_inter_threads,
         )
 
     def is_loaded(self) -> bool:
@@ -122,17 +137,18 @@ class OCREngine:
             engine_type=EngineType.ONNXRUNTIME,
             lang_type=LangRec.CH,
             model_type=ModelType.MOBILE,
-            ocr_version=OCRVersion.PPOCRV5,
+            ocr_version=OCRVersion.PPOCRV4,
             task_type=TaskType.REC,
             model_path=str(self._bundled_model_path) if self._bundled_model_path.exists() else None,
             model_root_dir=self._model_root_dir,
             rec_keys_path=None,
-            rec_batch_num=6,
+            rec_batch_num=5,
             rec_img_shape=[3, 48, 320],
             font_path=None,
             engine_cfg=_AttrDict(
-                intra_op_num_threads=1,
-                inter_op_num_threads=1,
+                # 默认线程组合基于本机实测；仍支持用环境变量覆盖继续压测。
+                intra_op_num_threads=self._ort_intra_threads,
+                inter_op_num_threads=self._ort_inter_threads,
                 enable_cpu_mem_arena=False,
                 cpu_ep_cfg=_AttrDict(arena_extend_strategy="kSameAsRequested"),
                 use_cuda=False,

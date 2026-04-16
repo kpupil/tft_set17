@@ -22,7 +22,7 @@ datas += add_tree(PROJECT_ROOT / "data" / "cache" / "processed", "data/cache/pro
 datas += add_tree(PROJECT_ROOT / "data" / "cache" / "images", "data/cache/images")
 datas += collect_data_files("rapidocr")
 
-bundled_model = Path.home() / ".rapidocr_models" / "ch_PP-OCRv5_rec_mobile.onnx"
+bundled_model = Path.home() / ".rapidocr_models" / "ch_PP-OCRv4_rec_mobile.onnx"
 if bundled_model.exists():
     datas.append((str(bundled_model), "models"))
 

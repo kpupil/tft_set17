@@ -31,4 +31,4 @@ to build both platforms automatically and upload the resulting artifacts.
 - On Windows, users will still see the normal UAC confirmation prompt; this
   setting only makes elevation the default launch behavior.
 - A local RapidOCR rec-only ONNX model will be bundled when found at:
-  `~/.rapidocr_models/ch_PP-OCRv5_rec_mobile.onnx`
+  `~/.rapidocr_models/ch_PP-OCRv4_rec_mobile.onnx`
