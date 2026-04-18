@@ -406,17 +406,8 @@ class OCREngine:
 
     @staticmethod
     def _preprocess(img: np.ndarray) -> np.ndarray:
-        try:
-            import cv2
-
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
-            enhanced = clahe.apply(gray)
-            h, w = enhanced.shape
-            enlarged = cv2.resize(enhanced, (w * 2, h * 2), interpolation=cv2.INTER_LINEAR)
-            return cv2.cvtColor(enlarged, cv2.COLOR_GRAY2BGR)
-        except ImportError:
-            return img
+        # 当前场景直接使用原始截图，避免额外 CPU 开销。
+        return img
 
     def _match_hero(self, text: str) -> tuple[Optional[str], float]:
         if not text or not self._hero_names:

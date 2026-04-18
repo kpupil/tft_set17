@@ -146,5 +146,5 @@ BOT = {
     "enabled": False,
     "confidence": 0.85,
     "pick_delay_ms": 0,
-    "scan_interval_ms": 0,
+    "scan_interval_ms": 40,
 }
