@@ -138,6 +138,7 @@ UI = {
     "theme": "dark",
     "hotkey_toggle": "<ctrl>+<shift>+t",      # pynput 格式：切换窗口显隐
     "hotkey_autopick": "x",            # pynput 格式：开关自动拿牌
+    "roll_key": "d",                   # 单键监听：D 牌时临时提速扫描
 }
 
 
@@ -146,5 +147,9 @@ BOT = {
     "enabled": False,
     "confidence": 0.85,
     "pick_delay_ms": 0,
-    "scan_interval_ms": 40,
+    "scan_interval_ms": 200,
+    "normal_scan_interval_ms": 1000,
+    "fast_scan_interval_ms": 40,
+    "fast_scan_hold_ms": 2000,
+    "shop_change_fast_slot_count": 1,
 }

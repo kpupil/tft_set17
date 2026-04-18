@@ -15,20 +15,25 @@ TFT Assistant — 自动拿牌控制面板
 
 from __future__ import annotations
 
-from PyQt6.QtCore import Qt, QRect, QPoint
+from collections import Counter
+
+from PyQt6.QtCore import Qt, QRect, QPoint, pyqtSignal
 from PyQt6.QtGui import (
     QColor, QFont, QPainter, QPainterPath, QPixmap, QPen, QBrush, QCursor,
 )
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
-    QLabel, QPushButton, QFrame,
+    QLabel, QPushButton, QFrame, QScrollArea, QApplication,
 )
 
 from bot.auto_picker import AutoPicker
 from bot.region_selector import RegionConfig, RegionSelector, RegionPreviewer
 from data.manager import DataManager
 from ui.image_cache import ImageCache
+from ui.shop_indicator_overlay import ShopIndicatorOverlay
+from ui.widgets.emblem_selector import EmblemSelectorDialog
 from ui.widgets.hero_selector import HeroSelectorDialog
+from ui.widgets.trait_badge import CompactTraitChip, SelectedEmblemTag
 
 # ── 调色板 ────────────────────────────────────────────────────
 BG_SECTION  = "#141922"
@@ -59,8 +64,14 @@ def _btn(text: str, color: str = TEXT_SEC, bg: str = "#1e2736",
          bold: bool = False) -> QPushButton:
     b = QPushButton(text)
     b.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+    b.setStyleSheet(_btn_style(color=color, bg=bg, bold=bold))
+    return b
+
+
+def _btn_style(color: str = TEXT_SEC, bg: str = "#1e2736",
+               bold: bool = False) -> str:
     w = "600" if bold else "400"
-    b.setStyleSheet(f"""
+    return f"""
         QPushButton {{
             background:{bg}; border:1px solid {BORDER};
             color:{color}; font-size:10px; font-weight:{w};
@@ -68,8 +79,7 @@ def _btn(text: str, color: str = TEXT_SEC, bg: str = "#1e2736",
         }}
         QPushButton:hover {{ background:{BG_HOVER}; color:{TEXT_PRI}; }}
         QPushButton:pressed {{ background:#1a2030; }}
-    """)
-    return b
+    """
 
 
 # ─────────────────────────────────────────────────────────────
@@ -215,22 +225,30 @@ class _PickSlot(QWidget):
 class PickListPanel(QWidget):
     """自动拿牌区域（嵌入 overlay 底部）。"""
 
+    emblems_changed = pyqtSignal(list)
+
     def __init__(self, manager: DataManager, parent=None):
         super().__init__(parent)
         self.manager = manager
         self.cache   = ImageCache.instance()
         self.picker  = AutoPicker.instance()
+        self._shop_overlay = ShopIndicatorOverlay()
 
         # 拿取列表：slot_idx → {id, name, cost, icon}
         self._slots: dict[int, dict] = {}
+        self._selected_emblems: list[dict] = []
+        self._emblem_counter = 0
 
         # 英雄选择弹窗（懒加载）
         self._hero_dlg: HeroSelectorDialog | None = None
+        self._emblem_dlg: EmblemSelectorDialog | None = None
 
         self.setStyleSheet(f"background:{BG_SECTION};")
         self._build_ui()
+        self._refresh_trait_chips()
         self._connect_picker()
         self._load_region_config()
+        self._apply_tooltip_style()
 
     # ──────────────────────────────────────────────────────────
     # 构建 UI
@@ -255,7 +273,7 @@ class PickListPanel(QWidget):
                           f" background:transparent;")
         c_lay.addWidget(lbl)
 
-        self._toggle_btn = _btn("▶ 开启", GREEN, bold=True)
+        self._toggle_btn = _btn("▶ 拿牌", GREEN, bold=True)
         self._toggle_btn.setFixedWidth(68)
         self._toggle_btn.clicked.connect(self._on_toggle)
         c_lay.addWidget(self._toggle_btn)
@@ -299,6 +317,78 @@ class PickListPanel(QWidget):
         root.addWidget(grid_wrap)
         root.addWidget(_hline())
 
+        traits_wrap = QWidget()
+        traits_wrap.setStyleSheet(f"background:{BG_SECTION};")
+        t_lay = QVBoxLayout(traits_wrap)
+        t_lay.setContentsMargins(10, 6, 10, 6)
+        t_lay.setSpacing(6)
+
+        trait_header = QHBoxLayout()
+        trait_header.setContentsMargins(0, 0, 0, 0)
+        trait_header.setSpacing(6)
+        trait_lbl = QLabel("羁绊 / 转职")
+        trait_lbl.setStyleSheet(
+            f"color:{TEXT_SEC}; font-size:10px; font-weight:600; background:transparent;"
+        )
+        self._trait_hint_lbl = QLabel("")
+        self._trait_hint_lbl.setStyleSheet(
+            f"color:{TEXT_SEC}; font-size:9px; background:transparent;"
+        )
+        trait_header.addWidget(trait_lbl)
+        self._selected_emblems_scroll = QScrollArea()
+        self._selected_emblems_scroll.setWidgetResizable(True)
+        self._selected_emblems_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self._selected_emblems_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self._selected_emblems_scroll.setFrameShape(QFrame.Shape.NoFrame)
+        self._selected_emblems_scroll.setFixedHeight(26)
+        self._selected_emblems_scroll.setFixedWidth(110)
+        self._selected_emblems_scroll.setStyleSheet("QScrollArea { background: transparent; }")
+        self._selected_emblems_host = QWidget()
+        self._selected_emblems_lay = QHBoxLayout(self._selected_emblems_host)
+        self._selected_emblems_lay.setContentsMargins(0, 0, 0, 0)
+        self._selected_emblems_lay.setSpacing(4)
+        self._selected_emblems_scroll.setWidget(self._selected_emblems_host)
+        trait_header.addWidget(self._selected_emblems_scroll)
+        trait_header.addStretch()
+        self._add_emblem_btn = _btn("+ 转职", TEXT_GOLD)
+        self._add_emblem_btn.clicked.connect(self._open_emblem_selector)
+        self._add_emblem_btn.setFixedHeight(22)
+        trait_header.addWidget(self._add_emblem_btn)
+        trait_header.addWidget(self._trait_hint_lbl)
+        t_lay.addLayout(trait_header)
+
+        self._traits_scroll = QScrollArea()
+        self._traits_scroll.setWidgetResizable(True)
+        self._traits_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self._traits_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self._traits_scroll.setFrameShape(QFrame.Shape.NoFrame)
+        self._traits_scroll.setFixedHeight(34)
+        self._traits_scroll.setStyleSheet("""
+            QScrollArea { background: transparent; }
+            QScrollBar:horizontal {
+                background: transparent;
+                height: 5px;
+                margin: 0;
+            }
+            QScrollBar::handle:horizontal {
+                background: #314257;
+                border-radius: 2px;
+            }
+            QScrollBar::add-line:horizontal,
+            QScrollBar::sub-line:horizontal {
+                width: 0;
+            }
+        """)
+        self._traits_strip = QWidget()
+        self._traits_strip_lay = QHBoxLayout(self._traits_strip)
+        self._traits_strip_lay.setContentsMargins(0, 0, 0, 0)
+        self._traits_strip_lay.setSpacing(6)
+        self._traits_scroll.setWidget(self._traits_strip)
+        t_lay.addWidget(self._traits_scroll)
+
+        root.addWidget(traits_wrap)
+        root.addWidget(_hline())
+
         # ── 阵容导入按钮 ──────────────────────────────────────
         import_row = QWidget()
         import_row.setStyleSheet(f"background:{BG_SECTION};")
@@ -315,6 +405,24 @@ class PickListPanel(QWidget):
         # 快捷键已移至 overlay.py 通过 GlobalHotkeyManager 全局注册
         # Ctrl+X → self._on_toggle
 
+    def _apply_tooltip_style(self):
+        app = QApplication.instance()
+        if app is None:
+            return
+        base = app.styleSheet() or ""
+        tooltip_css = """
+QToolTip {
+    background: #f3f6fb;
+    color: #10161f;
+    border: 1px solid #90a4bf;
+    padding: 4px 6px;
+    font-size: 10px;
+}
+"""
+        import re
+        cleaned = re.sub(r"QToolTip\s*\{[^}]*\}", "", base, flags=re.S)
+        app.setStyleSheet((cleaned + "\n" + tooltip_css).strip())
+
     # ──────────────────────────────────────────────────────────
     # 信号连接
     # ──────────────────────────────────────────────────────────
@@ -323,25 +431,28 @@ class PickListPanel(QWidget):
         self.picker.status_changed.connect(self._on_status_changed)
         self.picker.hero_picked.connect(self._on_hero_picked)
         self.picker.loading_changed.connect(self._on_loading_changed)
+        self.picker.shop_matches_changed.connect(self._shop_overlay.update_matches)
+        self.picker.pick_enabled_changed.connect(self._update_toggle_btn)
+        self._update_toggle_btn(self.picker.is_pick_enabled())
 
     def _on_status_changed(self, msg: str):
         self._status_lbl.setText(msg)
-        running = self.picker.is_running()
-        loading = self.picker.is_loading()
-        self._toggle_btn.setText("⏳ 加载中" if loading else ("■ 停止" if running else "▶ 开启"))
-        color = RED if running else GREEN
-        self._toggle_btn.setStyleSheet(self._toggle_btn.styleSheet().replace(
-            "color:" + (GREEN if running else RED), "color:" + color
-        ))
-        self._toggle_btn.setEnabled(not loading)
+        self._update_toggle_btn(self.picker.is_pick_enabled())
 
     def _on_loading_changed(self, loading: bool):
         self._toggle_btn.setEnabled(not loading)
         if loading:
             self._toggle_btn.setText("⏳ 加载中")
         else:
-            running = self.picker.is_running()
-            self._toggle_btn.setText("■ 停止" if running else "▶ 开启")
+            self._update_toggle_btn(self.picker.is_pick_enabled())
+
+    def _update_toggle_btn(self, enabled: bool):
+        self._toggle_btn.setText("■ 停牌" if enabled else "▶ 拿牌")
+        self._toggle_btn.setStyleSheet(_btn_style(
+            color=RED if enabled else GREEN,
+            bold=True,
+        ))
+        self._toggle_btn.setEnabled(not self.picker.is_loading())
 
     def _on_hero_picked(self, hero_id: str):
         # 可加闪光动画，目前仅 log
@@ -355,7 +466,8 @@ class PickListPanel(QWidget):
         cfg = RegionConfig.load()
         if cfg and cfg.is_valid():
             self.picker.set_region_config(cfg)
-            self._status_lbl.setText("区域已设置  •  未开启")
+            self._shop_overlay.update_region_config(cfg)
+            self._status_lbl.setText("区域已设置  •  商店识别待命")
 
     def _on_select_region(self):
         """启动全屏选区 UI。"""
@@ -375,7 +487,8 @@ class PickListPanel(QWidget):
 
         if sel.config:
             self.picker.set_region_config(sel.config)
-            self._status_lbl.setText("区域已更新  •  未开启")
+            self._shop_overlay.update_region_config(sel.config)
+            self._status_lbl.setText("区域已更新  •  商店识别待命")
 
     def _on_preview_region(self):
         """把当前保存的区域直接叠加到桌面上，便于肉眼检查漂移。"""
@@ -395,7 +508,7 @@ class PickListPanel(QWidget):
 
         if win:
             win.show()
-        self._status_lbl.setText("区域校验完成  •  未开启")
+        self._status_lbl.setText("区域校验完成  •  商店识别待命")
 
     # ──────────────────────────────────────────────────────────
     # 拿取列表管理
@@ -439,16 +552,21 @@ class PickListPanel(QWidget):
             info["id"], info["name"], info["cost"], info["icon"]
         )
         self._sync_picker()
+        self._refresh_trait_chips()
 
     def remove_slot(self, slot_idx: int):
         if slot_idx in self._slots:
             del self._slots[slot_idx]
         self._slot_widgets[slot_idx].clear()
         self._sync_picker()
+        self._refresh_trait_chips()
 
     def _sync_picker(self):
         """将当前拿取列表同步到 AutoPicker。"""
         self.picker.set_pick_list(self._current_pick_ids())
+        cfg = RegionConfig.load()
+        if cfg and cfg.is_valid():
+            self.picker.ensure_scanning()
 
     def _get_hero_info(self, hero_id: str) -> dict | None:
         import json
@@ -500,6 +618,7 @@ class PickListPanel(QWidget):
             )
 
         self._sync_picker()
+        self._refresh_trait_chips()
 
     def _find_comp_panel(self):
         """向上遍历找到 overlay 中的 CompPanel 实例。"""
@@ -520,10 +639,141 @@ class PickListPanel(QWidget):
         for i in range(SLOT_COUNT):
             self._slot_widgets[i].clear()
         self._slots.clear()
+        self._selected_emblems.clear()
         self._sync_picker()
+        self._refresh_trait_chips()
 
     def _on_toggle(self):
         if self.picker.is_loading():
             self._status_lbl.setText("⏳ OCR 正在加载，请稍候…")
             return
         self.picker.toggle()
+
+    def _open_emblem_selector(self):
+        if self._emblem_dlg is not None:
+            self._emblem_dlg.close()
+            self._emblem_dlg.deleteLater()
+
+        self._emblem_dlg = EmblemSelectorDialog(
+            self.manager,
+            set(),
+            parent=self.window(),
+        )
+        self._emblem_dlg.emblem_selected.connect(self._add_emblem)
+        btn_pos = self._add_emblem_btn.mapToGlobal(QPoint(0, self._add_emblem_btn.height()))
+        self._emblem_dlg.show_near(btn_pos)
+
+    def _add_emblem(self, trait_id: str):
+        self._emblem_counter += 1
+        self._selected_emblems.append({
+            "key": f"emblem-{self._emblem_counter}",
+            "trait_id": trait_id,
+        })
+        self._refresh_trait_chips()
+
+    def _remove_emblem(self, emblem_key: str):
+        self._selected_emblems = [
+            item for item in self._selected_emblems if item["key"] != emblem_key
+        ]
+        self._refresh_trait_chips()
+
+    def _refresh_trait_chips(self):
+        while self._selected_emblems_lay.count():
+            item = self._selected_emblems_lay.takeAt(0)
+            if item.widget():
+                item.widget().deleteLater()
+
+        while self._traits_strip_lay.count():
+            item = self._traits_strip_lay.takeAt(0)
+            if item.widget():
+                item.widget().deleteLater()
+
+        emblem_map = {item["trait_id"]: item for item in self.manager.get_emblem_traits()}
+        for emblem in self._selected_emblems:
+            info = emblem_map.get(emblem["trait_id"], {})
+            tag = SelectedEmblemTag(
+                item_key=emblem["key"],
+                name=info.get("name", self.manager.get_trait_name(emblem["trait_id"])),
+                icon=info.get("icon", ""),
+                cache=self.cache,
+                tooltip=f'{info.get("name", self.manager.get_trait_name(emblem["trait_id"]))}纹章（点击移除）',
+            )
+            tag.clicked.connect(self._remove_emblem)
+            self._selected_emblems_lay.addWidget(tag)
+        self._selected_emblems_lay.addStretch()
+
+        trait_rows = self._build_trait_rows()
+        if not trait_rows:
+            self._trait_hint_lbl.setText("未选择英雄")
+            hint = QLabel("导入阵容或手动添加英雄后，这里会显示羁绊")
+            hint.setStyleSheet(
+                f"color:{TEXT_SEC}; font-size:9px; background:transparent;"
+            )
+            self._traits_strip_lay.addWidget(hint)
+            self._traits_strip_lay.addStretch()
+            return
+
+        active_count = sum(1 for row in trait_rows if row["active"] and not row["is_emblem"])
+        emblem_count = len(self._selected_emblems)
+        self._trait_hint_lbl.setText(
+            f"已亮 {active_count}/{len([r for r in trait_rows if not r['is_emblem']])}" +
+            (f"  转职 {emblem_count}" if emblem_count else "")
+        )
+
+        for row in trait_rows:
+            chip = CompactTraitChip(
+                trait_id=row["id"],
+                item_key=row.get("item_key", row["id"]),
+                name=row["name"],
+                icon=row["icon"],
+                current_count=row["count"],
+                active=row["active"],
+                active_threshold=row["active_threshold"],
+                is_emblem=row["is_emblem"],
+                removable=False,
+                cache=self.cache,
+                tooltip=row["tooltip"],
+            )
+            self._traits_strip_lay.addWidget(chip)
+        self._traits_strip_lay.addStretch()
+        self.emblems_changed.emit([item["trait_id"] for item in self._selected_emblems])
+
+    def _build_trait_rows(self) -> list[dict]:
+        counts: Counter[str] = Counter()
+        emblem_trait_ids = [item["trait_id"] for item in self._selected_emblems]
+        emblem_set = set(emblem_trait_ids)
+        for info in self._slots.values():
+            for trait_id in self.manager.get_unit_traits(info["id"]):
+                counts[trait_id] += 1
+        for trait_id in emblem_trait_ids:
+            counts[trait_id] += 1
+
+        rows = []
+        for trait_id, count in counts.items():
+            thresholds = self.manager.get_trait_thresholds(trait_id)
+            active_threshold = 0
+            for threshold in thresholds:
+                if count >= threshold:
+                    active_threshold = threshold
+            active = active_threshold > 0 or not thresholds
+            name = self.manager.get_trait_name(trait_id)
+            if active_threshold and active_threshold != count:
+                tooltip = f"{name}：当前 {count}，实际激活档位 {active_threshold}"
+            elif active:
+                tooltip = f"{name}：当前 {count}，已激活"
+            else:
+                first = thresholds[0] if thresholds else 0
+                tooltip = f"{name}：当前 {count}，距离激活还差 {max(first - count, 0)}"
+            rows.append({
+                "id": trait_id,
+                "name": name,
+                "icon": self.manager.get_trait_info(trait_id).get("icon", ""),
+                "count": count,
+                "active": active,
+                "active_threshold": active_threshold,
+                "is_emblem": trait_id in emblem_set,
+                "tooltip": tooltip,
+            })
+
+        rows.sort(key=lambda row: (not row["is_emblem"], not row["active"], -row["count"], row["name"]))
+        return rows

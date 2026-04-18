@@ -24,6 +24,7 @@ from typing import Callable
 
 from PyQt6.QtCore import QObject, pyqtSignal
 
+from pynput import keyboard
 from pynput.keyboard import GlobalHotKeys
 
 
@@ -33,6 +34,7 @@ class _HotkeyBridge(QObject):
     每个热键对应一个唯一的 int id，通过 triggered 信号传递。
     """
     triggered = pyqtSignal(int)
+    raw_key_triggered = pyqtSignal(str)
 
 
 class GlobalHotkeyManager:
@@ -56,9 +58,12 @@ class GlobalHotkeyManager:
         self._bridge = _HotkeyBridge()
         self._callbacks: dict[int, Callable] = {}
         self._hotkey_map: dict[str, int] = {}   # pynput_str → id
+        self._raw_key_callbacks: dict[str, list[Callable]] = {}
         self._next_id = 0
         self._listener: GlobalHotKeys | None = None
+        self._raw_key_listener: keyboard.Listener | None = None
         self._bridge.triggered.connect(self._dispatch)
+        self._bridge.raw_key_triggered.connect(self._dispatch_raw_key)
 
     # ── 注册 ─────────────────────────────────────────────────────
 
@@ -90,29 +95,51 @@ class GlobalHotkeyManager:
             k: v for k, v in self._hotkey_map.items() if v != hid
         }
 
+    def register_key(self, key_name: str, callback: Callable):
+        """
+        注册一个单键按下回调。
+
+        key_name : str
+            单字符键名，例如 "d"。
+        callback : Callable
+            在 Qt 主线程中执行的无参回调。
+        """
+        key = key_name.lower().strip()
+        if not key:
+            return
+        self._raw_key_callbacks.setdefault(key, []).append(callback)
+
     # ── 生命周期 ──────────────────────────────────────────────────
 
     def start(self):
         """启动 pynput 全局热键监听（后台守护线程）。"""
         self.stop()
 
-        if not self._hotkey_map:
+        if not self._hotkey_map and not self._raw_key_callbacks:
             return
 
-        bindings: dict[str, Callable] = {}
-        for hotkey_str, hid in self._hotkey_map.items():
-            # 用默认参数捕获当前 hid 值
-            bindings[hotkey_str] = lambda _id=hid: self._bridge.triggered.emit(_id)
+        if self._hotkey_map:
+            bindings: dict[str, Callable] = {}
+            for hotkey_str, hid in self._hotkey_map.items():
+                bindings[hotkey_str] = lambda _id=hid: self._bridge.triggered.emit(_id)
 
-        self._listener = GlobalHotKeys(bindings)
-        self._listener.daemon = True
-        self._listener.start()
+            self._listener = GlobalHotKeys(bindings)
+            self._listener.daemon = True
+            self._listener.start()
+
+        if self._raw_key_callbacks:
+            self._raw_key_listener = keyboard.Listener(on_press=self._on_raw_key_press)
+            self._raw_key_listener.daemon = True
+            self._raw_key_listener.start()
 
     def stop(self):
         """停止监听线程。"""
         if self._listener is not None:
             self._listener.stop()
             self._listener = None
+        if self._raw_key_listener is not None:
+            self._raw_key_listener.stop()
+            self._raw_key_listener = None
 
     def restart(self):
         """重建监听器（注册表变化后调用）。"""
@@ -124,4 +151,20 @@ class GlobalHotkeyManager:
         """主线程回调分发。"""
         cb = self._callbacks.get(hid)
         if cb:
+            cb()
+
+    def _on_raw_key_press(self, key):
+        try:
+            char = key.char
+        except AttributeError:
+            return
+        if not char:
+            return
+
+        normalized = char.lower()
+        if normalized in self._raw_key_callbacks:
+            self._bridge.raw_key_triggered.emit(normalized)
+
+    def _dispatch_raw_key(self, key_name: str):
+        for cb in self._raw_key_callbacks.get(key_name, []):
             cb()

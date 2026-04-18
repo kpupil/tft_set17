@@ -4,7 +4,7 @@ TFT Assistant — 区域选择器
 全屏透明遮罩，引导用户分两阶段手动标定商店区域：
 
   阶段 1（OCR 区域）：依次框选 5 个英雄名称所在矩形
-  阶段 2（点击位置）：依次点击 5 个购买按钮中心点
+  阶段 2（槽位锚点）：点击第 1 个商店槽位锚点，其余 4 个自动推导
 
 结果保存到 data/cache/region_config.json，下次启动自动加载。
 
@@ -45,26 +45,32 @@ HINT_BG      = QColor(0, 0, 0, 180)
 
 @dataclass
 class RegionConfig:
-    """商店区域配置，保存 5 个 OCR 区域 + 5 个点击中心。"""
+    """商店区域配置，保存 5 个 OCR 区域 + 5 个槽位锚点。"""
     ocr_rects:     list[list[int]] = field(default_factory=list)  # [[x,y,w,h]×5]
-    click_points:  list[list[int]] = field(default_factory=list)  # [[x,y]×5]
+    slot_points:  list[list[int]] = field(default_factory=list)  # [[x,y]×5]
     screen_name:   str = ""
     screen_rect:   list[int] = field(default_factory=list)        # [x,y,w,h]
     ocr_rects_relative: list[list[float]] = field(default_factory=list)   # [[rx,ry,rw,rh]×5]
-    click_points_relative: list[list[float]] = field(default_factory=list) # [[rx,ry]×5]
+    slot_points_relative: list[list[float]] = field(default_factory=list) # [[rx,ry]×5]
 
     @staticmethod
     def load() -> Optional["RegionConfig"]:
         if REGION_CONFIG_PATH.exists():
             try:
                 d = json.loads(REGION_CONFIG_PATH.read_text(encoding="utf-8"))
+                slot_points = d.get("slot_points")
+                if not slot_points:
+                    slot_points = d.get("click_points") or d.get("indicator_points") or []
+                slot_points_relative = d.get("slot_points_relative")
+                if not slot_points_relative:
+                    slot_points_relative = d.get("click_points_relative") or d.get("indicator_points_relative") or []
                 return RegionConfig(
                     ocr_rects=d.get("ocr_rects", []),
-                    click_points=d.get("click_points", []),
+                    slot_points=slot_points,
                     screen_name=d.get("screen_name", ""),
                     screen_rect=d.get("screen_rect", []),
                     ocr_rects_relative=d.get("ocr_rects_relative", []),
-                    click_points_relative=d.get("click_points_relative", []),
+                    slot_points_relative=slot_points_relative,
                 )
             except Exception:
                 return None
@@ -79,8 +85,8 @@ class RegionConfig:
 
     def is_valid(self) -> bool:
         return (
-            len(self.ocr_rects)    == SLOT_COUNT and
-            len(self.click_points) == SLOT_COUNT
+            len(self.ocr_rects) == SLOT_COUNT and
+            len(self.slot_points) == SLOT_COUNT
         )
 
     def _saved_screen_rect(self) -> QRect:
@@ -111,7 +117,7 @@ class RegionConfig:
         if not screen.isValid() or screen.width() <= 0 or screen.height() <= 0:
             return []
         rels: list[list[float]] = []
-        for point in self.click_points:
+        for point in self.slot_points:
             if len(point) != 2:
                 continue
             x, y = point
@@ -167,11 +173,11 @@ class RegionConfig:
                 return rects
         return [[int(v) for v in rect] for rect in self.ocr_rects if len(rect) == 4]
 
-    def resolved_click_points(self) -> list[list[int]]:
-        return self.resolved_click_points_for_target(self.resolved_screen_rect())
+    def resolved_slot_points(self) -> list[list[int]]:
+        return self.resolved_slot_points_for_target(self.resolved_screen_rect())
 
-    def resolved_click_points_for_target(self, target: QRect) -> list[list[int]]:
-        rels = self.click_points_relative or self._fallback_relative_points()
+    def resolved_slot_points_for_target(self, target: QRect) -> list[list[int]]:
+        rels = self.slot_points_relative or self._fallback_relative_points()
         if target.isValid() and len(rels) == SLOT_COUNT:
             points: list[list[int]] = []
             for rel in rels:
@@ -184,7 +190,7 @@ class RegionConfig:
                 ])
             if len(points) == SLOT_COUNT:
                 return points
-        return [[int(v) for v in point] for point in self.click_points if len(point) == 2]
+        return [[int(v) for v in point] for point in self.slot_points if len(point) == 2]
 
 
 # ─────────────────────────────────────────────────────────────
@@ -198,8 +204,9 @@ class _SelectorOverlay(QWidget):
     阶段 1（phase='ocr'）：
         左键拖拽画矩形，松开确认；画满 5 个后自动进入阶段 2。
 
-    阶段 2（phase='click'）：
-        左键单击确认购买位置；点满 5 个后自动完成。
+    阶段 2（phase='slot'）：
+        左键单击确认第 1 个商店槽位锚点；
+        其余 4 个点根据“第 1 个锚点相对第 1 个 OCR 框”的偏移自动推导。
 
     ESC 取消，Z 撤销上一步。
     """
@@ -211,9 +218,9 @@ class _SelectorOverlay(QWidget):
         self._screen_name = ""
         self._screen_rect = QRect()
 
-        self._phase = "ocr"          # "ocr" | "click" | "done"
+        self._phase = "ocr"          # "ocr" | "slot" | "done"
         self._ocr_rects:    list[QRect]  = []
-        self._click_points: list[QPoint] = []
+        self._slot_points: list[QPoint] = []
 
         # 拖拽状态
         self._drag_start: QPoint | None = None
@@ -267,10 +274,10 @@ class _SelectorOverlay(QWidget):
         if self._phase == "ocr":
             self._drag_start = e.pos()
             self._drag_cur   = e.pos()
-        elif self._phase == "click":
-            self._click_points.append(e.pos())
+        elif self._phase == "slot":
+            self._slot_points = self._build_slot_points_from_anchor(e.pos())
             self.update()
-            if len(self._click_points) == SLOT_COUNT:
+            if len(self._slot_points) == SLOT_COUNT:
                 QTimer.singleShot(300, self._finish)
 
     def mouseMoveEvent(self, e):
@@ -289,7 +296,7 @@ class _SelectorOverlay(QWidget):
             self._ocr_rects.append(rect)
             self.update()
             if len(self._ocr_rects) == SLOT_COUNT:
-                QTimer.singleShot(400, self._enter_click_phase)
+                QTimer.singleShot(400, self._enter_slot_phase)
 
         self._drag_start = None
         self._drag_cur   = None
@@ -298,25 +305,24 @@ class _SelectorOverlay(QWidget):
     # 状态转换
     # ──────────────────────────────────────────────────────────
 
-    def _enter_click_phase(self):
-        self._phase = "click"
+    def _enter_slot_phase(self):
+        self._phase = "slot"
         self.update()
 
     def _finish(self):
         self._phase = "done"
         self.hide()
-        self._on_done(self._ocr_rects, self._click_points)
+        self._on_done(self._ocr_rects, self._slot_points)
 
     def _cancel(self):
         self.hide()
         self._on_cancel()
 
     def _undo(self):
-        if self._phase == "click" and self._click_points:
-            self._click_points.pop()
+        if self._phase == "slot" and self._slot_points:
+            self._slot_points.clear()
             self.update()
-        elif self._phase == "click" and not self._click_points:
-            # 撤回到 OCR 阶段最后一步
+        elif self._phase == "slot" and not self._slot_points:
             self._phase = "ocr"
             self.update()
         elif self._phase == "ocr" and self._ocr_rects:
@@ -343,16 +349,18 @@ class _SelectorOverlay(QWidget):
             r = self._make_rect(self._drag_start, self._drag_cur)
             self._draw_ocr_rect(p, r, len(self._ocr_rects) + 1, done=False)
 
-        # 已完成的点击点
-        for i, pt in enumerate(self._click_points):
+        for i, pt in enumerate(self._slot_points):
             self._draw_click_point(p, pt, i + 1, done=True)
 
-        # 当前等待点击的位置提示（高亮对应 OCR 框）
-        if self._phase == "click":
-            idx = len(self._click_points)
-            if idx < SLOT_COUNT and idx < len(self._ocr_rects):
-                self._draw_ocr_rect(p, self._ocr_rects[idx], idx + 1,
-                                    done=False, highlight=True)
+        if self._phase == "slot":
+            if self._ocr_rects:
+                self._draw_ocr_rect(p, self._ocr_rects[0], 1, done=False, highlight=True)
+
+            if self._slot_points:
+                for i, pt in enumerate(self._slot_points):
+                    self._draw_click_point(p, pt, i + 1, done=False)
+            elif self._ocr_rects:
+                self._draw_click_point(p, self._ocr_rects[0].center(), 1, done=False)
 
         self._draw_hint(p)
         p.end()
@@ -412,14 +420,13 @@ class _SelectorOverlay(QWidget):
                        f"（剩余 {remaining} 个）      Z = 撤销    ESC = 取消")
             else:
                 msg = "所有 OCR 区域已标定，即将进入阶段 2…"
-        elif self._phase == "click":
-            remaining = SLOT_COUNT - len(self._click_points)
-            if remaining > 0:
-                msg = (f"【阶段 2/2  购买点击位置】  "
-                       f"点击第 {len(self._click_points)+1} 个英雄的购买位置  "
-                       f"（剩余 {remaining} 个）      Z = 撤销    ESC = 取消")
+        elif self._phase == "slot":
+            if not self._slot_points:
+                msg = ("【阶段 2/2  槽位锚点】  "
+                       "点击第 1 个商店槽位锚点，程序将按它相对第 1 个 OCR 框的偏移自动推导后 4 个点      "
+                       "Z = 撤销    ESC = 取消")
             else:
-                msg = "全部完成！"
+                msg = "槽位锚点已自动推导完成！"
         else:
             msg = ""
 
@@ -441,6 +448,17 @@ class _SelectorOverlay(QWidget):
             min(a.x(), b.x()), min(a.y(), b.y()),
             abs(b.x() - a.x()), abs(b.y() - a.y()),
         )
+
+    def _build_slot_points_from_anchor(self, anchor: QPoint) -> list[QPoint]:
+        if not self._ocr_rects:
+            return []
+
+        first_center = self._ocr_rects[0].center()
+        offset = anchor - first_center
+        points: list[QPoint] = []
+        for rect in self._ocr_rects:
+            points.append(rect.center() + offset)
+        return points
 
 
 class _PreviewOverlay(QWidget):
@@ -508,7 +526,7 @@ class _PreviewOverlay(QWidget):
             rect = QRect(*rect_data).translated(-self._target_rect.topLeft())
             self._draw_ocr_rect(p, rect, idx)
 
-        for idx, point_data in enumerate(self._config.resolved_click_points(), start=1):
+        for idx, point_data in enumerate(self._config.resolved_slot_points(), start=1):
             if len(point_data) != 2:
                 continue
             pt = QPoint(*point_data) - self._target_rect.topLeft()
@@ -562,7 +580,7 @@ class _PreviewOverlay(QWidget):
         f.setPointSize(12)
         f.setBold(True)
         p.setFont(f)
-        label = "区域校验模式：蓝框 = OCR 区域，橙点 = 点击位置，按 ESC / Enter / 空格 或单击退出"
+        label = "区域校验模式：蓝框 = OCR 区域，橙点 = 槽位锚点，按 ESC / Enter / 空格 或单击退出"
         p.drawText(bar, Qt.AlignmentFlag.AlignCenter, label)
 
         if self._config.screen_rect:
@@ -612,7 +630,11 @@ class RegionSelector:
         while not self._done:
             QApplication.processEvents()
 
-    def _on_done(self, ocr_rects: list[QRect], click_points: list[QPoint]):
+    def _on_done(
+        self,
+        ocr_rects: list[QRect],
+        slot_points: list[QPoint],
+    ):
         if self._overlay is None:
             self.config = None
             self._done = True
@@ -631,9 +653,9 @@ class RegionSelector:
                 ]
                 for r in ocr_rects
             ],
-            click_points=[
+            slot_points=[
                 [self._overlay.mapToGlobal(p).x(), self._overlay.mapToGlobal(p).y()]
-                for p in click_points
+                for p in slot_points
             ],
             screen_name=self._overlay.screen_name,
             screen_rect=[
@@ -651,9 +673,9 @@ class RegionSelector:
                 ]
                 for r in ocr_rects
             ],
-            click_points_relative=[
+            slot_points_relative=[
                 [p.x() / screen_w, p.y() / screen_h]
-                for p in click_points
+                for p in slot_points
             ],
         )
         cfg.save()

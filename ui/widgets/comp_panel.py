@@ -16,6 +16,8 @@ TFT Assistant — 阵容详情面板
 
 from __future__ import annotations
 
+from collections import Counter
+
 from PyQt6.QtCore import Qt, QRect, pyqtSignal
 from PyQt6.QtGui import QColor, QFont, QPainter, QPainterPath, QPixmap, QPen, QBrush, QCursor
 from PyQt6.QtWidgets import (
@@ -321,6 +323,7 @@ class CompPanel(QWidget):
         self.manager = manager
         self.cache   = ImageCache.instance()
         self._comp: Composition | None = None
+        self._extra_emblems: list[str] = []
 
         self.setFixedWidth(self.PANEL_W)
         self.setStyleSheet(f"background: {BG_SECTION}; color: {TEXT_PRI};")
@@ -376,7 +379,8 @@ class CompPanel(QWidget):
         top_lay.addWidget(self._lbl_winrate)
         self._root.addWidget(top)
 
-        self._root.addWidget(_hline())
+        self._traits_divider = _hline()
+        self._root.addWidget(self._traits_divider)
 
         # ── 英雄卡片网格 ───────────────────────────────────────
         self._units_widget = QWidget()
@@ -385,6 +389,36 @@ class CompPanel(QWidget):
         self._units_grid.setContentsMargins(10, 10, 10, 10)
         self._units_grid.setSpacing(4)
         self._root.addWidget(self._units_widget)
+
+        self._root.addWidget(_hline())
+
+        # ── 激活羁绊区 ────────────────────────────────────────
+        self._traits_widget = QWidget()
+        self._traits_widget.setStyleSheet(f"background:{BG_SECTION};")
+        traits_lay = QVBoxLayout(self._traits_widget)
+        traits_lay.setContentsMargins(10, 8, 10, 8)
+        traits_lay.setSpacing(6)
+
+        header = QHBoxLayout()
+        header.setContentsMargins(0, 0, 0, 0)
+        header.setSpacing(6)
+        title = _label("已激活羁绊", TEXT_PRI, 10, bold=True)
+        self._traits_hint = _label("", TEXT_SEC, 9)
+        header.addWidget(title)
+        header.addStretch()
+        header.addWidget(self._traits_hint)
+        traits_lay.addLayout(header)
+
+        self._traits_grid_host = QWidget()
+        self._traits_grid = QGridLayout(self._traits_grid_host)
+        self._traits_grid.setContentsMargins(0, 0, 0, 0)
+        self._traits_grid.setHorizontalSpacing(6)
+        self._traits_grid.setVerticalSpacing(6)
+        traits_lay.addWidget(self._traits_grid_host)
+
+        self._root.addWidget(self._traits_widget)
+        self._traits_divider.hide()
+        self._traits_widget.hide()
 
         # ── 变体区块（动态替换）───────────────────────────────
         self._variants_widget: VariantsSection | None = None
@@ -446,6 +480,53 @@ class CompPanel(QWidget):
             card = UnitCard(unit, self.cache)
             self._units_grid.addWidget(card, i // cols, i % cols)
 
+    def _render_traits(self, comp: Composition):
+        # 羁绊展示已迁移到 PickListPanel，这里保留空实现以兼容旧调用。
+        return
+
+    def _compute_active_traits(self, comp: Composition) -> list[dict]:
+        counts: Counter[str] = Counter()
+        for unit in comp.units:
+            for trait_id in self.manager.get_unit_traits(unit.id):
+                counts[trait_id] += 1
+        for trait_id in self._extra_emblems:
+            counts[trait_id] += 1
+
+        active_traits = []
+        for trait_id, count in counts.items():
+            thresholds = self.manager.get_trait_thresholds(trait_id)
+            active_threshold = 0
+            active_tier = 0
+            for idx, threshold in enumerate(thresholds, 1):
+                if count >= threshold:
+                    active_threshold = threshold
+                    active_tier = idx
+            if thresholds and active_threshold == 0:
+                continue
+            name = self.manager.get_trait_name(trait_id)
+            if active_threshold:
+                label = f"{name} {count}/{active_threshold}"
+                tooltip = f"{name}：当前 {count}，已激活第 {active_tier} 档"
+            else:
+                label = f"{name} {count}"
+                tooltip = f"{name}：当前 {count}"
+            active_traits.append({
+                "id": trait_id,
+                "name": name,
+                "icon": self.manager.get_trait_info(trait_id).get("icon", ""),
+                "count": count,
+                "active_threshold": active_threshold,
+                "active_tier": active_tier,
+                "label": label,
+                "subtitle": f"{count}/{active_threshold}" if active_threshold else f"{count}",
+                "tooltip": tooltip,
+            })
+
+        active_traits.sort(
+            key=lambda x: (-x["active_threshold"], -x["count"], x["name"])
+        )
+        return active_traits
+
     def _render_variants(self, comp: Composition):
         if self._variants_widget:
             self._root.removeWidget(self._variants_widget)
@@ -470,3 +551,6 @@ class CompPanel(QWidget):
         if self._comp:
             updated = self.manager.get_comp(self._comp.slug)
             self._show_comp(updated or self.manager.get_comps_sorted()[0])
+
+    def set_extra_emblems(self, trait_ids: list[str]):
+        self._extra_emblems = list(trait_ids)

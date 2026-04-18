@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import threading
 from pathlib import Path
 from typing import Callable, Optional
@@ -55,6 +56,10 @@ class DataManager:
         self.lang          = lang
 
         self._comps: dict[str, Composition] = {}   # slug → Composition
+        self._raw_units: dict[str, dict] | None = None
+        self._raw_traits: dict[str, dict] | None = None
+        self._raw_items: dict[str, dict] | None = None
+        self._emblem_traits: list[dict] | None = None
 
         self._loaded = False
         self._refreshing = False
@@ -246,3 +251,76 @@ class DataManager:
 
     def summary(self) -> dict:
         return {"compositions": len(self._comps), "loaded": self._loaded}
+
+    # ──────────────────────────────────────────────────────────
+    # 原始实体查询（供 UI 动态羁绊/转职使用）
+    # ──────────────────────────────────────────────────────────
+
+    def _ensure_raw_entities_loaded(self):
+        if self._raw_units is None:
+            path = self.raw_dir / "entity_units.json"
+            self._raw_units = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+        if self._raw_traits is None:
+            path = self.raw_dir / "entity_traits.json"
+            self._raw_traits = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+        if self._raw_items is None:
+            path = self.raw_dir / "entity_items.json"
+            self._raw_items = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+    def get_unit_traits(self, unit_id: str) -> list[str]:
+        self._ensure_raw_entities_loaded()
+        info = (self._raw_units or {}).get(unit_id, {})
+        return list(info.get("traitIds") or [])
+
+    def get_trait_info(self, trait_id: str) -> dict:
+        self._ensure_raw_entities_loaded()
+        return dict((self._raw_traits or {}).get(trait_id, {}))
+
+    def get_trait_name(self, trait_id: str) -> str:
+        info = self.get_trait_info(trait_id)
+        return info.get("name", trait_id)
+
+    def get_trait_thresholds(self, trait_id: str) -> list[int]:
+        info = self.get_trait_info(trait_id)
+        thresholds = []
+        for tier in info.get("tiers") or []:
+            min_units = tier.get("minUnits")
+            if isinstance(min_units, int):
+                thresholds.append(min_units)
+        return sorted(set(thresholds))
+
+    def get_emblem_traits(self) -> list[dict]:
+        self._ensure_raw_entities_loaded()
+        if self._emblem_traits is not None:
+            return list(self._emblem_traits)
+
+        trait_name_to_id = {
+            info.get("name", ""): tid
+            for tid, info in (self._raw_traits or {}).items()
+            if info.get("name")
+        }
+        emblem_traits: list[dict] = []
+        for item in (self._raw_items or {}).values():
+            if item.get("category") != "emblem":
+                continue
+            desc = item.get("description", "")
+            match = re.search(r"获得【([^】]+)】羁绊", desc)
+            if not match:
+                continue
+            trait_name = match.group(1)
+            trait_id = trait_name_to_id.get(trait_name)
+            if not trait_id:
+                continue
+            trait_info = (self._raw_traits or {}).get(trait_id, {})
+            emblem_traits.append({
+                "trait_id": trait_id,
+                "name": trait_name,
+                "icon": trait_info.get("icon", ""),
+                "thresholds": self.get_trait_thresholds(trait_id),
+                "item_name": item.get("name", trait_name),
+                "item_id": item.get("id", ""),
+            })
+
+        emblem_traits.sort(key=lambda x: x["name"])
+        self._emblem_traits = emblem_traits
+        return list(self._emblem_traits)

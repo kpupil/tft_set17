@@ -291,11 +291,11 @@ class OCREngine:
             return config.resolved_ocr_rects_for_target(target)
         return config.resolved_ocr_rects()
 
-    def resolve_native_click_points(self, config) -> list[list[int]]:
+    def resolve_native_slot_points(self, config) -> list[list[int]]:
         if os.name == "nt":
             target = self._resolve_windows_native_target_rect(config)
-            return config.resolved_click_points_for_target(target)
-        return config.resolved_click_points()
+            return config.resolved_slot_points_for_target(target)
+        return config.resolved_slot_points()
 
     def recognize_slot(self, rect: list[int]) -> tuple[Optional[str], float]:
         if not self._loaded:

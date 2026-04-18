@@ -244,6 +244,9 @@ class TFTOverlay(QMainWindow):
         self._panel.variant_import_requested.connect(
             self._pick_panel.import_units
         )
+        self._pick_panel.emblems_changed.connect(
+            self._panel.set_extra_emblems
+        )
 
     def _setup_hotkey(self):
         # 全局热键：无论焦点在哪个窗口都能触发
@@ -255,6 +258,10 @@ class TFTOverlay(QMainWindow):
         hk.register(
             UI.get("hotkey_autopick", "<ctrl>+x"),
             self._pick_panel._on_toggle,
+        )
+        hk.register_key(
+            UI.get("roll_key", "d"),
+            self._pick_panel.picker.notify_roll_key_pressed,
         )
         hk.start()
 
