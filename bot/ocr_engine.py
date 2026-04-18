@@ -72,6 +72,21 @@ def _env_int(name: str, default: int) -> int:
         return default
 
 
+def _empty_detail() -> dict:
+    return {
+        "hero_id": None,
+        "score": 0.0,
+        "raw_text": "",
+        "text_parts": [],
+        "elapsed_ms": 0.0,
+        "preprocess_ms": 0.0,
+        "infer_ms": 0.0,
+        "match_ms": 0.0,
+        "screenshot_ms": 0.0,
+        "cache_hit": False,
+    }
+
+
 class OCREngine:
     """
     单例 OCR 引擎。首次调用 recognize() 时懒加载模型。
@@ -94,6 +109,10 @@ class OCREngine:
         self._bundled_model_path = RESOURCE_ROOT / "models" / "ch_PP-OCRv4_rec_mobile.onnx"
         self._ort_intra_threads = _env_int("TFT_OCR_ORT_INTRA_THREADS", 4)
         self._ort_inter_threads = _env_int("TFT_OCR_ORT_INTER_THREADS", 2)
+        self._slot_cache: list[dict] = []
+        self._thumb_width = 48
+        self._thumb_height = 12
+        self._thumb_diff_threshold = 6.0
 
     def load(self):
         """加载 OCR 依赖与英雄名称库。"""
@@ -302,11 +321,50 @@ class OCREngine:
         shot_started = time.perf_counter()
         imgs = self.screenshot_regions(ocr_rects)
         screenshot_ms = (time.perf_counter() - shot_started) * 1000
-        details = self._recognize_images_detail(imgs)
+        details = self._recognize_images_detail_with_cache(imgs)
         per_slot_shot_ms = screenshot_ms / max(1, len(details))
         for detail in details:
             detail["screenshot_ms"] = per_slot_shot_ms
             detail["elapsed_ms"] += per_slot_shot_ms
+        return details
+
+    def _recognize_images_detail_with_cache(self, imgs: list[np.ndarray]) -> list[dict]:
+        self._ensure_slot_cache(len(imgs))
+
+        details = [_empty_detail() for _ in imgs]
+        changed_indices = []
+        changed_imgs = []
+
+        for idx, img in enumerate(imgs):
+            thumb = self._make_thumb(img)
+            cache = self._slot_cache[idx]
+            prev_thumb = cache.get("thumb")
+            prev_detail = cache.get("detail")
+            changed = prev_thumb is None or self._thumb_diff(prev_thumb, thumb) >= self._thumb_diff_threshold
+
+            cache["thumb"] = thumb
+            if changed or prev_detail is None:
+                changed_indices.append(idx)
+                changed_imgs.append(img)
+                continue
+
+            detail = dict(prev_detail)
+            detail["cache_hit"] = True
+            details[idx] = detail
+
+        if changed_imgs:
+            fresh_details = self._recognize_images_detail(changed_imgs)
+            for idx, detail in zip(changed_indices, fresh_details):
+                detail = dict(detail)
+                detail["cache_hit"] = False
+                self._slot_cache[idx]["detail"] = dict(detail)
+                details[idx] = detail
+
+        for idx, detail in enumerate(details):
+            if not detail.get("raw_text") and self._slot_cache[idx].get("detail") is not None:
+                # 首帧异常时兜底使用缓存，避免返回未填充的空结构。
+                details[idx] = dict(self._slot_cache[idx]["detail"])
+
         return details
 
     def _recognize_images_detail(self, imgs: list[np.ndarray]) -> list[dict]:
@@ -408,6 +466,34 @@ class OCREngine:
     def _preprocess(img: np.ndarray) -> np.ndarray:
         # 当前场景直接使用原始截图，避免额外 CPU 开销。
         return img
+
+    def _ensure_slot_cache(self, count: int):
+        if len(self._slot_cache) == count:
+            return
+        self._slot_cache = [{"thumb": None, "detail": None} for _ in range(count)]
+
+    def _make_thumb(self, img: np.ndarray) -> np.ndarray:
+        if img.size == 0:
+            return np.zeros((self._thumb_height, self._thumb_width), dtype=np.uint8)
+
+        if len(img.shape) == 3 and img.shape[2] >= 3:
+            gray = img[..., :3].mean(axis=2)
+        else:
+            gray = img.astype(np.float32, copy=False)
+
+        src_h, src_w = gray.shape[:2]
+        y_idx = np.linspace(0, max(src_h - 1, 0), self._thumb_height).astype(np.int32)
+        x_idx = np.linspace(0, max(src_w - 1, 0), self._thumb_width).astype(np.int32)
+        thumb = gray[np.ix_(y_idx, x_idx)]
+        return thumb.astype(np.uint8, copy=False)
+
+    @staticmethod
+    def _thumb_diff(prev_thumb: np.ndarray, curr_thumb: np.ndarray) -> float:
+        return float(
+            np.mean(
+                np.abs(curr_thumb.astype(np.int16) - prev_thumb.astype(np.int16))
+            )
+        )
 
     def _match_hero(self, text: str) -> tuple[Optional[str], float]:
         if not text or not self._hero_names:
