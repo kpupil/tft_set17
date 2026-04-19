@@ -33,10 +33,10 @@ from config import BOT
 
 logger = logging.getLogger("tft.picker")
 
-DEFAULT_SCAN_INTERVAL = BOT.get("scan_interval_ms", 40) / 1000
-NORMAL_POLL_INTERVAL = BOT.get("normal_scan_interval_ms", BOT.get("scan_interval_ms", 40)) / 1000
-FAST_POLL_INTERVAL = BOT.get("fast_scan_interval_ms", 40) / 1000
-FAST_SCAN_HOLD = BOT.get("fast_scan_hold_ms", 900) / 1000
+DEFAULT_SCAN_INTERVAL = BOT.get("scan_interval_ms", 500) / 1000
+NORMAL_POLL_INTERVAL = BOT.get("normal_scan_interval_ms", BOT.get("scan_interval_ms", 1000)) / 1000
+FAST_POLL_INTERVAL = BOT.get("fast_scan_interval_ms", 200) / 1000
+FAST_SCAN_HOLD = BOT.get("fast_scan_hold_ms", 2000) / 1000
 SHOP_CHANGE_FAST_SLOT_COUNT = max(1, int(BOT.get("shop_change_fast_slot_count", 2)))
 CLICK_DELAY   = BOT.get("pick_delay_ms", 10) / 1000      # 每次点击后等待（秒，防连点）
 
@@ -272,7 +272,8 @@ class AutoPicker(QThread):
         details = self._ocr.recognize_all_details(ocr_rects)
         results = [(d["hero_id"], d["score"]) for d in details]
         self._maybe_accelerate_from_shop_change(details)
-        self._log_ocr_results(details, pick_set)
+        if logger.isEnabledFor(logging.DEBUG):
+            self._log_ocr_results(details, pick_set)
 
         matches = []
         for slot_idx, (hero_id, score) in enumerate(results):
@@ -332,8 +333,11 @@ class AutoPicker(QThread):
 
     @staticmethod
     def _log_ocr_results(details: list[dict], pick_set: Set[str]):
+        if not logger.isEnabledFor(logging.DEBUG):
+            return
+
         if not details:
-            logger.info("本轮 OCR 无识别结果")
+            logger.debug("本轮 OCR 无识别结果")
             return
 
         slot_logs = []
@@ -354,7 +358,7 @@ class AutoPicker(QThread):
                 f"{target_flag})"
             )
 
-        logger.info("本轮 OCR 结果 | %s", " | ".join(slot_logs))
+        logger.debug("本轮 OCR 结果 | %s", " | ".join(slot_logs))
 
     def _click_slot(self, config: RegionConfig, slot_idx: int):
         """通过 pydirectinput 点击指定 slot 的槽位锚点。"""

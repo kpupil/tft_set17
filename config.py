@@ -147,9 +147,9 @@ BOT = {
     "enabled": False,
     "confidence": 0.85,
     "pick_delay_ms": 0,
-    "scan_interval_ms": 200,
+    "scan_interval_ms": 500,
     "normal_scan_interval_ms": 1000,
-    "fast_scan_interval_ms": 40,
+    "fast_scan_interval_ms": 200,
     "fast_scan_hold_ms": 2000,
     "shop_change_fast_slot_count": 1,
 }

@@ -107,8 +107,9 @@ class OCREngine:
         self._thread_local = threading.local()
         self._model_root_dir = APP_DATA_ROOT / "models"
         self._bundled_model_path = RESOURCE_ROOT / "models" / "ch_PP-OCRv4_rec_mobile.onnx"
-        self._ort_intra_threads = _env_int("TFT_OCR_ORT_INTRA_THREADS", 4)
-        self._ort_inter_threads = _env_int("TFT_OCR_ORT_INTER_THREADS", 2)
+        # 默认保守一些，减少与游戏主线程竞争 CPU；仍支持环境变量覆盖。
+        self._ort_intra_threads = _env_int("TFT_OCR_ORT_INTRA_THREADS", 1)
+        self._ort_inter_threads = _env_int("TFT_OCR_ORT_INTER_THREADS", 1)
         self._slot_cache: list[dict] = []
         self._thumb_width = 48
         self._thumb_height = 12

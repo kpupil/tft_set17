@@ -17,6 +17,7 @@ def add_tree(src: Path, dest: str):
 
 
 datas = []
+datas += add_tree(PROJECT_ROOT / "assets", "assets")
 datas += add_tree(PROJECT_ROOT / "data" / "cache" / "raw", "data/cache/raw")
 datas += add_tree(PROJECT_ROOT / "data" / "cache" / "processed", "data/cache/processed")
 datas += add_tree(PROJECT_ROOT / "data" / "cache" / "images", "data/cache/images")

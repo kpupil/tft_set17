@@ -325,36 +325,49 @@ class PickListPanel(QWidget):
 
         trait_header = QHBoxLayout()
         trait_header.setContentsMargins(0, 0, 0, 0)
-        trait_header.setSpacing(6)
+        trait_header.setSpacing(8)
+
+        # 左侧：金色竖条 + 标题 + hint
+        title_bar = QLabel()
+        title_bar.setFixedSize(3, 12)
+        title_bar.setStyleSheet(f"background:{TEXT_GOLD}; border-radius:1.5px;")
+        trait_header.addWidget(title_bar)
+
         trait_lbl = QLabel("羁绊 / 转职")
         trait_lbl.setStyleSheet(
-            f"color:{TEXT_SEC}; font-size:10px; font-weight:600; background:transparent;"
-        )
-        self._trait_hint_lbl = QLabel("")
-        self._trait_hint_lbl.setStyleSheet(
-            f"color:{TEXT_SEC}; font-size:9px; background:transparent;"
+            f"color:{TEXT_PRI}; font-size:11px; font-weight:700;"
+            f" background:transparent; letter-spacing:0.3px;"
         )
         trait_header.addWidget(trait_lbl)
+
+        self._trait_hint_lbl = QLabel("")
+        self._trait_hint_lbl.setStyleSheet(
+            f"color:{TEXT_SEC}; font-size:10px; background:transparent;"
+        )
+        trait_header.addWidget(self._trait_hint_lbl)
+
+        trait_header.addStretch()
+
+        # 右侧：已选转职滑版 + 添加按钮
         self._selected_emblems_scroll = QScrollArea()
         self._selected_emblems_scroll.setWidgetResizable(True)
         self._selected_emblems_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self._selected_emblems_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self._selected_emblems_scroll.setFrameShape(QFrame.Shape.NoFrame)
-        self._selected_emblems_scroll.setFixedHeight(26)
-        self._selected_emblems_scroll.setFixedWidth(110)
-        self._selected_emblems_scroll.setStyleSheet("QScrollArea { background: transparent; }")
+        self._selected_emblems_scroll.setFixedHeight(30)
+        self._selected_emblems_scroll.setMaximumWidth(120)
+        self._selected_emblems_scroll.setStyleSheet("QScrollArea { background: transparent; border:none; }")
         self._selected_emblems_host = QWidget()
         self._selected_emblems_lay = QHBoxLayout(self._selected_emblems_host)
         self._selected_emblems_lay.setContentsMargins(0, 0, 0, 0)
         self._selected_emblems_lay.setSpacing(4)
         self._selected_emblems_scroll.setWidget(self._selected_emblems_host)
         trait_header.addWidget(self._selected_emblems_scroll)
-        trait_header.addStretch()
+
         self._add_emblem_btn = _btn("+ 转职", TEXT_GOLD)
         self._add_emblem_btn.clicked.connect(self._open_emblem_selector)
         self._add_emblem_btn.setFixedHeight(22)
         trait_header.addWidget(self._add_emblem_btn)
-        trait_header.addWidget(self._trait_hint_lbl)
         t_lay.addLayout(trait_header)
 
         self._traits_scroll = QScrollArea()
@@ -362,21 +375,33 @@ class PickListPanel(QWidget):
         self._traits_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self._traits_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self._traits_scroll.setFrameShape(QFrame.Shape.NoFrame)
-        self._traits_scroll.setFixedHeight(34)
+        self._traits_scroll.setFixedHeight(40)
         self._traits_scroll.setStyleSheet("""
-            QScrollArea { background: transparent; }
+            QScrollArea { background: transparent; border:none; }
             QScrollBar:horizontal {
                 background: transparent;
-                height: 5px;
-                margin: 0;
+                height: 4px;
+                margin: 2px 2px 0 2px;
+            }
+            QScrollBar:horizontal:hover {
+                height: 6px;
             }
             QScrollBar::handle:horizontal {
-                background: #314257;
+                background: #3c5070;
                 border-radius: 2px;
+                min-width: 24px;
+            }
+            QScrollBar::handle:horizontal:hover {
+                background: #c89b3c;
             }
             QScrollBar::add-line:horizontal,
             QScrollBar::sub-line:horizontal {
                 width: 0;
+                background: transparent;
+            }
+            QScrollBar::add-page:horizontal,
+            QScrollBar::sub-page:horizontal {
+                background: transparent;
             }
         """)
         self._traits_strip = QWidget()
@@ -410,13 +435,18 @@ class PickListPanel(QWidget):
         if app is None:
             return
         base = app.styleSheet() or ""
+        # 深色底 + 金色描边的 tooltip，字号加大确保可读
         tooltip_css = """
 QToolTip {
-    background: #f3f6fb;
-    color: #10161f;
-    border: 1px solid #90a4bf;
-    padding: 4px 6px;
-    font-size: 10px;
+    background-color: #0f1420;
+    color: #e8eef7;
+    border: 1px solid #c89b3c;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-family: "Microsoft YaHei UI", "PingFang SC", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    opacity: 240;
 }
 """
         import re

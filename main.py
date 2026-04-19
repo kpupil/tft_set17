@@ -21,7 +21,8 @@ from data.manager import DataManager
 
 
 def setup_logging(verbose: bool = False):
-    level = logging.DEBUG if verbose else logging.INFO
+    # 默认面向最终用户保持安静；需要排查问题时再用 -v 打开详细日志。
+    level = logging.DEBUG if verbose else logging.WARNING
     logging.basicConfig(
         level=level,
         format="%(asctime)s [%(levelname)s] %(message)s",
