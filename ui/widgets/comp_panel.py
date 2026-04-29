@@ -23,7 +23,7 @@ from PyQt6.QtGui import QColor, QFont, QPainter, QPainterPath, QPixmap, QPen, QB
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel,
     QComboBox, QFrame, QGridLayout,
-    QSizePolicy, QPushButton,
+    QSizePolicy, QPushButton, QScrollArea,
 )
 
 from data.manager import DataManager
@@ -62,6 +62,28 @@ def _hline() -> QFrame:
     f.setStyleSheet(f"color:{BORDER}; background:{BORDER};")
     f.setFixedHeight(1)
     return f
+
+
+def _fmt_pct(value: float | None) -> str:
+    if value is None:
+        return "—"
+    return f"{value * 100:.1f}%"
+
+
+def _fmt_place(value: float | int | str | None) -> str:
+    if value in (None, "", 0):
+        return "—"
+    try:
+        return f"{float(value):.2f}"
+    except (TypeError, ValueError):
+        return str(value)
+
+
+def _sort_float(value, default: float = 9.0) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
 
 
 # ─────────────────────────────────────────────────────────────
@@ -250,6 +272,16 @@ class VariantsSection(QWidget):
             lbl = _label(f"变体{i}", TEXT_GOLD, 9, bold=True)
             left_lay.addWidget(lbl)
 
+            stats = v.stats or {}
+            meta_bits = []
+            if stats.get("avg_placement") is not None:
+                meta_bits.append(f"{_fmt_place(stats.get('avg_placement'))}名")
+            if stats.get("share") is not None:
+                meta_bits.append(_fmt_pct(stats.get("share")))
+            if meta_bits:
+                meta = _label(meta_bits[0], TEXT_SEC, 8)
+                left_lay.addWidget(meta)
+
             import_btn = QPushButton("导入")
             import_btn.setFixedSize(34, 16)
             import_btn.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
@@ -265,7 +297,7 @@ class VariantsSection(QWidget):
                 lambda _, us=units: self.import_requested.emit(us)
             )
             left_lay.addWidget(import_btn)
-            left.setFixedWidth(34)
+            left.setFixedWidth(48)
             card_lay.addWidget(left)
 
             # 右侧：头像横排
@@ -283,6 +315,8 @@ class VariantsSection(QWidget):
                 av_lay.addWidget(mini)
             av_lay.addStretch()
             card_lay.addWidget(avatars, stretch=1)
+            if meta_bits:
+                card.setToolTip("变体统计：" + " / ".join(meta_bits))
 
             body_lay.addWidget(card)
         self._outer.addWidget(self._body)
@@ -304,6 +338,378 @@ class VariantsSection(QWidget):
         self._update_header_text()
         # 无需手动 resize — overlay 的 SetFixedSize layout 约束
         # 会在 show/hide 触发 layout 变化时自动调整窗口高度
+
+
+class AdvancedIcon(QWidget):
+    """进阶信息里的装备/英雄小图标。"""
+
+    def __init__(
+        self,
+        icon: str,
+        cache: ImageCache,
+        *,
+        name: str = "",
+        cost: int | None = None,
+        category: str = "",
+        size: int = 28,
+        parent=None,
+    ):
+        super().__init__(parent)
+        self._icon = icon
+        self._name = name
+        self._cost = cost
+        self._category = category
+        self._size = size
+        self._cache = cache
+        self._px: QPixmap | None = cache.get(icon) if icon else None
+
+        self.setFixedSize(size, size)
+        self.setToolTip(name)
+        self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
+        cache.image_ready.connect(self._on_ready)
+
+    def _on_ready(self, icon_path: str, px: QPixmap):
+        if icon_path == self._icon:
+            self._px = px
+            self.update()
+
+    def paintEvent(self, _event):
+        p = QPainter(self)
+        p.setRenderHint(QPainter.RenderHint.Antialiasing)
+        p.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform)
+
+        r = 5
+        sz = self._size
+        border = self._border_color()
+
+        path = QPainterPath()
+        path.addRoundedRect(0, 0, sz, sz, r, r)
+        p.fillPath(path, QColor("#111722"))
+        p.setClipPath(path)
+
+        if self._px:
+            src = self._px
+            side = min(src.width(), src.height())
+            sx = (src.width() - side) // 2
+            sy = (src.height() - side) // 2
+            p.drawPixmap(QRect(0, 0, sz, sz), src, QRect(sx, sy, side, side))
+        else:
+            p.fillRect(0, 0, sz, sz, QColor("#1e2433"))
+
+        p.setClipping(False)
+        p.setPen(QPen(border, 1.4))
+        p.setBrush(Qt.BrushStyle.NoBrush)
+        p.drawRoundedRect(1, 1, sz - 2, sz - 2, r, r)
+        p.end()
+
+    def _border_color(self) -> QColor:
+        if self._cost:
+            return QColor(COST_COLORS.get(self._cost, "#5d6168"))
+        if self._category == "emblem":
+            return QColor("#d8b35a")
+        if self._category == "artifact":
+            return QColor("#a68cff")
+        if self._category == "radiant":
+            return QColor("#e8d17a")
+        return QColor(CHIP_BORDER)
+
+
+class AdvancedVisualRow(QFrame):
+    """一行图像化进阶信息：装备图标 → 携带者头像 + 少量统计。"""
+
+    def __init__(
+        self,
+        kind: str,
+        source: dict,
+        cache: ImageCache,
+        *,
+        target: dict | None = None,
+        build_items: list[dict] | None = None,
+        stat: str = "",
+        tooltip: str = "",
+        parent=None,
+    ):
+        super().__init__(parent)
+        self.setStyleSheet(f"background:{CHIP_BG}; border-radius:5px;")
+        self.setToolTip(tooltip)
+
+        lay = QHBoxLayout(self)
+        lay.setContentsMargins(8, 5, 8, 5)
+        lay.setSpacing(6)
+
+        kind_lbl = _label(kind, TEXT_GOLD, 9, bold=True)
+        kind_lbl.setFixedWidth(34)
+        lay.addWidget(kind_lbl)
+
+        lay.addWidget(AdvancedIcon(
+            source.get("icon", ""),
+            cache,
+            name=source.get("name", ""),
+            category=source.get("category", ""),
+            size=28,
+        ))
+
+        if target:
+            arrow = _label("→", TEXT_SEC, 10, bold=True)
+            arrow.setFixedWidth(12)
+            lay.addWidget(arrow)
+            lay.addWidget(AdvancedIcon(
+                target.get("icon", ""),
+                cache,
+                name=target.get("name", ""),
+                cost=target.get("cost"),
+                size=28,
+            ))
+
+        for item in (build_items or [])[:3]:
+            lay.addWidget(AdvancedIcon(
+                item.get("icon", ""),
+                cache,
+                name=item.get("name", ""),
+                category=item.get("category", ""),
+                size=20,
+            ))
+
+        lay.addStretch()
+
+        if stat:
+            stat_lbl = _label(stat, TEXT_SEC, 9)
+            stat_lbl.setAlignment(Qt.AlignmentFlag.AlignRight | Qt.AlignmentFlag.AlignVCenter)
+            stat_lbl.setMinimumWidth(58)
+            lay.addWidget(stat_lbl)
+
+
+class UnitStatsStrip(QFrame):
+    """单位统计摘要：用头像扫读核心单位，详细数字放 tooltip。"""
+
+    def __init__(self, units: list[dict], cache: ImageCache, parent=None):
+        super().__init__(parent)
+        self.setStyleSheet(f"background:{CHIP_BG}; border-radius:5px;")
+
+        lay = QHBoxLayout(self)
+        lay.setContentsMargins(8, 5, 8, 5)
+        lay.setSpacing(6)
+
+        kind_lbl = _label("单位", TEXT_GOLD, 9, bold=True)
+        kind_lbl.setFixedWidth(34)
+        lay.addWidget(kind_lbl)
+
+        for unit in units[:6]:
+            metrics = unit.get("metrics") or []
+            tooltip = unit.get("name", "")
+            if metrics:
+                tooltip += "\n" + " | ".join(str(m) for m in metrics[:6])
+            icon = AdvancedIcon(
+                unit.get("icon", ""),
+                cache,
+                name=tooltip,
+                cost=unit.get("cost"),
+                size=28,
+            )
+            lay.addWidget(icon)
+
+        lay.addStretch()
+
+
+# ─────────────────────────────────────────────────────────────
+# 进阶信息区
+# ─────────────────────────────────────────────────────────────
+
+class AdvancedInfoSection(QWidget):
+    """默认折叠的图像化进阶信息：转职、特殊装备、单位统计。"""
+
+    def __init__(self, comp: Composition, cache: ImageCache):
+        super().__init__()
+        self._comp = comp
+        self._cache = cache
+        self._expanded = False
+        self._setup_ui()
+
+    def _setup_ui(self):
+        self._outer = QVBoxLayout(self)
+        self._outer.setContentsMargins(0, 0, 0, 0)
+        self._outer.setSpacing(0)
+
+        self._header = QPushButton()
+        self._header.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self._header.setStyleSheet(f"""
+            QPushButton {{
+                background: {BG_SECTION};
+                border: none;
+                border-top: 1px solid {BORDER};
+                color: {TEXT_SEC};
+                font-size: 10px;
+                text-align: left;
+                padding: 7px 12px;
+            }}
+            QPushButton:hover {{
+                background: {BG_HOVER};
+                color: {TEXT_PRI};
+            }}
+        """)
+        self._header.clicked.connect(self._toggle)
+        self._outer.addWidget(self._header)
+
+        self._body = QWidget()
+        body_lay = QVBoxLayout(self._body)
+        body_lay.setContentsMargins(8, 4, 8, 8)
+        body_lay.setSpacing(5)
+
+        self._fill_body(body_lay)
+        self._body.hide()
+        self._outer.addWidget(self._body)
+        self._update_header_text()
+
+    def _fill_body(self, body_lay: QVBoxLayout):
+        for emblem in self._best_emblems()[:4]:
+            carrier = self._best_carrier(emblem.get("carriers", []))
+            meta = f"{_fmt_place(emblem.get('avg_placement'))}名  {_fmt_pct(emblem.get('appearance_rate'))}"
+            carrier_name = carrier.get("name", "—") if carrier else "—"
+            tooltip = f"{emblem.get('name', '—')} → {carrier_name}\n{meta}"
+            body_lay.addWidget(AdvancedVisualRow(
+                "转职",
+                emblem,
+                self._cache,
+                target=carrier,
+                stat=meta,
+                tooltip=tooltip,
+            ))
+
+        special_items = self._best_special_items()
+        if special_items:
+            special_host = QWidget()
+            special_host.setStyleSheet("background:transparent;")
+            special_lay = QVBoxLayout(special_host)
+            special_lay.setContentsMargins(0, 0, 0, 0)
+            special_lay.setSpacing(5)
+
+            for item in special_items:
+                special_lay.addWidget(self._special_item_row(item))
+            special_lay.addStretch()
+
+            if len(special_items) > 6:
+                scroll = QScrollArea()
+                scroll.setWidgetResizable(True)
+                scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+                scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+                scroll.setFrameShape(QFrame.Shape.NoFrame)
+                scroll.setFixedHeight(260)
+                scroll.setStyleSheet("""
+                    QScrollArea { background: transparent; border:none; }
+                    QScrollBar:vertical {
+                        background: transparent;
+                        width: 5px;
+                        margin: 2px 0 2px 0;
+                    }
+                    QScrollBar::handle:vertical {
+                        background: #3c5070;
+                        border-radius: 2px;
+                        min-height: 24px;
+                    }
+                    QScrollBar::handle:vertical:hover {
+                        background: #c89b3c;
+                    }
+                    QScrollBar::add-line:vertical,
+                    QScrollBar::sub-line:vertical {
+                        height: 0;
+                        background: transparent;
+                    }
+                    QScrollBar::add-page:vertical,
+                    QScrollBar::sub-page:vertical {
+                        background: transparent;
+                    }
+                """)
+                scroll.setWidget(special_host)
+                body_lay.addWidget(scroll)
+            else:
+                body_lay.addWidget(special_host)
+
+        core_units = self._core_unit_stats()
+        if core_units:
+            body_lay.addWidget(UnitStatsStrip(core_units, self._cache))
+
+    def _special_item_row(self, item: dict) -> AdvancedVisualRow:
+        carrier = item.get("carrier") or {}
+        avg = self._special_item_avg(item)
+        metrics = item.get("metrics") or []
+        stat = _fmt_place(avg)
+        if stat != "—":
+            stat += "名"
+        if len(metrics) > 1 and metrics[1]:
+            stat = f"{stat}  {metrics[1]}" if stat != "—" else str(metrics[1])
+        best_build = item.get("best_build") or {}
+        build_items = best_build.get("items", []) or []
+        tooltip = f"{item.get('name', '—')} → {carrier.get('name', '—')}"
+        if stat:
+            tooltip += f"\n{stat}"
+        if build_items:
+            tooltip += "\n最佳出装：" + " / ".join(i.get("name", "") for i in build_items)
+        return AdvancedVisualRow(
+            self._category_label(item.get("category", "")),
+            item,
+            self._cache,
+            target=carrier,
+            build_items=build_items,
+            stat=stat,
+            tooltip=tooltip,
+        )
+
+    def _best_emblems(self) -> list[dict]:
+        return sorted(
+            self._comp.emblems,
+            key=lambda e: e.get("avg_placement") or 9.0,
+        )
+
+    def _best_carrier(self, carriers: list[dict]) -> dict | None:
+        for carrier in carriers:
+            if carrier.get("best"):
+                return carrier
+        return carriers[0] if carriers else None
+
+    def _special_item_avg(self, item: dict):
+        best_build = item.get("best_build") or {}
+        if best_build.get("avg_placement"):
+            return best_build.get("avg_placement")
+        metrics = item.get("metrics") or []
+        return metrics[3] if len(metrics) > 3 else None
+
+    def _best_special_items(self) -> list[dict]:
+        return sorted(
+            self._comp.special_items,
+            key=lambda item: _sort_float(self._special_item_avg(item)),
+        )
+
+    def _core_unit_stats(self) -> list[dict]:
+        return sorted(
+            [u for u in self._comp.unit_stats if u.get("metrics")],
+            key=lambda u: (-(u.get("cost") or 0), u.get("name", "")),
+        )
+
+    def _category_label(self, category: str) -> str:
+        if category == "artifact":
+            return "神器"
+        if category == "radiant":
+            return "光明"
+        if category == "emblem":
+            return "转职"
+        return "特装"
+
+    def _update_header_text(self):
+        arrow = "▼" if self._expanded else "▶"
+        parts = []
+        if self._comp.emblems:
+            parts.append(f"转职{len(self._comp.emblems)}")
+        if self._comp.special_items:
+            parts.append(f"特装{len(self._comp.special_items)}")
+        if self._comp.unit_stats:
+            parts.append(f"单位{len(self._comp.unit_stats)}")
+        suffix = " / ".join(parts) if parts else "无"
+        self._header.setText(f"  {arrow}  进阶信息  ({suffix})")
+
+    def _toggle(self):
+        self._expanded = not self._expanded
+        self._body.setVisible(self._expanded)
+        self._update_header_text()
 
 
 # ─────────────────────────────────────────────────────────────
@@ -390,6 +796,15 @@ class CompPanel(QWidget):
         self._units_grid.setSpacing(4)
         self._root.addWidget(self._units_widget)
 
+        # ── 进阶信息（动态替换，默认折叠）─────────────────────
+        self._advanced_host = QWidget()
+        self._advanced_host.setStyleSheet(f"background:{BG_SECTION};")
+        self._advanced_lay = QVBoxLayout(self._advanced_host)
+        self._advanced_lay.setContentsMargins(0, 0, 0, 0)
+        self._advanced_lay.setSpacing(0)
+        self._root.addWidget(self._advanced_host)
+        self._advanced_host.hide()
+
         self._root.addWidget(_hline())
 
         # ── 激活羁绊区 ────────────────────────────────────────
@@ -420,7 +835,8 @@ class CompPanel(QWidget):
         self._traits_divider.hide()
         self._traits_widget.hide()
 
-        # ── 变体区块（动态替换）───────────────────────────────
+        # ── 进阶信息 / 变体区块（动态替换）────────────────────
+        self._advanced_widget: AdvancedInfoSection | None = None
         self._variants_widget: VariantsSection | None = None
 
     # ──────────────────────────────────────────────────────────
@@ -452,16 +868,32 @@ class CompPanel(QWidget):
 
         self._render_stats(comp)
         self._render_units(comp)
+        self._render_advanced(comp)
         self._render_variants(comp)
 
         # 预载所有图片
         icons = [u.icon for u in comp.units if u.icon]
         for u in comp.units:
-            for b in u.builds[:1]:
+            for b in u.builds:
                 icons += [i.icon for i in b.items if i.icon]
         # 变体英雄头像
         for v in comp.variants:
             icons += [vu.icon for vu in v.units if vu.icon]
+        # 进阶信息中的装备/携带者
+        for emblem in comp.emblems:
+            if emblem.get("icon"):
+                icons.append(emblem["icon"])
+            icons += [c.get("icon", "") for c in emblem.get("carriers", []) if c.get("icon")]
+        for item in comp.special_items:
+            if item.get("icon"):
+                icons.append(item["icon"])
+            carrier = item.get("carrier") or {}
+            if carrier.get("icon"):
+                icons.append(carrier["icon"])
+            for bi in (item.get("best_build") or {}).get("items", []):
+                if bi.get("icon"):
+                    icons.append(bi["icon"])
+        icons += [u.get("icon", "") for u in comp.unit_stats if u.get("icon")]
         self.cache.prefetch(icons)
 
     def _render_stats(self, comp: Composition):
@@ -483,6 +915,24 @@ class CompPanel(QWidget):
     def _render_traits(self, comp: Composition):
         # 羁绊展示已迁移到 PickListPanel，这里保留空实现以兼容旧调用。
         return
+
+    def _render_advanced(self, comp: Composition):
+        if self._advanced_widget:
+            self._advanced_lay.removeWidget(self._advanced_widget)
+            self._advanced_widget.deleteLater()
+            self._advanced_widget = None
+
+        has_info = any([
+            comp.emblems,
+            comp.special_items,
+            comp.unit_stats,
+        ])
+        self._advanced_host.setVisible(has_info)
+        if not has_info:
+            return
+
+        self._advanced_widget = AdvancedInfoSection(comp, self.cache)
+        self._advanced_lay.addWidget(self._advanced_widget)
 
     def _compute_active_traits(self, comp: Composition) -> list[dict]:
         counts: Counter[str] = Counter()

@@ -34,6 +34,7 @@ class Item:
     id:         str
     name:       str
     icon:       str       = ""                            # 图标路径（相对 tftable.cc 根目录）
+    category:   str       = ""                            # normal / emblem / artifact / radiant …
     components: list[str] = field(default_factory=list)   # 散件名称列表，长度通常为 2
 
     @staticmethod
@@ -42,6 +43,7 @@ class Item:
             id=d.get("id", ""),
             name=d.get("name", ""),
             icon=d.get("icon", ""),
+            category=d.get("category", ""),
             components=d.get("components", []),
         )
 
@@ -54,16 +56,24 @@ class ItemPriority:
     """英雄装备优先级条目（来自 prioritySections）"""
     id:        str
     name:      str
-    necessity: float  # 0.0–1.0，越高越核心
-    rating:    str    # "Core" / "Recommended" / "Flex" …
+    icon:      str   = ""
+    category:  str   = ""
+    necessity: float = 0.0  # 0.0–1.0，越高越核心
+    rating:    str   = ""   # "Core" / "Recommended" / "Flex" …
+    count:     int   = 0
+    appearance_rate: float = 0.0
 
     @staticmethod
     def from_dict(d: dict) -> "ItemPriority":
         return ItemPriority(
             id=d.get("id", ""),
             name=d.get("name", ""),
+            icon=d.get("icon", ""),
+            category=d.get("category", ""),
             necessity=d.get("necessity", 0.0),
             rating=d.get("rating", ""),
+            count=d.get("count", 0),
+            appearance_rate=d.get("appearance_rate", 0.0),
         )
 
     def to_dict(self) -> dict:
@@ -73,18 +83,21 @@ class ItemPriority:
 @dataclass
 class Build:
     """英雄的一套出装方案"""
+    index:      int         = 1
     items:      list[Item]  = field(default_factory=list)   # 推荐装备
     components: list[str]   = field(default_factory=list)   # 所需散件（去重保序）
 
     @staticmethod
     def from_dict(d: dict) -> "Build":
         return Build(
+            index=d.get("index", 1),
             items=[Item.from_dict(i) for i in d.get("items", [])],
             components=d.get("components", []),
         )
 
     def to_dict(self) -> dict:
         return {
+            "index":      self.index,
             "items":      [i.to_dict() for i in self.items],
             "components": self.components,
         }
@@ -99,6 +112,7 @@ class Unit:
     icon:          str                = ""    # 头像路径（相对 tftable.cc 根目录）
     builds:        list[Build]        = field(default_factory=list)
     item_priority: list[ItemPriority] = field(default_factory=list)
+    stats:         dict               = field(default_factory=dict)
 
     @staticmethod
     def from_dict(d: dict) -> "Unit":
@@ -109,6 +123,7 @@ class Unit:
             icon=d.get("icon", ""),
             builds=[Build.from_dict(b) for b in d.get("builds", [])],
             item_priority=[ItemPriority.from_dict(p) for p in d.get("item_priority", [])],
+            stats=d.get("stats", {}),
         )
 
     def to_dict(self) -> dict:
@@ -119,6 +134,7 @@ class Unit:
             "icon":          self.icon,
             "builds":        [b.to_dict() for b in self.builds],
             "item_priority": [p.to_dict() for p in self.item_priority],
+            "stats":         self.stats,
         }
 
 
@@ -147,6 +163,8 @@ class Variant:
     units:  list[Unit]    = field(default_factory=list)
     traits: list[Trait]   = field(default_factory=list)
     stats:  dict          = field(default_factory=dict)   # 包含 avgPlacement / winRate 等原始数值
+    label:  str           = ""
+    team_code: str        = ""
 
     @staticmethod
     def from_dict(d: dict) -> "Variant":
@@ -154,6 +172,8 @@ class Variant:
             units=[Unit.from_dict(u) for u in d.get("units", [])],
             traits=[Trait.from_dict(t) for t in d.get("traits", [])],
             stats=d.get("stats", {}),
+            label=d.get("label", ""),
+            team_code=d.get("team_code", ""),
         )
 
     def to_dict(self) -> dict:
@@ -161,6 +181,8 @@ class Variant:
             "units":  [u.to_dict() for u in self.units],
             "traits": [t.to_dict() for t in self.traits],
             "stats":  self.stats,
+            "label":  self.label,
+            "team_code": self.team_code,
         }
 
 
@@ -185,6 +207,11 @@ class Composition:
     required_components: list[str]     = field(default_factory=list)  # 散件优先级
     variants:            list[Variant] = field(default_factory=list)
     has_details:         bool          = False
+    team_code:           str           = ""
+    stats:               dict          = field(default_factory=dict)  # 详情页原始统计
+    unit_stats:          list[dict]    = field(default_factory=list)
+    emblems:             list[dict]    = field(default_factory=list)
+    special_items:       list[dict]    = field(default_factory=list)
 
     # ── 工厂方法 ──────────────────────────────────────────────
 
@@ -202,6 +229,11 @@ class Composition:
             required_components=d.get("required_components", []),
             variants=[Variant.from_dict(v) for v in d.get("variants", [])],
             has_details=d.get("has_details", False),
+            team_code=d.get("team_code", ""),
+            stats=d.get("stats", {}),
+            unit_stats=d.get("unit_stats", []),
+            emblems=d.get("emblems", []),
+            special_items=d.get("special_items", []),
         )
 
     def to_dict(self) -> dict:
@@ -217,6 +249,11 @@ class Composition:
             "required_components": self.required_components,
             "variants":            [v.to_dict() for v in self.variants],
             "has_details":         self.has_details,
+            "team_code":           self.team_code,
+            "stats":               self.stats,
+            "unit_stats":          self.unit_stats,
+            "emblems":             self.emblems,
+            "special_items":       self.special_items,
         }
 
     # ── 便捷属性 ──────────────────────────────────────────────

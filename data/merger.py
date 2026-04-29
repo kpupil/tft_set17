@@ -43,10 +43,14 @@ class TFTDataMerger:
         "cost": 5,
         "avg_placement": 3.67,
         "win_rate": 0.153,
-        "trending": "up",
+        "team_code": "...",
+        "stats": { ... },
         "units": [ { "id": "TFT17_Jhin", "name": "烬", "cost": 5, ... } ],
         "traits": [ { "id": "...", "name": "暗星", "count": 6 } ],
         "required_components": ["BF大剑", "暴风大剑", ...],
+        "unit_stats": [...],
+        "emblems": [...],
+        "special_items": [...],
         "variants": [...],
         "has_details": true
       }
@@ -143,9 +147,14 @@ class TFTDataMerger:
                 "cost":                card.get("compCost"),
                 "avg_placement":       round(card.get("averagePlacementValue", 0.0), 2),
                 "win_rate":            round(card.get("winRate", 0.0), 4),
+                "team_code":           "",
+                "stats":               {},
                 "units":               [],
                 "traits":              [],
                 "required_components": [],
+                "unit_stats":          [],
+                "emblems":             [],
+                "special_items":       [],
                 "variants":            [],
                 "has_details":         False,
             }
@@ -156,6 +165,10 @@ class TFTDataMerger:
         overview = comp.get("overview", {})
         stats    = overview.get("stats", {})
 
+        # ── 详情统计（保留原始 metrics，同时补齐可读名称/图标）────
+        unit_stats = self._parse_unit_stats(details.get("unitStats") or [])
+        unit_stats_by_id = {s["id"]: s for s in unit_stats if s.get("id")}
+
         # ── 核心英雄 ──────────────────────────────────────────
         units = self._parse_units(overview.get("coreUnits", []))
 
@@ -163,6 +176,7 @@ class TFTDataMerger:
         priority_map = self._parse_priority(details.get("prioritySections") or [])
         for u in units:
             u["item_priority"] = priority_map.get(u["id"], [])
+            u["stats"] = unit_stats_by_id.get(u["id"], {})
 
         # ── 羁绊 ──────────────────────────────────────────────
         traits = [
@@ -181,6 +195,10 @@ class TFTDataMerger:
         limit    = MERGER["variants_limit"]
         variants = self._parse_variants(comp.get("variants", [])[:limit])
 
+        # ── 转职 / 神器 / 光明装等高价值进阶信息 ────────────────
+        emblems       = self._parse_emblems(details.get("emblems") or {})
+        special_items = self._parse_special_items(details.get("specialSections") or [])
+
         # ── 统计数值（优先使用详情页数据）───────────────────
         avg_placement = float(
             stats.get("avgPlacementValue") or card.get("averagePlacementValue") or 0.0
@@ -196,9 +214,14 @@ class TFTDataMerger:
             "cost":                card.get("compCost"),
             "avg_placement":       round(avg_placement, 2),
             "win_rate":            round(win_rate, 4),
+            "team_code":           overview.get("teamCode", ""),
+            "stats":               stats,
             "units":               units,
             "traits":              traits,
             "required_components": required_components,
+            "unit_stats":          unit_stats,
+            "emblems":             emblems,
+            "special_items":       special_items,
             "variants":            variants,
             "has_details":         bool(details),
         }
@@ -214,13 +237,10 @@ class TFTDataMerger:
                 components_needed = []
                 for slot in build.get("items", []):
                     iid  = slot.get("id", "")
-                    items_in_build.append({
-                        "id":   iid,
-                        "name": self._item_name(iid),
-                        "icon": self._item_icon(iid),
-                    })
+                    items_in_build.append(self._item_record(iid))
                     components_needed.extend(self._get_components(iid))
                 builds.append({
+                    "index":      build.get("index", len(builds) + 1),
                     "items":      items_in_build,
                     "components": list(dict.fromkeys(components_needed)),
                 })
@@ -232,6 +252,7 @@ class TFTDataMerger:
                 "icon":          self._unit_icon(uid),
                 "builds":        builds,
                 "item_priority": [],
+                "stats":         {},
             })
         return units
 
@@ -251,8 +272,12 @@ class TFTDataMerger:
                 items.append({
                     "id":        iid,
                     "name":      self._item_name(iid),
+                    "icon":      self._item_icon(iid),
+                    "category":  self._item_category(iid),
                     "necessity": round(item_info.get("necessity", 0.0), 3),
                     "rating":    item_info.get("rating", ""),
+                    "count":     item_info.get("count") or 0,
+                    "appearance_rate": round(item_info.get("appearanceRate", 0.0), 4),
                 })
             result[uid] = items
         return result
@@ -270,24 +295,105 @@ class TFTDataMerger:
         """解析变体阵容列表。"""
         result = []
         for v in variants_raw:
-            vunits = [
-                {
-                    "id":   vu.get("id", ""),
-                    "name": self._unit_name(vu.get("id", "")),
-                    "cost": self._unit_cost(vu.get("id", "")),
-                    "icon": self._unit_icon(vu.get("id", "")),
-                }
-                for vu in v.get("units", [])
-            ]
+            vunits = [self._unit_record(vu.get("id", "")) for vu in v.get("units", [])]
             vtraits = [
-                {"name": self._trait_name(vt.get("id", "")), "count": vt.get("count")}
+                {
+                    "id":    vt.get("id", ""),
+                    "name":  self._trait_name(vt.get("id", "")),
+                    "count": vt.get("count") or vt.get("units_required"),
+                }
                 for vt in v.get("traits", [])
             ]
             result.append({
-                "units":  vunits,
-                "traits": vtraits,
-                "stats":  v.get("stats", {}),
+                "units":     vunits,
+                "traits":    vtraits,
+                "stats":     v.get("clustered_stats") or v.get("stats", {}),
+                "label":     v.get("variant_label", ""),
+                "team_code": v.get("team_code", ""),
             })
+        return result
+
+    def _unit_record(self, uid: str) -> dict:
+        """返回 UI 可直接消费的英雄摘要。"""
+        return {
+            "id":   uid,
+            "name": self._unit_name(uid),
+            "cost": self._unit_cost(uid),
+            "icon": self._unit_icon(uid),
+        }
+
+    def _item_category(self, iid: str) -> str:
+        return self._items.get(iid, {}).get("category", "")
+
+    def _item_record(self, iid: str) -> dict:
+        """返回 UI 可直接消费的装备摘要。"""
+        return {
+            "id":         iid,
+            "name":       self._item_name(iid),
+            "icon":       self._item_icon(iid),
+            "category":   self._item_category(iid),
+            "components": self._get_components(iid),
+        }
+
+    def _parse_unit_stats(self, rows: list) -> list[dict]:
+        """保留单位统计 metrics，并补齐本地化名称/图标。"""
+        result = []
+        for row in rows:
+            uid = row.get("id", "")
+            result.append({
+                **self._unit_record(uid),
+                "metrics": row.get("metrics", []),
+            })
+        return result
+
+    def _parse_emblems(self, raw: dict) -> list[dict]:
+        """解析转职推荐，包括推荐携带者及平均名次。"""
+        rows = raw.get("rows", []) if isinstance(raw, dict) else []
+        result = []
+        for row in rows:
+            iid = row.get("itemId", "")
+            carriers = []
+            for carrier in row.get("carriers", []) or []:
+                uid = carrier.get("unit_id", "")
+                carriers.append({
+                    **self._unit_record(uid),
+                    "share": round(carrier.get("share") or 0.0, 4),
+                    "count": carrier.get("count"),
+                    "best": bool(carrier.get("best")),
+                })
+            result.append({
+                **self._item_record(iid),
+                "metrics": row.get("metrics", []),
+                "avg_placement": round(row.get("avgPlacement") or 0.0, 2),
+                "appearance_rate": round(row.get("appearanceRate") or 0.0, 4),
+                "carriers": carriers,
+            })
+        return result
+
+    def _parse_special_items(self, sections: list) -> list[dict]:
+        """解析神器/光明装等特殊装备推荐，保留 bestBuild。"""
+        result = []
+        for section_idx, section in enumerate(sections, 1):
+            section_title = section.get("title") or ""
+            for row in section.get("rows", []) or []:
+                iid = row.get("itemId", "")
+                carrier_id = row.get("carrierId", "")
+                best_build = row.get("bestBuild") or {}
+                best_items = [
+                    self._item_record(item.get("item_id", ""))
+                    for item in best_build.get("items", []) or []
+                ]
+                result.append({
+                    **self._item_record(iid),
+                    "section_index": section_idx,
+                    "section_title": section_title,
+                    "metrics": row.get("metrics", []),
+                    "carrier": self._unit_record(carrier_id),
+                    "best_build": {
+                        "items": best_items,
+                        "avg_placement": round(best_build.get("avg_placement") or 0.0, 2),
+                    } if best_build else {},
+                })
         return result
 
     # ──────────────────────────────────────────────────────────

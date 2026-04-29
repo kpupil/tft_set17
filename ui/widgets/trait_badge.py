@@ -2,8 +2,8 @@
 TFT Assistant — 羁绊展示组件
 ============================
 两套视觉方案，通过 `CHIP_VARIANT` 顶层常量切换：
-  - "A" 横向卡片：图标 + 名字 + 档位胶囊（64×28，信息密度高、易扫读）
-  - "B" 方形增强：图标居中 + 右下角档位 pill（38×32，保留紧凑，字号加大）
+  - "A" 图标状态芯片：图标 + 右下数量（34×32，信息密度高）
+  - "B" 方形增强：图标居中 + 底部数字（38×32，保留紧凑，字号加大）
 
 保持对外 API 不变（CompactTraitChip / SelectedEmblemTag 构造签名 + clicked 信号）。
 """
@@ -20,10 +20,10 @@ from ui.image_cache import ImageCache
 
 # ─────────────────────────────────────────────────────────────
 # 切换视觉方案：改这一个常量就好
-#   "A" → 横向卡片（推荐，信息密度高）
+#   "A" → 图标状态芯片（推荐，信息密度高）
 #   "B" → 方形增强（更紧凑）
 # ─────────────────────────────────────────────────────────────
-CHIP_VARIANT = "B"
+CHIP_VARIANT = "A"
 
 # ── 色板 ──────────────────────────────────────────────────────
 TEXT_PRI    = "#e8eef7"
@@ -64,8 +64,8 @@ def _tier_from_threshold(threshold: int) -> dict:
 # ─────────────────────────────────────────────────────────────
 # 外部尺寸（pick_list 里不直接用，但保留导出防外部脚本 import）
 # ─────────────────────────────────────────────────────────────
-CHIP_W = 64 if CHIP_VARIANT == "A" else 38
-CHIP_H = 28 if CHIP_VARIANT == "A" else 32
+CHIP_W = 34 if CHIP_VARIANT == "A" else 38
+CHIP_H = 32 if CHIP_VARIANT == "A" else 32
 EMBLEM_TAG_W = 28
 EMBLEM_TAG_H = 28
 
@@ -162,7 +162,7 @@ class CompactTraitChip(QWidget):
         tier = _tier_from_threshold(self._active_threshold if self._active else 0)
         return {**tier, "is_prism": (self._active_threshold or 0) >= 7}
 
-    # ── Variant A: 横向卡片 ──────────────────────────────────
+    # ── Variant A: 图标状态芯片 ──────────────────────────────
     def _paint_variant_a(self, p: QPainter):
         pal = self._resolve_palette()
         w, h = CHIP_W, CHIP_H
@@ -173,41 +173,21 @@ class CompactTraitChip(QWidget):
         p.setBrush(QColor(pal["bg"]))
         p.drawRoundedRect(1, 1, w - 2, h - 2, r, r)
 
-        # 左侧高亮竖条（激活/转职）
-        if self._active or self._is_emblem:
-            bar_path = QPainterPath()
-            bar_path.addRoundedRect(QRectF(1, 1, 4, h - 2), 2, 2)
-            p.fillPath(bar_path, QColor(pal["edge"]))
-
-        # 图标（20×20）
-        icon_sz = 20
-        icon_x, icon_y = 9, (h - icon_sz) // 2
+        # 图标
+        icon_sz = 22
+        icon_x, icon_y = 4, 4
         self._draw_icon(p, icon_x, icon_y, icon_sz, 5, dim=not (self._active or self._is_emblem))
 
-        # 名字
-        name_x = icon_x + icon_sz + 5
-        name_w = w - name_x - 16  # 右侧预留档位 pill 空间
-        name_color = QColor(pal["text"]) if (self._active or self._is_emblem) else QColor(TEXT_SEC)
-        p.setPen(name_color)
-        name_font = QFont()
-        name_font.setPointSize(7)
-        name_font.setBold(self._active or self._is_emblem)
-        p.setFont(name_font)
-        metrics = p.fontMetrics()
-        name = metrics.elidedText(self._name, Qt.TextElideMode.ElideRight, name_w)
-        p.drawText(QRect(name_x, 0, name_w, h), Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft, name)
-
-        # 档位 pill（右上）—— 紧贴右侧
+        # 数量角标
         count_text = str(self._current_count)
         count_font = QFont()
         count_font.setPointSize(7)
         count_font.setBold(True)
         p.setFont(count_font)
-        tw = p.fontMetrics().horizontalAdvance(count_text) + 10
-        pill_w = max(tw, 14)
-        pill_h = 12
-        pill_x = w - pill_w - 4
-        pill_y = (h - pill_h) // 2
+        pill_w = max(p.fontMetrics().horizontalAdvance(count_text) + 8, 14)
+        pill_h = 14
+        pill_x = w - pill_w - 1
+        pill_y = h - pill_h - 1
         p.setPen(Qt.PenStyle.NoPen)
         pill_bg = QColor(pal["edge"]) if (self._active or self._is_emblem) else QColor("#1f2838")
         p.setBrush(pill_bg)
