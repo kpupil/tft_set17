@@ -159,11 +159,11 @@ class TFTDataMerger:
                 "has_details":         False,
             }
 
-        raw     = json.loads(comp_path.read_text(encoding="utf-8"))
-        comp    = raw.get("composition", {})
-        details = raw.get("details") or {}
-        overview = comp.get("overview", {})
-        stats    = overview.get("stats", {})
+        raw      = json.loads(comp_path.read_text(encoding="utf-8"))
+        comp     = raw.get("composition") or {}
+        details  = raw.get("details") or {}
+        overview = comp.get("overview") or {}
+        stats    = overview.get("stats") or {}
 
         # ── 详情统计（保留原始 metrics，同时补齐可读名称/图标）────
         unit_stats = self._parse_unit_stats(details.get("unitStats") or [])
@@ -264,10 +264,21 @@ class TFTDataMerger:
         limit      = MERGER["item_priority_limit"]
         result: dict[str, list] = {}
         for ps in priority_sections:
-            uid    = ps.get("unitId")
-            matrix = ps.get("baseline", {}).get("matrix", {})
+            if not isinstance(ps, dict):
+                continue
+
+            uid = ps.get("unitId")
+            if not uid:
+                continue
+
+            baseline = ps.get("baseline") or {}
+            matrix = baseline.get("matrix") or {}
+            if not isinstance(matrix, dict):
+                matrix = {}
             items  = []
-            for item_info in matrix.get("items", [])[:limit]:
+            for item_info in (matrix.get("items") or [])[:limit]:
+                if not isinstance(item_info, dict):
+                    continue
                 iid = item_info.get("itemId", "")
                 items.append({
                     "id":        iid,

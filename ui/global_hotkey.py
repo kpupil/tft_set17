@@ -19,6 +19,8 @@ pynput 热键格式示例：
 
 from __future__ import annotations
 
+import logging
+import sys
 import threading
 from typing import Callable
 
@@ -26,6 +28,8 @@ from PyQt6.QtCore import QObject, pyqtSignal
 
 from pynput import keyboard
 from pynput.keyboard import GlobalHotKeys
+
+logger = logging.getLogger("tft.hotkey")
 
 
 class _HotkeyBridge(QObject):
@@ -118,6 +122,9 @@ class GlobalHotkeyManager:
         if not self._hotkey_map and not self._raw_key_callbacks:
             return
 
+        if not self._preflight_accessibility_api():
+            return
+
         if self._hotkey_map:
             bindings: dict[str, Callable] = {}
             for hotkey_str, hid in self._hotkey_map.items():
@@ -146,6 +153,26 @@ class GlobalHotkeyManager:
         self.start()
 
     # ── 内部 ──────────────────────────────────────────────────────
+
+    def _preflight_accessibility_api(self) -> bool:
+        """
+        macOS + PyObjC lazily resolves AXIsProcessTrusted. Resolve it before
+        starting multiple pynput listener threads to avoid a lazy-import race.
+        """
+        if sys.platform != "darwin":
+            return True
+
+        try:
+            from pynput._util import darwin as pynput_darwin
+
+            is_trusted = getattr(pynput_darwin.HIServices, "AXIsProcessTrusted")
+            if not is_trusted():
+                logger.warning("全局快捷键需要在 macOS 辅助功能权限中授权当前程序")
+        except Exception as exc:
+            logger.warning("全局快捷键初始化失败，已跳过: %s", exc)
+            return False
+
+        return True
 
     def _dispatch(self, hid: int):
         """主线程回调分发。"""
